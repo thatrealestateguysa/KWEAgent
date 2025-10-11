@@ -42,14 +42,14 @@
         </header>
 
         <!-- Main Quick Links -->
-        <section class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-            <a href="https://calendar.google.com/calendar/embed?src=admin%40kwsa.co.za&ctz=Africa%2FJohannesburg" target="_blank" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-lg text-center transition duration-300">
-                KWSA Training
+        <section class="mb-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <a href="https://calendar.google.com/" target="_blank" class="block bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-4 rounded-lg text-center transition duration-300">
+                My Calendar
             </a>
-             <a href="https://calendar.google.com/calendar/embed?src=c_classroomc31566ea%40group.calendar.google.com&ctz=Africa%2FJohannesburg" target="_blank" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-lg text-center transition duration-300">
-                KWE Training
+            <a href="https://mail.google.com/" target="_blank" class="block bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-4 rounded-lg text-center transition duration-300">
+                My Mail
             </a>
-            <a href="https://thatrealestateguysa.github.io/learnmore/" target="_blank" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-4 rounded-lg text-center transition duration-300">
+            <a href="https://thatrealestateguysa.github.io/learnmore/" target="_blank" class="block bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-lg text-center transition duration-300">
                 Refer a New Agent
             </a>
         </section>
@@ -76,6 +76,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            // Reordered tabs to match the logical flow from the original document
             const tabsData = {
                 "Do Not Call": [
                     { title: "Virtual Agent", url: "https://www.thevirtualagent.co.za/info/#c-tab3-5" },
@@ -96,9 +97,34 @@
                 "Documentation": [
                     { title: "Agent Toolkit", url: "https://drive.google.com/drive/folders/17t9lC6d9cZHPltRiKw3CVtporeDzxTbT" }
                 ],
+                 "Letter of Employment": [
+                    { title: "General Letter of Employment", url: "https://docs.google.com/forms/d/e/1FAIpQLSfXYVHkzEEDTycJx-lN8iFcW7rwo6rdEVPjSGIfzvsuvmzUlA/viewform" },
+                    { title: "SARS and PPRA Letter of Employment", url: "https://docs.google.com/forms/d/e/1FAIpQLSd0yabWfk6dM9JwDUxRofYdI9m9S66ZbhwlIKMIN3iXXfREdg/viewform" }
+                ],
                 "Sales Docs": [
                     { title: "Mandates", url: "https://drive.google.com/drive/folders/1P_9v2kTheV4mzPt0h2Jtm4oozt3QrVFG?usp=drive_link" },
                     { title: "Offer To Purchase", url: "https://drive.google.com/drive/folders/1SgDPogFFXti5vMFc7GiPRR_LjIHUySaP?usp=drive_link" }
+                ],
+                 "Bond Approval": [
+                    { title: "Get An Ooba Bond", url: "https://my.ooba.co.za/obi/?var1=KW4&var2=&var3=OBI&var4" }
+                ],
+                "Rentals": [
+                    { title: "Red Rabbit", url: "https://www.weconnectu.co.za/redrabbit" },
+                    { title: "Rental Documents", url: "https://drive.google.com/drive/folders/1GlY8meqjLJFqTKLSipRr0CFXjgZYrdSE" },
+                    { title: "Eviction Secure", url: "https://evictionsecure.co.za/" },
+                    { title: "Rental Policy and Procedures", url: "https://drive.google.com/file/d/1mE1lX7e0W-u7b2uSHvZlLMsEwLX8Jcjf/view?usp=drive_link" },
+                    { title: "Rental FAQ", url: "https://drive.google.com/file/d/1dlIv_sGXhoSwb7QKm_UiYQCAKF2s6mHQ/view?usp=drive_link" }
+                ],
+                "Design Templates": [
+                    { title: "Mapps To Explore (Facebook Group)", url: "https://web.facebook.com/groups/236242439163189?_rdc=1&_rdr#" }
+                ],
+                "KWE WhatsApp Links": [
+                    { title: "KWE Business", url: "https://chat.whatsapp.com/Fo9u1JwPQPX5jKFxkxireB" },
+                    { title: "KWE Family", url: "https://chat.whatsapp.com/7Vt6td3OTf6AnC9UAZ2NrW" },
+                    { title: "KWE Mindset", url: "https://chat.whatsapp.com/BmC5OcpGr0fEsSNjBjs9V6" },
+                    { title: "KWE Trading Floor", url: "https://chat.whatsapp.com/KhXyuE7SMBzKa4zmKjT8V2" },
+                    { title: "KWE Rentals", url: "https://chat.whatsapp.com/FJjYfQR22CWCJoi14kZxFa" },
+                    { title: "KWE Commercial", url: "https://chat.whatsapp.com/GgAtHnEYmXmAQEXzEl0DkC?mode=wwc" }
                 ],
                 "Partners": { // Nested object for sub-tabs
                     "Van Deventers": { type: 'link', url: 'https://www.vandeventers.law/' },
@@ -107,68 +133,24 @@
                     "Ooba": { type: 'link', url: 'https://www.ooba.co.za/product-determinator-v2/?paid_campaign=search&landing_page=homeloan1&adwords_campaign_id=1615939422&gclid=Cj0KCQjwrfymBhCTARIsADXTabn4IM5wvINZrk6RE8ePkpkWcMaHiH3fzglJthHjrXIPCmY_NrUw8yUaAuwFEALw_wcB' }
                 },
                 "Leadership": { // Nested object for sub-tabs
-                    "Estelle Ferreira": { 
-                        type: 'contact', 
-                        role: 'Principal Property Practitioner', 
-                        phone: '+27 82 460 6864', 
-                        email: 'Estelle.Ferreira@kwsa.co.za' 
-                    },
-                    "Shawn Armer": { 
-                        type: 'contact', 
-                        role: 'Operating Partner', 
-                        phone: '+27 81 533 5683', 
-                        email: 'shawn.armer@kwsa.co.za'
-                    },
-                    "Dawie Du Toit": { 
-                        type: 'contact', 
-                        role: 'Team Leader', 
-                        phone: '+27 84 062 4865', 
-                        email: 'dawie.dutoit@kwsa.co.za'
-                    },
-                    "Rukudzo Jagada": { 
-                        type: 'contact', 
-                        role: 'Market Centre Administrator', 
-                        phone: '+27 78 584 8244', 
-                        email: 'rukudzo.jagada@kwsa.co.za' 
-                    },
-                    "Casandra Van der Merwe": { 
-                        type: 'contact', 
-                        role: 'MCTT', 
-                        phone: '+27 84 212 1991', 
-                        email: 'casandra.vdmerwe@kwsa.co.za' 
-                    },
-                    "Francois Muller": {
-                        type: 'contact',
-                        role: 'Rental Manager',
-                        phone: '082 440 2482',
-                        email: 'francois.muller@kwsa.co.za'
-                    },
-                    "Maryna Muller": {
-                        type: 'contact',
-                        role: 'Rental Administrator',
-                        phone: '076 892 2404',
-                        email: 'maryna.muller@kwsa.co.za'
-                    },
-                     "Mornay Cloete": { 
-                        type: 'contact', 
-                        role: 'Commercial Department I Corporate Real Estate Consultant | Property Investment Strategist', 
-                        phone: '+27 82 888 6602', 
-                        email: 'mornay@emacity.co.za' 
-                    }
+                    "Estelle Ferreira": { type: 'contact', role: 'Principal Property Practitioner', phone: '+27 82 460 6864', email: 'Estelle.Ferreira@kwsa.co.za' },
+                    "Shawn Armer": { type: 'contact', role: 'Operating Partner', phone: '+27 81 533 5683', email: 'shawn.armer@kwsa.co.za'},
+                    "Dawie Du Toit": { type: 'contact', role: 'Team Leader', phone: '+27 84 062 4865', email: 'dawie.dutoit@kwsa.co.za'},
+                    "Rukudzo Jagada": { type: 'contact', role: 'Market Centre Administrator', phone: '+27 78 584 8244', email: 'rukudzo.jagada@kwsa.co.za' },
+                    "Casandra Van der Merwe": { type: 'contact', role: 'MCTT', phone: '+27 84 212 1991', email: 'casandra.vdmerwe@kwsa.co.za' },
+                    "Francois Muller": { type: 'contact', role: 'Rental Manager', phone: '082 440 2482', email: 'francois.muller@kwsa.co.za'},
+                    "Maryna Muller": { type: 'contact', role: 'Rental Administrator', phone: '076 892 2404', email: 'maryna.muller@kwsa.co.za'},
+                     "Mornay Cloete": { type: 'contact', role: 'Commercial Department I Corporate Real Estate Consultant | Property Investment Strategist', phone: '+27 82 888 6602', email: 'mornay@emacity.co.za' }
                 },
                 "Compliance": [
                     { title: "PPRA", url: "https://theppra.org.za/myffc" },
                     { title: "Code of Conduct", url: "https://drive.google.com/file/d/1ngSQQgKzl-3-BQ6VijgiZbyD8Fh8HByB/view?usp=sharing" },
                     { title: "FIC", url: "https://drive.google.com/file/d/12oz_bU_Tqnqlx9LJa3OPz2aY5mCFF80C/view?usp=sharing" }
                 ],
-                "Whatsapp": [
-                    { title: "KWE Business", url: "https://chat.whatsapp.com/Fo9u1JwPQPX5jKFxkxireB" },
-                    { title: "KWE Family", url: "https://chat.whatsapp.com/7Vt6td3OTf6AnC9UAZ2NrW" },
-                    { title: "KWE Mindset", url: "https://chat.whatsapp.com/BmC5OcpGr0fEsSNjBjs9V6" },
-                    { title: "KWE Trading Floor", url: "https://chat.whatsapp.com/KhXyuE7SMBzKa4zmKjT8V2" },
-                    { title: "KWE Rentals", url: "https://chat.whatsapp.com/FJjYfQR22CWCJoi14kZxFa" },
-                    { title: "KWE Commercial", url: "https://chat.whatsapp.com/GgAtHnEYmXmAQEXzEl0DkC?mode=wwc" }
-                ],
+                "Resources": [
+                    { title: "Keller Ink", url: "https://kellerink.com/" },
+                    { title: "CGI Calculator", url: "https://kwecgi.netlify.app/" }
+                ]
             };
 
             const mainTabContainer = document.getElementById('main-tabs-container');
@@ -282,3 +264,4 @@
     </script>
 </body>
 </html>
+
