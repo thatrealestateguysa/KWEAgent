@@ -14,9 +14,8 @@
         }
         /* Style for active tabs */
         .tab.active {
-            border-color: #ef4444; /* red-500 */
-            color: #ef4444;
-            background-color: #1f2937; /* gray-800 */
+            background-color: #ef4444; /* red-500 */
+            color: #ffffff;
         }
         .sub-tab.active {
             background-color: #ef4444; /* red-500 */
@@ -56,8 +55,8 @@
 
         <!-- Main Tabs Navigation -->
         <nav class="mb-6">
-            <div class="border-b border-gray-700">
-                <div id="main-tabs-container" class="flex flex-wrap -mb-px space-x-1 sm:space-x-4" aria-label="Tabs">
+            <div class="border-b border-gray-700 pb-4">
+                <div id="main-tabs-container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2" aria-label="Tabs">
                     <!-- Main tab buttons will be dynamically inserted here -->
                 </div>
             </div>
@@ -169,7 +168,7 @@
             Object.keys(tabsData).forEach((key, index) => {
                 // Create main tab button
                 const tabButton = document.createElement('button');
-                tabButton.className = 'tab text-gray-300 hover:text-red-500 border-b-2 border-transparent py-2 px-2 sm:px-4 text-sm sm:text-base font-medium transition';
+                tabButton.className = 'tab text-center bg-gray-800 hover:bg-gray-700 text-gray-200 font-medium py-2 px-4 rounded-md transition duration-200';
                 tabButton.textContent = key;
                 tabButton.dataset.tab = `main-${key.replace(/\s+/g, '-')}`;
                 mainTabContainer.appendChild(tabButton);
