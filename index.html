@@ -34,11 +34,15 @@ h1 { font-weight:800; letter-spacing:.02em; }
 
 .section-title { font-weight:800; margin:.75rem 0 .5rem; }
 
-/* OTP panel styles */
+/* Panels + subtabs */
 .subtabbar { display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.5rem; }
 .subtab { background:#111827; color:#fff; font-weight:700; padding:.7rem 1rem; border-radius:.8rem; border:1px solid rgba(255,255,255,.08); }
 .subtab:hover, .subtab[aria-selected="true"] { background:#374151; }
+.card { background:#0b1220; border:1px solid rgba(255,255,255,.08); border-radius:1rem; padding:1rem; }
 .hidden { display:none; }
+.contact-name { font-weight:800; }
+.contact-sub { color:#fca5a5; }
+a.underline { text-decoration: underline; }
 </style>
 </head>
 <body class="bg-black text-white">
@@ -59,8 +63,8 @@ h1 { font-weight:800; letter-spacing:.02em; }
       </div>
     </section>
 
-    <!-- Quick links includes OTP/Mandates trigger -->
-    <section aria-label="Quick Links" class="mb-3">
+    <!-- Quick links + OTP -->
+    <section aria-label="Quick Links" class="mb-6">
       <h2 class="section-title">QUICK LINKS</h2>
       <div class="quick-5">
         <a class="btn" target="_blank" href="https://mapp.kwsouthafrica.co.za/Account/Login?returnUrl=%2F">MAPP</a>
@@ -73,10 +77,8 @@ h1 { font-weight:800; letter-spacing:.02em; }
         <a class="btn" target="_blank" href="https://www.privateproperty.co.za/">PRIVATE PROPERTY</a>
         <a class="btn" target="_blank" href="https://web.whatsapp.com/">WHATSAPP WEB</a>
         <a class="btn" target="_blank" href="https://drive.google.com/drive/folders/17t9lC6d9cZHPltRiKw3CVtporeDzxTbT">AGENT TOOLKIT</a>
-        <!-- NEW: OTP / MANDATES trigger -->
         <button id="otpBtn" class="btn" type="button" aria-expanded="false" aria-controls="otpPanel">OTP / MANDATES</button>
       </div>
-      <!-- Subtabs panel appears here -->
       <div id="otpPanel" class="hidden" role="region" aria-label="OTP / Mandates Options">
         <div class="subtabbar">
           <a class="subtab" target="_blank" href="https://drive.google.com/drive/folders/1P_9v2kTheV4mzPt0h2Jtm4oozt3QrVFG?usp=drive_link">MANDATES</a>
@@ -85,35 +87,56 @@ h1 { font-weight:800; letter-spacing:.02em; }
       </div>
     </section>
 
-    <!-- Placeholder sections (to be built next) -->
-    <section class="mb-10">
-      <h2 class="section-title">NEXT SECTIONS</h2>
+    <!-- BOND PRE-APPROVAL -->
+    <section class="mb-10" aria-label="Bond Pre-Approval">
+      <h2 class="section-title">BOND PRE-APPROVAL</h2>
       <div class="quick-5">
-        <button class="btn" type="button">BOND PRE-APPROVAL</button>
-        <button class="btn" type="button">RENTAL DESK</button>
-        <button class="btn" type="button">AI APPS</button>
-        <button class="btn" type="button">MARKETING</button>
-        <button class="btn" type="button">EXPLORE IN A BOX</button>
-        <button class="btn" type="button">COMPLIANCE</button>
-        <button class="btn" type="button">CONTACT THE LEADERSHIP TEAM</button>
-        <button class="btn" type="button">RESOURCES</button>
-        <button class="btn" type="button">PARTNERS</button>
+        <button id="bondBtn" class="btn" type="button" aria-expanded="false" aria-controls="bondPanel">OPEN SUB-TABS</button>
+      </div>
+      <div id="bondPanel" class="hidden" role="region" aria-label="Bond Pre-Approval Options">
+        <div class="subtabbar">
+          <a class="subtab" target="_blank" href="https://my.ooba.co.za/obi/?var1=KW4&var2=&var3=OBI&var4">GET A OOBA BOND</a>
+          <button id="bondGirlTab" class="subtab" type="button" aria-controls="bondGirlCard" aria-selected="false">THE BOND GIRL</button>
+        </div>
+        <div id="bondGirlCard" class="hidden mt-3">
+          <div class="card">
+            <div class="contact-name">MORICOLETTE ERASMUS-NEL</div>
+            <div class="contact-sub">THE BOND GIRL</div>
+            <p class="mt-2"><a class="underline" href="tel:+27725759054">+27 72 575 9054</a></p>
+            <p class="mt-1"><a class="underline" href="mailto:moricolette.erasmusnel@kwsa.co.za">MORICOLETTE.ERASMUSNEL@KWSA.CO.ZA</a></p>
+          </div>
+        </div>
       </div>
     </section>
   </div>
 
 <script>
-// Toggle OTP panel
+// OTP panel toggle
 const otpBtn = document.getElementById('otpBtn');
 const otpPanel = document.getElementById('otpPanel');
 otpBtn.addEventListener('click', () => {
   const expanded = otpBtn.getAttribute('aria-expanded') === 'true';
   otpBtn.setAttribute('aria-expanded', String(!expanded));
   otpPanel.classList.toggle('hidden');
-  // Keep focus visible for accessibility
-  if (!expanded) {
-    otpPanel.querySelector('a').focus();
-  }
+  if (!expanded) { otpPanel.querySelector('.subtab').focus(); }
+});
+
+// Bond panel + bond girl card toggles
+const bondBtn = document.getElementById('bondBtn');
+const bondPanel = document.getElementById('bondPanel');
+const bondGirlTab = document.getElementById('bondGirlTab');
+const bondGirlCard = document.getElementById('bondGirlCard');
+
+bondBtn.addEventListener('click', () => {
+  const expanded = bondBtn.getAttribute('aria-expanded') === 'true';
+  bondBtn.setAttribute('aria-expanded', String(!expanded));
+  bondPanel.classList.toggle('hidden');
+});
+
+bondGirlTab.addEventListener('click', () => {
+  const shown = !bondGirlCard.classList.contains('hidden');
+  bondGirlCard.classList.toggle('hidden');
+  bondGirlTab.setAttribute('aria-selected', String(!shown));
 });
 </script>
 </body>
