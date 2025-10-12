@@ -69,6 +69,7 @@ h1 { font-weight:800; letter-spacing:.02em; }
         <a class="btn" target="_blank" href="https://web.whatsapp.com/">WHATSAPP WEB</a>
         <a class="btn" target="_blank" href="https://drive.google.com/drive/folders/17t9lC6d9cZHPltRiKw3CVtporeDzxTbT">AGENT TOOLKIT</a>
 
+        <!-- Existing expanders -->
         <button id="otpBtn" class="btn" type="button" aria-expanded="false" aria-controls="otpPanel">OTP / MANDATES</button>
         <button id="bondBtn" class="btn" type="button" aria-expanded="false" aria-controls="bondPanel">BOND PRE-APPROVAL</button>
         <button id="rentBtn" class="btn" type="button" aria-expanded="false" aria-controls="rentPanel">RENTAL DESK</button>
@@ -76,9 +77,10 @@ h1 { font-weight:800; letter-spacing:.02em; }
         <button id="marketingBtn" class="btn" type="button" aria-expanded="false" aria-controls="marketingPanel">MARKETING</button>
         <button id="complianceBtn" class="btn" type="button" aria-expanded="false" aria-controls="compliancePanel">COMPLIANCE</button>
         <button id="resourcesBtn" class="btn" type="button" aria-expanded="false" aria-controls="resourcesPanel">RESOURCES</button>
+        <button id="partnersBtn" class="btn" type="button" aria-expanded="false" aria-controls="partnersPanel">PARTNERS</button>
       </div>
 
-      <!-- Panels (existing ones omitted for brevity in comment; included below) -->
+      <!-- previously built panels (shortened for space but all included) -->
       <div id="otpPanel" class="panel"><div class="subtabbar">
         <a class="subtab" target="_blank" href="https://drive.google.com/drive/folders/1P_9v2kTheV4mzPt0h2Jtm4oozt3QrVFG?usp=drive_link">MANDATES</a>
         <a class="subtab" target="_blank" href="https://drive.google.com/drive/folders/1SgDPogFFXti5vMFc7GiPRR_LjIHUySaP?usp=drive_link">OFFER TO PURCHASE</a>
@@ -131,7 +133,6 @@ h1 { font-weight:800; letter-spacing:.02em; }
         </div>
       </div>
 
-      <!-- RESOURCES (NEW) -->
       <div id="resourcesPanel" class="panel">
         <div class="subtabbar">
           <a class="subtab" target="_blank" href="https://kellerink.com/">KELLER INK</a>
@@ -140,12 +141,22 @@ h1 { font-weight:800; letter-spacing:.02em; }
         </div>
       </div>
 
+      <!-- PARTNERS (NEW) -->
+      <div id="partnersPanel" class="panel">
+        <div class="subtabbar">
+          <a class="subtab" target="_blank" href="https://www.vandeventers.law/">VAN DEVENTERS</a>
+          <a class="subtab" target="_blank" href="https://lmw.co.za/">LWM INC.</a>
+          <a class="subtab" target="_blank" href="https://www.hammondpole.co.za/">HAMMOND POLE</a>
+          <a class="subtab" target="_blank" href="https://www.ooba.co.za/product-determinator-v2/?paid_campaign=search&landing_page=homeloan1&adwords_campaign_id=1615939422&gclid=Cj0KCQjwrfymBhCTARIsADXTabn4IM5wvINZrk6RE8ePkpkWcMaHiH3fzglJthHjrXIPCmY_NrUw8yUaAuwFEALw_wcB">OOBA</a>
+        </div>
+      </div>
+
     </section>
   </div>
 
 <script>
 function closeOthers(exceptId){
-  const ids=['otpPanel','bondPanel','rentPanel','aiPanel','marketingPanel','compliancePanel','resourcesPanel'];
+  const ids=['otpPanel','bondPanel','rentPanel','aiPanel','marketingPanel','compliancePanel','resourcesPanel','partnersPanel'];
   ids.forEach(id=>{
     if(id!==exceptId){
       const p=document.getElementById(id);
@@ -155,7 +166,8 @@ function closeOthers(exceptId){
         id==='rentPanel'?'rentBtn':
         id==='aiPanel'?'aiBtn':
         id==='marketingPanel'?'marketingBtn':
-        id==='compliancePanel'?'complianceBtn':'resourcesBtn'
+        id==='compliancePanel'?'complianceBtn':
+        id==='resourcesPanel'?'resourcesBtn':'partnersBtn'
       );
       p.classList.remove('open');
       b.setAttribute('aria-expanded','false');
@@ -178,8 +190,9 @@ setupToggle('aiBtn','aiPanel');
 setupToggle('marketingBtn','marketingPanel');
 setupToggle('complianceBtn','compliancePanel');
 setupToggle('resourcesBtn','resourcesPanel');
+setupToggle('partnersBtn','partnersPanel');
 
-// Bond Girl & DNC toggles
+// Sub toggles
 const bondGirlTab=document.getElementById('bondGirlTab');
 const bondGirlCard=document.getElementById('bondGirlCard');
 if(bondGirlTab){ bondGirlTab.addEventListener('click',e=>{ e.preventDefault(); bondGirlCard.classList.toggle('hidden'); }); }
