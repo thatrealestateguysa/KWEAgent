@@ -18,13 +18,27 @@
 body { font-family: 'Inter', sans-serif; }
 .brand-wrap { display:grid; place-items:center; gap:0.5rem; }
 .brand-logo { width:var(--logoW); height:auto; }
-.brand-tagline { width:calc(var(--logoW) * 0.25); height:auto; }
-.btn { display:block; width:100%; background:#374151; color:#fff; font-weight:700; padding:.75rem 1rem; border-radius:.75rem; text-align:center; transition:.2s; }
-.btn:hover { background:#4b5563; }
+/* Tagline at 40% of logo width */
+.brand-tagline { width:calc(var(--logoW) * 0.40); height:auto; }
 .section-title { font-weight:700; letter-spacing:.03em; color:#fff; margin-bottom:.5rem; margin-top:1rem; }
+
+/* CRITICAL: wrap text everywhere (tabs, buttons, chips) */
+.btn, .main-nav-button, .sub-tab, .tabbtn {
+  display:block; width:100%;
+  background:#374151; color:#fff; font-weight:700;
+  padding:.75rem 1rem; border-radius:.75rem; text-align:center; transition:.2s;
+  white-space: normal; word-wrap: break-word; overflow-wrap: anywhere; hyphens: auto; line-height:1.2;
+}
+.btn:hover { background:#4b5563; }
+
 .grid-links { gap:.5rem; }
 .leadership * { text-transform: uppercase; }
 a:focus { outline: 2px solid #dc2626; outline-offset:2px; }
+
+.contact-card { background: #0f172a; border:1px solid rgba(255,255,255,0.06); border-radius: 1rem; padding: 1rem; }
+.contact-name { font-weight: 800; letter-spacing: .04em; font-size: 1.25rem; }
+.contact-role { color: #fca5a5; letter-spacing: .02em; }
+.contact-link { text-decoration: underline; display:block; }
 </style>
 </head>
 <body class="bg-black text-white">
@@ -103,15 +117,15 @@ a:focus { outline: 2px solid #dc2626; outline-offset:2px; }
 <section class="mb-10 leadership" aria-label="Contact the leadership team">
   <h2 class="section-title">CONTACT THE LEADERSHIP TEAM</h2>
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-    <div class="bg-gray-900 p-4 rounded-lg"><h3 class="font-bold">ESTELLE FERREIRA</h3><p>ROLE: PRINCIPAL PROPERTY PRACTITIONER</p><p><a class="underline" href="tel:+27824606864">PHONE: +27 82 460 6864</a></p><p><a class="underline" href="mailto:Estelle.Ferreira@kwsa.co.za">EMAIL: ESTELLE.FERREIRA@KWSA.CO.ZA</a></p></div>
-    <div class="bg-gray-900 p-4 rounded-lg"><h3 class="font-bold">SHAWN ARMER</h3><p>ROLE: OPERATING PARTNER</p><p><a class="underline" href="tel:+27815335683">PHONE: +27 81 533 5683</a></p><p><a class="underline" href="mailto:shawn.armer@kwsa.co.za">EMAIL: SHAWN.ARMER@KWSA.CO.ZA</a></p></div>
-    <div class="bg-gray-900 p-4 rounded-lg"><h3 class="font-bold">DAWIE DU TOIT</h3><p>ROLE: TEAM LEADER</p><p><a class="underline" href="tel:+27840624865">PHONE: +27 84 062 4865</a></p><p><a class="underline" href="mailto:dawie.dutoit@kwsa.co.za">EMAIL: DAWIE.DUTOIT@KWSA.CO.ZA</a></p></div>
-    <div class="bg-gray-900 p-4 rounded-lg"><h3 class="font-bold">RUKUDZO JAGADA</h3><p>ROLE: MARKET CENTRE ADMINISTRATOR</p><p><a class="underline" href="tel:+27785848244">PHONE: +27 78 584 8244</a></p><p><a class="underline" href="mailto:rukudzo.jagada@kwsa.co.za">EMAIL: RUKUDZO.JAGADA@KWSA.CO.ZA</a></p></div>
-    <div class="bg-gray-900 p-4 rounded-lg"><h3 class="font-bold">CASANDRA VAN DER MERWE</h3><p>ROLE: MCTT/DFI</p><p><a class="underline" href="tel:+27842121991">PHONE: +27 84 212 1991</a></p><p><a class="underline" href="mailto:casandra.vdmerwe@kwsa.co.za">EMAIL: CASANDRA.VDMERWE@KWSA.CO.ZA</a></p></div>
-    <div class="bg-gray-900 p-4 rounded-lg"><h3 class="font-bold">FRANCOIS MULLER</h3><p>ROLE: RENTAL MANAGER</p><p><a class="underline" href="tel:+27824402482">PHONE: 082 440 2482</a></p><p><a class="underline" href="mailto:francois.muller@kwsa.co.za">EMAIL: FRANCOIS.MULLER@KWSA.CO.ZA</a></p></div>
-    <div class="bg-gray-900 p-4 rounded-lg"><h3 class="font-bold">MARYNA MULLER</h3><p>ROLE: RENTAL ADMINISTRATOR</p><p><a class="underline" href="tel:+27768922404">PHONE: 076 892 2404</a></p><p><a class="underline" href="mailto:maryna.muller@kwsa.co.za">EMAIL: MARYNA.MULLER@KWSA.CO.ZA</a></p></div>
-    <div class="bg-gray-900 p-4 rounded-lg"><h3 class="font-bold">MORNAY CLOETE</h3><p>ROLE: COMMERCIAL DEPARTMENT | CORPORATE REAL ESTATE CONSULTANT | PROPERTY INVESTMENT STRATEGIST</p><p><a class="underline" href="tel:+27828886602">PHONE: +27 82 888 6602</a></p><p><a class="underline" href="mailto:mornay@emacity.co.za">EMAIL: MORNAY@EMACITY.CO.ZA</a></p></div>
-    <div class="bg-gray-900 p-4 rounded-lg"><h3 class="font-bold">MORICOLETTE ERASMUS-NEL</h3><p>ROLE: THE BOND GIRL</p><p><a class="underline" href="tel:+27725759054">PHONE: 072 575 9054</a></p><p><a class="underline" href="mailto:moricolette.erasmusnel@kwsa.co.za">EMAIL: MORICOLETTE.ERASMUSNEL@KWSA.CO.ZA</a></p></div>
+    <div class="contact-card"><div class="contact-name">ESTELLE FERREIRA</div><div class="contact-role">PRINCIPAL PROPERTY PRACTITIONER</div><a class="contact-link" href="tel:+27824606864">+27 82 460 6864</a><a class="contact-link" href="mailto:Estelle.Ferreira@kwsa.co.za">ESTELLE.FERREIRA@KWSA.CO.ZA</a></div>
+    <div class="contact-card"><div class="contact-name">SHAWN ARMER</div><div class="contact-role">OPERATING PARTNER</div><a class="contact-link" href="tel:+27815335683">+27 81 533 5683</a><a class="contact-link" href="mailto:shawn.armer@kwsa.co.za">SHAWN.ARMER@KWSA.CO.ZA</a></div>
+    <div class="contact-card"><div class="contact-name">DAWIE DU TOIT</div><div class="contact-role">TEAM LEADER</div><a class="contact-link" href="tel:+27840624865">+27 84 062 4865</a><a class="contact-link" href="mailto:dawie.dutoit@kwsa.co.za">DAWIE.DUTOIT@KWSA.CO.ZA</a></div>
+    <div class="contact-card"><div class="contact-name">RUKUDZO JAGADA</div><div class="contact-role">MARKET CENTRE ADMINISTRATOR</div><a class="contact-link" href="tel:+27785848244">+27 78 584 8244</a><a class="contact-link" href="mailto:rukudzo.jagada@kwsa.co.za">RUKUDZO.JAGADA@KWSA.CO.ZA</a></div>
+    <div class="contact-card"><div class="contact-name">CASANDRA VAN DER MERWE</div><div class="contact-role">MCTT / DFI</div><a class="contact-link" href="tel:+27842121991">+27 84 212 1991</a><a class="contact-link" href="mailto:casandra.vdmerwe@kwsa.co.za">CASANDRA.VDMERWE@KWSA.CO.ZA</a></div>
+    <div class="contact-card"><div class="contact-name">FRANCOIS MULLER</div><div class="contact-role">RENTAL MANAGER</div><a class="contact-link" href="tel:+27824402482">082 440 2482</a><a class="contact-link" href="mailto:francois.muller@kwsa.co.za">FRANCOIS.MULLER@KWSA.CO.ZA</a></div>
+    <div class="contact-card"><div class="contact-name">MARYNA MULLER</div><div class="contact-role">RENTAL ADMINISTRATOR</div><a class="contact-link" href="tel:+27768922404">076 892 2404</a><a class="contact-link" href="mailto:maryna.muller@kwsa.co.za">MARYNA.MULLER@KWSA.CO.ZA</a></div>
+    <div class="contact-card"><div class="contact-name">MORNAY CLOETE</div><div class="contact-role">COMMERCIAL DEPARTMENT | CORPORATE REAL ESTATE CONSULTANT | PROPERTY INVESTMENT STRATEGIST</div><a class="contact-link" href="tel:+27828886602">+27 82 888 6602</a><a class="contact-link" href="mailto:mornay@emacity.co.za">MORNAY@EMACITY.CO.ZA</a></div>
+    <div class="contact-card"><div class="contact-name">MORICOLETTE ERASMUS-NEL</div><div class="contact-role">THE BOND GIRL</div><a class="contact-link" href="tel:+27725759054">072 575 9054</a><a class="contact-link" href="mailto:moricolette.erasmusnel@kwsa.co.za">MORICOLETTE.ERASMUSNEL@KWSA.CO.ZA</a></div>
   </div>
 </section>
 
