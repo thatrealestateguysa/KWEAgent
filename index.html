@@ -1,114 +1,108 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>KWE AGENT DASHBOARD</title>
-<meta name="theme-color" content="#dc2626" />
-<link rel="apple-touch-icon" sizes="180x180" href="assets/icon-180.png" />
-<link rel="icon" type="image/png" href="assets/icon-192.png" />
+<meta name="theme-color" content="#dc2626">
+<link rel="icon" href="assets/icon.png">
 <script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root {
-  --logoW: clamp(220px, 60vw, 560px);
+:root{
   --kwred:#dc2626;
-  /* Softer zebra greys (closer together) */
-  --dark:#232c37;     /* softer dark */
-  --light:#2c3744;    /* softer light */
-  --hover:#313d4b;
+  --g1:#2b3541;
+  --g2:#232c37;
+  --hover:#dc2626;
+  --logoW:clamp(220px,60vw,560px);
 }
-body { font-family: 'Inter', sans-serif; }
-.brand { display:grid; place-items:center; gap:.5rem; }
-.brand img.logo { width:var(--logoW); height:auto; }
-.brand img.tagline { width:calc(var(--logoW) * .40); height:auto; }
+*{box-sizing:border-box}
+body{font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+.brand{display:grid;place-items:center;gap:.5rem}
+.brand img.logo{width:var(--logoW);height:auto}
+.brand img.tagline{width:calc(var(--logoW)*.40);height:auto}
 
-h1 { font-weight:800; letter-spacing:.02em; }
-.subtle { color:#d1d5db; }
-
-.btn {
-  display:block; width:100%; color:#fff; font-weight:700;
-  padding:.95rem 1rem; border-radius:1.2rem; text-align:center;
-  border:1px solid rgba(255,255,255,.08);
-  white-space:normal; overflow-wrap:anywhere; hyphens:auto; line-height:1.2;
-  transition:filter .15s, background .15s, border-color .15s;
-  box-shadow: 0 1px 0 rgba(0,0,0,.25) inset;
+.btn{
+  display:block;width:100%;color:#fff;font-weight:800;letter-spacing:.02em;
+  padding:.95rem 1.05rem;border-radius:1.1rem;text-align:center;line-height:1.2;
+  border:1px solid rgba(255,255,255,.08);box-shadow:0 1px 0 rgba(0,0,0,.25) inset;
+  white-space:normal;overflow-wrap:anywhere;hyphens:auto;
+  transition:background .12s,border-color .12s,filter .12s,transform .02s;
 }
-.btn:hover { background:var(--kwred); border-color:var(--kwred); filter:brightness(1.02); }
-.btn.active { background:var(--kwred) !important; border-color:var(--kwred) !important; }
+.btn:hover{background:var(--hover);border-color:var(--hover);filter:brightness(1.02)}
+.btn:active{transform:translateY(1px)}
+.btn.active{background:var(--kwred)!important;border-color:var(--kwred)!important}
 
-.main-three { display:grid; grid-template-columns:1fr; gap:.8rem; }
-@media (min-width:640px){ .main-three{ grid-template-columns:repeat(3,1fr);} }
+.main-three{display:grid;grid-template-columns:1fr;gap:.8rem}
+@media(min-width:640px){.main-three{grid-template-columns:repeat(3,1fr)}}
 
-.quick-5 { display:grid; grid-template-columns:repeat(2,1fr); gap:.85rem; }
-@media (min-width:640px){ .quick-5{ grid-template-columns:repeat(3,1fr);} }
-@media (min-width:1024px){ .quick-5{ grid-template-columns:repeat(5,minmax(0,1fr)); } }
+.quick-5{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.85rem}
+@media(min-width:640px){.quick-5{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(min-width:1024px){.quick-5{grid-template-columns:repeat(5,minmax(0,1fr))}}
 
-/* Subtle alternating greys */
-.quick-5 > .btn:nth-child(odd)  { background: var(--light); }
-.quick-5 > .btn:nth-child(even) { background: var(--dark); }
+/* alternating greys */
+.quick-5 > .btn:nth-child(odd){background:var(--g1)}
+.quick-5 > .btn:nth-child(even){background:var(--g2)}
 
-.section-title { font-weight:800; margin:.75rem 0 .5rem; }
+.section-title{font-weight:900;margin:.8rem 0 .5rem}
 
-/* Panels appear directly under the trigger; spanning full width of the grid */
-.panel-slot { display:none; }
-.panel-slot.open { display:block; grid-column:1 / -1; }
-.panel { display:none; }
-.panel.open{ display:block; }
-.panel .subtabbar { display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.5rem; }
-.subtab { background:#1b2330; color:#fff; font-weight:800; padding:.7rem 1rem; border-radius:.95rem; border:2px solid rgba(255,255,255,.08); transition:border-color .15s, box-shadow .15s, background .15s; }
-.subtab:hover, .subtab[aria-selected="true"] { background:#222c3a; }
-.subtab.open-sub { border-color: var(--kwred); box-shadow: 0 0 0 2px color-mix(in srgb, var(--kwred) 40%, transparent) inset; }
+.panel-slot{display:none}
+.panel-slot.open{display:block;grid-column:1 / -1}
+.panel{display:none}
+.panel.open{display:block}
 
-.subrow { display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.6rem; }
-.linkpill { background:#131a1f; border:1px solid rgba(255,255,255,.1); padding:.6rem 1rem; border-radius:.8rem; font-weight:800; }
-.linkpill:hover { background:#182233; }
+.subtabbar{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.6rem}
+.subtab{background:#1b2330;color:#fff;font-weight:900;padding:.7rem 1rem;border-radius:.9rem;border:2px solid rgba(255,255,255,.08);}
+.subtab:hover,.subtab[aria-selected="true"]{background:#222c3a}
+.subtab.open-sub{border-color:var(--kwred)}
 
-.hidden{display:none;}
+.subrow{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.6rem}
+.linkpill{background:#131a1f;border:1px solid rgba(255,255,255,.1);padding:.6rem 1rem;border-radius:.8rem;font-weight:800}
+.linkpill:hover{background:#182233}
 
-/* Leadership */
-.leadership * { text-transform: uppercase; }
-.leader-card { background:#131a1f; border:1px solid rgba(255,255,255,.12); border-radius:1rem; padding:1rem; }
-.leader-name { font-weight:900; font-size:1.35rem; letter-spacing:.02em; }
-.leader-role { color:#fca5a5; font-weight:800; margin-top:.25rem; }
-.leader-links a { text-decoration: underline; }
+.leadership *{text-transform:uppercase}
+.leader-card{background:#131a1f;border:1px solid rgba(255,255,255,.12);border-radius:1rem;padding:1rem}
+.leader-name{font-weight:900;font-size:1.35rem}
+.leader-role{color:#fca5a5;font-weight:800;margin-top:.25rem}
+.leader-links a{text-decoration:underline}
 </style>
 </head>
 <body class="bg-black text-white">
   <div class="max-w-6xl mx-auto p-4 md:p-6">
     <header class="brand text-center mb-4">
-      <img src="assets/logo.png" class="logo" alt="KW Explore Logo" />
-      <img src="assets/tagline.png" class="tagline" alt="Where Entrepreneurs Thrive" />
-      <h1 class="text-2xl md:text-3xl mt-2">KWE AGENT DASHBOARD</h1>
-      <p class="subtle mt-1">WELCOME TO KW EXPLORE! WORKING TOGETHER TO THE NUMBER 1 AGENCY IN SA</p>
+      <img src="assets/logo.png" class="logo" alt="KW Explore Logo">
+      <img src="assets/tagline.png" class="tagline" alt="Where Entrepreneurs Thrive">
+      <p class="uppercase tracking-wide text-gray-300 text-sm md:text-base mt-2">
+        Welcome to KW Explore! Working together to the Number 1 Agency in SA
+      </p>
     </header>
 
-    <!-- Main 3 buttons (layout preserved) -->
     <section class="mb-6" aria-label="Main tabs">
       <div class="main-three">
-        <a class="btn" style="background:var(--light)" target="_blank" href="https://calendar.google.com/calendar/">CALENDAR</a>
-        <a class="btn" style="background:var(--dark)" target="_blank" href="https://mail.google.com/mail/">MY MAIL</a>
-        <a class="btn" style="background:var(--kwred); border-color:var(--kwred)" target="_blank" href="https://thatrealestateguysa.github.io/learnmore/">REFER A NEW AGENT</a>
+        <a class="btn" style="background:var(--g1)" target="_blank" href="https://calendar.google.com/calendar/">CALENDAR</a>
+        <a class="btn" style="background:var(--g2)" target="_blank" href="https://mail.google.com/mail/">MY MAIL</a>
+        <a class="btn active" target="_blank" href="https://thatrealestateguysa.github.io/learnmore/">REFER A NEW AGENT</a>
       </div>
     </section>
 
-    <!-- Quick links grid (layout preserved) -->
-    <section aria-label="Quick Links" class="mb-6" id="quickLinksRoot">
+    <section aria-label="Quick Links" class="mb-8" id="quickLinksRoot">
       <h2 class="section-title">QUICK LINKS</h2>
       <div class="quick-5">
 
-        <a class="btn" target="_blank" href="https://mapp.kwsouthafrica.co.za/Account/Login?returnUrl=%2F">MAPP</a>
-        <a class="btn" target="_blank" href="https://console.command.kw.com/command">COMMAND</a>
-        <a class="btn" target="_blank" href="https://drive.google.com/drive/">GOOGLE DRIVE</a>
-        <a class="btn" target="_blank" href="https://toolkit.lightstone.co.za/#/">LIGHTSTONE</a>
-        <a class="btn" target="_blank" href="https://www.cmainfo.co.za/">CMA INFO</a>
-        <a class="btn" target="_blank" href="https://app.thevirtualagent.co.za/User/sign-in">THE VIRTUAL AGENT</a>
-        <a class="btn" target="_blank" href="https://www.property24.com/">PROPERTY 24</a>
-        <a class="btn" target="_blank" href="https://www.privateproperty.co.za/">PRIVATE PROPERTY</a>
-        <a class="btn" target="_blank" href="https://web.whatsapp.com/">WHATSAPP WEB</a>
-        <a class="btn" target="_blank" href="https://drive.google.com/drive/folders/17t9lC6d9cZHPltRiKw3CVtporeDzxTbT">AGENT TOOLKIT</a>
+        <a class="btn" href="https://mapp.kwsouthafrica.co.za/Account/Login?returnUrl=%2F" target="_blank">MAPP</a>
+        <a class="btn" href="https://console.command.kw.com/command" target="_blank">COMMAND</a>
+        <a class="btn" href="https://drive.google.com/drive/" target="_blank">GOOGLE DRIVE</a>
+        <a class="btn" href="https://toolkit.lightstone.co.za/#/" target="_blank">LIGHTSTONE</a>
+        <a class="btn" href="https://www.cmainfo.co.za/" target="_blank">CMA INFO</a>
 
-        <button id="otpBtn" class="btn" type="button" aria-expanded="false" data-panel="otpPanel">OTP / MANDATES</button>
+        <a class="btn" href="https://app.thevirtualagent.co.za/User/sign-in" target="_blank">THE VIRTUAL AGENT</a>
+        <a class="btn" href="https://www.property24.com/" target="_blank">PROPERTY 24</a>
+        <a class="btn" href="https://www.privateproperty.co.za/" target="_blank">PRIVATE PROPERTY</a>
+        <a class="btn" href="https://web.whatsapp.com/" target="_blank">WHATSAPP WEB</a>
+        <a class="btn" href="https://drive.google.com/drive/folders/17t9lC6d9cZHPltRiKw3CVtporeDzxTbT" target="_blank">AGENT TOOLKIT</a>
+
+        <!-- OTP / Mandates -->
+        <button class="btn" type="button" data-panel="otpPanel">OTP / MANDATES</button>
         <div class="panel-slot"><div id="otpPanel" class="panel">
           <div class="subtabbar">
             <a class="subtab" target="_blank" href="https://drive.google.com/drive/folders/1P_9v2kTheV4mzPt0h2Jtm4oozt3QrVFG?usp=drive_link">MANDATES</a>
@@ -116,7 +110,8 @@ h1 { font-weight:800; letter-spacing:.02em; }
           </div>
         </div></div>
 
-        <button id="bondBtn" class="btn" type="button" aria-expanded="false" data-panel="bondPanel">BOND PRE-APPROVAL</button>
+        <!-- Bond -->
+        <button class="btn" type="button" data-panel="bondPanel">BOND PRE-APPROVAL</button>
         <div class="panel-slot"><div id="bondPanel" class="panel">
           <div class="subtabbar">
             <a class="subtab" target="_blank" href="https://my.ooba.co.za/obi/?var1=KW4&var2=&var3=OBI&var4">GET A OOBA BOND</a>
@@ -132,7 +127,8 @@ h1 { font-weight:800; letter-spacing:.02em; }
           </div>
         </div></div>
 
-        <button id="rentBtn" class="btn" type="button" aria-expanded="false" data-panel="rentPanel">RENTAL DESK</button>
+        <!-- Rental Desk -->
+        <button class="btn" type="button" data-panel="rentPanel">RENTAL DESK</button>
         <div class="panel-slot"><div id="rentPanel" class="panel">
           <div class="subtabbar">
             <a class="subtab" target="_blank" href="https://drive.google.com/file/d/1HsmWsP35aBx0s8gykS-LeAzIQETbCLVj/view?usp=sharing">ROADMAP TO RENTALS</a>
@@ -144,7 +140,8 @@ h1 { font-weight:800; letter-spacing:.02em; }
           </div>
         </div></div>
 
-        <button id="productivityBtn" class="btn" type="button" aria-expanded="false" data-panel="productivityPanel">PRODUCTIVITY APPS</button>
+        <!-- Productivity Apps -->
+        <button class="btn" type="button" data-panel="productivityPanel">PRODUCTIVITY APPS</button>
         <div class="panel-slot"><div id="productivityPanel" class="panel">
           <div class="subtabbar">
             <a class="subtab" target="_blank" href="https://docs.google.com/">DOCS</a>
@@ -156,7 +153,8 @@ h1 { font-weight:800; letter-spacing:.02em; }
           </div>
         </div></div>
 
-        <button id="marketingBtn" class="btn" type="button" aria-expanded="false" data-panel="marketingPanel">MARKETING</button>
+        <!-- Marketing -->
+        <button class="btn" type="button" data-panel="marketingPanel">MARKETING</button>
         <div class="panel-slot"><div id="marketingPanel" class="panel">
           <div class="subtabbar">
             <a class="subtab" target="_blank" href="https://authn.kw.com/saml20/idp/startsso?spEntityId=https://www.canva.com">CANVA (SSO)</a>
@@ -164,7 +162,8 @@ h1 { font-weight:800; letter-spacing:.02em; }
           </div>
         </div></div>
 
-        <button id="complianceBtn" class="btn" type="button" aria-expanded="false" data-panel="compliancePanel">COMPLIANCE</button>
+        <!-- Compliance -->
+        <button class="btn" type="button" data-panel="compliancePanel">COMPLIANCE</button>
         <div class="panel-slot"><div id="compliancePanel" class="panel">
           <div class="subtabbar">
             <a class="subtab" target="_blank" href="https://theppra.org.za/myffc">PPRA</a>
@@ -178,7 +177,8 @@ h1 { font-weight:800; letter-spacing:.02em; }
           </div>
         </div></div>
 
-        <button id="resourcesBtn" class="btn" type="button" aria-expanded="false" data-panel="resourcesPanel">RESOURCES</button>
+        <!-- Resources -->
+        <button class="btn" type="button" data-panel="resourcesPanel">RESOURCES</button>
         <div class="panel-slot"><div id="resourcesPanel" class="panel">
           <div class="subtabbar">
             <a class="subtab" target="_blank" href="https://kellerink.com/">KELLER INK</a>
@@ -187,7 +187,8 @@ h1 { font-weight:800; letter-spacing:.02em; }
           </div>
         </div></div>
 
-        <button id="exploreBoxBtn" class="btn" type="button" aria-expanded="false" data-panel="exploreBoxPanel">EXPLORE IN A BOX</button>
+        <!-- Explore in a Box -->
+        <button class="btn" type="button" data-panel="exploreBoxPanel">EXPLORE IN A BOX</button>
         <div class="panel-slot"><div id="exploreBoxPanel" class="panel">
           <div class="subtabbar">
             <a class="subtab" href="#" id="waTab">EXPLORE WHATSAPP</a>
@@ -214,7 +215,8 @@ h1 { font-weight:800; letter-spacing:.02em; }
           </div>
         </div></div>
 
-        <button id="partnersBtn" class="btn" type="button" aria-expanded="false" data-panel="partnersPanel">PARTNERS</button>
+        <!-- Partners -->
+        <button class="btn" type="button" data-panel="partnersPanel">PARTNERS</button>
         <div class="panel-slot"><div id="partnersPanel" class="panel">
           <div class="subtabbar">
             <a class="subtab" target="_blank" href="https://www.vandeventers.law/">VAN DEVENTERS</a>
@@ -224,7 +226,8 @@ h1 { font-weight:800; letter-spacing:.02em; }
           </div>
         </div></div>
 
-        <button id="leadBtn" class="btn" type="button" aria-expanded="false" data-panel="leadershipPanel">CONTACT THE LEADERSHIP TEAM</button>
+        <!-- Leadership -->
+        <button class="btn" type="button" data-panel="leadershipPanel">CONTACT THE LEADERSHIP TEAM</button>
         <div class="panel-slot"><div id="leadershipPanel" class="panel leadership">
           <div class="subtabbar">
             <a class="subtab" href="#" data-target="estelle">ESTELLE FERREIRA</a>
@@ -241,74 +244,47 @@ h1 { font-weight:800; letter-spacing:.02em; }
             <div id="estelle" class="leader-card hidden">
               <div class="leader-name">ESTELLE FERREIRA</div>
               <div class="leader-role">PRINCIPAL PROPERTY PRACTITIONER</div>
-              <div class="leader-links mt-2">
-                <a href="tel:+27824606864">+27 82 460 6864</a> ·
-                <a href="mailto:estelle.ferreira@kwsa.co.za">ESTELLE.FERREIRA@KWSA.CO.ZA</a>
-              </div>
+              <div class="leader-links mt-2"><a href="tel:+27824606864">+27 82 460 6864</a> · <a href="mailto:estelle.ferreira@kwsa.co.za">ESTELLE.FERREIRA@KWSA.CO.ZA</a></div>
             </div>
             <div id="shawn" class="leader-card hidden">
               <div class="leader-name">SHAWN ARMER</div>
               <div class="leader-role">OPERATING PARTNER</div>
-              <div class="leader-links mt-2">
-                <a href="tel:+27815335683">+27 81 533 5683</a> ·
-                <a href="mailto:shawn.armer@kwsa.co.za">SHAWN.ARMER@KWSA.CO.ZA</a>
-              </div>
+              <div class="leader-links mt-2"><a href="tel:+27815335683">+27 81 533 5683</a> · <a href="mailto:shawn.armer@kwsa.co.za">SHAWN.ARMER@KWSA.CO.ZA</a></div>
             </div>
             <div id="dawie" class="leader-card hidden">
               <div class="leader-name">DAWIE DU TOIT</div>
               <div class="leader-role">TEAM LEADER</div>
-              <div class="leader-links mt-2">
-                <a href="tel:+27840624865">+27 84 062 4865</a> ·
-                <a href="mailto:dawie.dutoit@kwsa.co.za">DAWIE.DUTOIT@KWSA.CO.ZA</a>
-              </div>
+              <div class="leader-links mt-2"><a href="tel:+27840624865">+27 84 062 4865</a> · <a href="mailto:dawie.dutoit@kwsa.co.za">DAWIE.DUTOIT@KWSA.CO.ZA</a></div>
             </div>
             <div id="rukudzo" class="leader-card hidden">
               <div class="leader-name">RUKUDZO JAGADA</div>
               <div class="leader-role">MARKET CENTRE ADMINISTRATOR</div>
-              <div class="leader-links mt-2">
-                <a href="tel:+27785848244">+27 78 584 8244</a> ·
-                <a href="mailto:rukudzo.jagada@kwsa.co.za">RUKUDZO.JAGADA@KWSA.CO.ZA</a>
-              </div>
+              <div class="leader-links mt-2"><a href="tel:+27785848244">+27 78 584 8244</a> · <a href="mailto:rukudzo.jagada@kwsa.co.za">RUKUDZO.JAGADA@KWSA.CO.ZA</a></div>
             </div>
             <div id="casandra" class="leader-card hidden">
               <div class="leader-name">CASANDRA VAN DER MERWE</div>
               <div class="leader-role">MCTT / DFI</div>
-              <div class="leader-links mt-2">
-                <a href="tel:+27842121991">+27 84 212 1991</a> ·
-                <a href="mailto:casandra.vdmerwe@kwsa.co.za">CASANDRA.VDMERWE@KWSA.CO.ZA</a>
-              </div>
+              <div class="leader-links mt-2"><a href="tel:+27842121991">+27 84 212 1991</a> · <a href="mailto:casandra.vdmerwe@kwsa.co.za">CASANDRA.VDMERWE@KWSA.CO.ZA</a></div>
             </div>
             <div id="francois" class="leader-card hidden">
               <div class="leader-name">FRANCOIS MULLER</div>
               <div class="leader-role">RENTAL MANAGER</div>
-              <div class="leader-links mt-2">
-                <a href="tel:+27824402482">082 440 2482</a> ·
-                <a href="mailto:francois.muller@kwsa.co.za">FRANCOIS.MULLER@KWSA.CO.ZA</a>
-              </div>
+              <div class="leader-links mt-2"><a href="tel:+27824402482">082 440 2482</a> · <a href="mailto:francois.muller@kwsa.co.za">FRANCOIS.MULLER@KWSA.CO.ZA</a></div>
             </div>
             <div id="maryna" class="leader-card hidden">
               <div class="leader-name">MARYNA MULLER</div>
               <div class="leader-role">RENTAL ADMINISTRATOR</div>
-              <div class="leader-links mt-2">
-                <a href="tel:+27768922404">076 892 2404</a> ·
-                <a href="mailto:maryna.muller@kwsa.co.za">MARYNA.MULLER@KWSA.CO.ZA</a>
-              </div>
+              <div class="leader-links mt-2"><a href="tel:+27768922404">076 892 2404</a> · <a href="mailto:maryna.muller@kwsa.co.za">MARYNA.MULLER@KWSA.CO.ZA</a></div>
             </div>
             <div id="mornay" class="leader-card hidden">
               <div class="leader-name">MORNAY CLOETE</div>
               <div class="leader-role">COMMERCIAL DEPARTMENT | CORPORATE REAL ESTATE CONSULTANT | PROPERTY INVESTMENT STRATEGIST</div>
-              <div class="leader-links mt-2">
-                <a href="tel:+27828886602">+27 82 888 6602</a> ·
-                <a href="mailto:mornay@emacity.co.za">MORNAY@EMACITY.CO.ZA</a>
-              </div>
+              <div class="leader-links mt-2"><a href="tel:+27828886602">+27 82 888 6602</a> · <a href="mailto:mornay@emacity.co.za">MORNAY@EMACITY.CO.ZA</a></div>
             </div>
             <div id="bondgirl" class="leader-card hidden">
               <div class="leader-name">MORICOLETTE ERASMUS-NEL</div>
               <div class="leader-role">THE BOND GIRL</div>
-              <div class="leader-links mt-2">
-                <a href="tel:+27725759054">072 575 9054</a> ·
-                <a href="mailto:moricolette.erasmusnel@kwsa.co.za">MORICOLETTE.ERASMUSNEL@KWSA.CO.ZA</a>
-              </div>
+              <div class="leader-links mt-2"><a href="tel:+27725759054">072 575 9054</a> · <a href="mailto:moricolette.erasmusnel@kwsa.co.za">MORICOLETTE.ERASMUSNEL@KWSA.CO.ZA</a></div>
             </div>
           </div>
         </div></div>
@@ -318,152 +294,69 @@ h1 { font-weight:800; letter-spacing:.02em; }
   </div>
 
 <script>
-function closeAll(){
-  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('open'));
-  document.querySelectorAll('[data-panel]').forEach(btn=>{ btn.setAttribute('aria-expanded','false'); btn.classList.remove('active'); });
-  ['bondGirlCard','dncRow','waRow','techRow','loeRow'].forEach(id=>{ const el=document.getElementById(id); if(el) el.classList.add('hidden'); });
-  document.querySelectorAll('.subtab.open-sub').forEach(el=>el.classList.remove('open-sub'));
-  document.querySelectorAll('#leadershipPanel .leader-card').forEach(c=>c.classList.add('hidden'));
-}
-function closeOthers(exceptId){
-  document.querySelectorAll('.panel').forEach(p=>{ if(p.id!==exceptId) p.classList.remove('open'); });
-  document.querySelectorAll('[data-panel]').forEach(btn=>{
-    if(btn.dataset.panel!==exceptId){ btn.setAttribute('aria-expanded','false'); btn.classList.remove('active'); }
-  });
-  ['bondGirlCard','dncRow','waRow','techRow','loeRow'].forEach(id=>{ const el=document.getElementById(id); if(el) el.classList.add('hidden'); });
-  if(exceptId!=='leadershipPanel'){ document.querySelectorAll('#leadershipPanel .leader-card').forEach(c=>c.classList.add('hidden')); }
-  document.querySelectorAll('.subtab.open-sub').forEach(el=>el.classList.remove('open-sub'));
-}
-function setupToggle(btnId,panelId){
-  const btn=document.getElementById(btnId);
-  const panel=document.getElementById(panelId);
-  btn.addEventListener('click', (e)=>{
-    e.stopPropagation();
-    const open=panel.classList.contains('open');
-    if(open){ panel.classList.remove('open'); btn.setAttribute('aria-expanded','false'); btn.classList.remove('active'); }
-    else{ closeOthers(panelId); panel.classList.add('open'); btn.setAttribute('aria-expanded','true'); btn.classList.add('active'); }
-  });
-}
-['otp','bond','rent','productivity','marketing','compliance','resources','exploreBox','partners','lead'].forEach(key=>setupToggle(key+'Btn', key+'Panel'));
-
-// Click-away + Escape closes everything
-document.querySelectorAll('.panel').forEach(p=>p.addEventListener('click', e=>e.stopPropagation()));
-document.addEventListener('click', (e)=>{ const root=document.getElementById('quickLinksRoot'); if(!root.contains(e.target)) closeAll(); });
-document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeAll(); });
-
-function toggleRow(tabId, rowId){
-  const tab=document.getElementById(tabId);
-  const row=document.getElementById(rowId);
-  if(!tab || !row) return;
-  tab.addEventListener('click', (e)=>{
-    e.preventDefault(); e.stopPropagation();
-    const isHidden=row.classList.toggle('hidden');
-    if(isHidden){ tab.classList.remove('open-sub'); }
-    else{ tab.classList.add('open-sub'); }
-  });
-}
-toggleRow('bondGirlTab','bondGirlCard');
-toggleRow('dncTab','dncRow');
-toggleRow('waTab','waRow');
-toggleRow('techTab','techRow');
-toggleRow('loeTab','loeRow');
-
-// Leadership subtabs
-document.querySelectorAll('#leadershipPanel .subtabbar .subtab').forEach(btn=>{
-  btn.addEventListener('click', (e)=>{
-    e.preventDefault(); e.stopPropagation();
-    document.querySelectorAll('#leadershipPanel .leader-card').forEach(c=>c.classList.add('hidden'));
-    const card = document.getElementById(btn.getAttribute('data-target'));
-    if(card){ card.classList.remove('hidden'); }
-  });
-});
-</script>
-
-<script>
-document.addEventListener('DOMContentLoaded', function(){
-  const KWRED = getComputedStyle(document.documentElement).getPropertyValue('--kwred') || '#dc2626';
-
+// Unified, tiny controller
+(function(){
+  const root = document.getElementById('quickLinksRoot');
   function closeAll(){
-    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('open'));
-    document.querySelectorAll('.panel-slot').forEach(s=>s.classList.remove('open'));
-    document.querySelectorAll('[data-panel]').forEach(btn=>{ btn.setAttribute('aria-expanded','false'); btn.classList.remove('active'); });
-    ['bondGirlCard','dncRow','waRow','techRow','loeRow'].forEach(id=>{ const el=document.getElementById(id); if(el) el.classList.add('hidden'); });
-    document.querySelectorAll('.subtab.open-sub').forEach(el=>el.classList.remove('open-sub'));
+    document.querySelectorAll('.panel.open').forEach(p=>p.classList.remove('open'));
+    document.querySelectorAll('.panel-slot.open').forEach(s=>s.classList.remove('open'));
+    document.querySelectorAll('[data-panel].active').forEach(b=>b.classList.remove('active'));
+    ['bondGirlCard','dncRow','waRow','techRow','loeRow'].forEach(id=>{ const el=document.getElementById(id); if(el) el.classList.add('hidden') });
     document.querySelectorAll('#leadershipPanel .leader-card').forEach(c=>c.classList.add('hidden'));
+    document.querySelectorAll('.subtab.open-sub').forEach(el=>el.classList.remove('open-sub'));
   }
   function closeOthers(exceptPanelId){
-    document.querySelectorAll('[data-panel]').forEach(btn=>{
-      if(btn.dataset.panel!==exceptPanelId){ btn.setAttribute('aria-expanded','false'); btn.classList.remove('active'); }
-    });
-    document.querySelectorAll('.panel-slot').forEach(slot=>{
-      const p = slot.querySelector('.panel');
-      if(!p || p.id!==exceptPanelId){ slot.classList.remove('open'); }
-    });
     document.querySelectorAll('.panel').forEach(p=>{ if(p.id!==exceptPanelId) p.classList.remove('open'); });
-    if(exceptPanelId!=='leadershipPanel'){ document.querySelectorAll('#leadershipPanel .leader-card').forEach(c=>c.classList.add('hidden')); }
-    document.querySelectorAll('.subtab.open-sub').forEach(el=>el.classList.remove('open-sub'));
-    ['bondGirlCard','dncRow','waRow','techRow','loeRow'].forEach(id=>{ const el=document.getElementById(id); if(el) el.classList.add('hidden'); });
+    document.querySelectorAll('.panel-slot').forEach(slot=>{
+      const p=slot.querySelector('.panel'); if(!p || p.id!==exceptPanelId) slot.classList.remove('open');
+    });
+    document.querySelectorAll('[data-panel]').forEach(b=>{ if(b.dataset.panel!==exceptPanelId) b.classList.remove('active'); });
   }
-
-  // Attach click handlers to each trigger
-  document.querySelectorAll('[data-panel]').forEach(btn=>{
-    const slot = btn.nextElementSibling;
+  // Delegation for opening/closing panels
+  root.addEventListener('click', function(e){
+    const trigger = e.target.closest('[data-panel]');
+    if(!trigger) return;
+    e.preventDefault(); e.stopPropagation();
+    const slot = trigger.nextElementSibling;
     const panel = slot ? slot.querySelector('.panel') : null;
     if(!slot || !panel) return;
-    btn.addEventListener('click', function(e){
-      e.preventDefault();
-      e.stopPropagation();
-      const open = panel.classList.contains('open');
-      if(open){
-        panel.classList.remove('open');
-        slot.classList.remove('open');
-        btn.setAttribute('aria-expanded','false');
-        btn.classList.remove('active');
-      } else {
-        closeOthers(panel.id);
-        slot.classList.add('open');
-        panel.classList.add('open');
-        btn.setAttribute('aria-expanded','true');
-        btn.classList.add('active');
-      }
-    });
+    const isOpen = panel.classList.contains('open');
+    if(isOpen){
+      panel.classList.remove('open'); slot.classList.remove('open'); trigger.classList.remove('active');
+    } else {
+      closeOthers(panel.id);
+      slot.classList.add('open'); panel.classList.add('open'); trigger.classList.add('active');
+    }
   });
 
-  // Sub-row toggles
-  function toggleRow(tabId, rowId){
-    const tab=document.getElementById(tabId);
-    const row=document.getElementById(rowId);
+  // Simple toggles for nested rows
+  function wireToggle(tabId,rowId){
+    const tab=document.getElementById(tabId), row=document.getElementById(rowId);
     if(!tab || !row) return;
     tab.addEventListener('click', (e)=>{
       e.preventDefault(); e.stopPropagation();
-      const hidden=row.classList.toggle('hidden');
-      if(hidden){ tab.classList.remove('open-sub'); }
-      else{ tab.classList.add('open-sub'); }
+      const hide = !row.classList.toggle('hidden');
+      if(hide){ tab.classList.add('open-sub'); } else { tab.classList.remove('open-sub'); }
     });
   }
-  toggleRow('bondGirlTab','bondGirlCard');
-  toggleRow('dncTab','dncRow');
-  toggleRow('waTab','waRow');
-  toggleRow('techTab','techRow');
-  toggleRow('loeTab','loeRow');
+  wireToggle('bondGirlTab','bondGirlCard');
+  wireToggle('dncTab','dncRow');
+  wireToggle('waTab','waRow');
+  wireToggle('techTab','techRow');
+  wireToggle('loeTab','loeRow');
 
-  // Leadership cards
-  document.querySelectorAll('#leadershipPanel .subtabbar .subtab').forEach(btn=>{
-    btn.addEventListener('click', (e)=>{
-      if(!btn.dataset.target) return;
-      e.preventDefault(); e.stopPropagation();
-      document.querySelectorAll('#leadershipPanel .leader-card').forEach(c=>c.classList.add('hidden'));
-      const card = document.getElementById(btn.dataset.target);
-      if(card){ card.classList.remove('hidden'); }
-    });
+  // Leadership card reveal
+  document.getElementById('leadershipPanel')?.querySelector('.subtabbar')?.addEventListener('click', (e)=>{
+    const t = e.target.closest('.subtab[data-target]'); if(!t) return;
+    e.preventDefault(); e.stopPropagation();
+    document.querySelectorAll('#leadershipPanel .leader-card').forEach(c=>c.classList.add('hidden'));
+    document.getElementById(t.dataset.target)?.classList.remove('hidden');
   });
 
-  // click-away / esc
-  document.querySelectorAll('.panel').forEach(p=>p.addEventListener('click', e=>e.stopPropagation()));
-  document.addEventListener('click', (e)=>{ const root=document.getElementById('quickLinksRoot'); if(root && !root.contains(e.target)) closeAll(); });
+  // click-away + Escape
+  document.addEventListener('click', (e)=>{ if(!root.contains(e.target)) closeAll(); });
   document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeAll(); });
-});
+})();
 </script>
-
 </body>
 </html>
