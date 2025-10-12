@@ -12,7 +12,7 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 <style>
 :root { --logoW: clamp(220px, 60vw, 560px); }
 body { font-family: 'Inter', sans-serif; }
@@ -20,25 +20,28 @@ body { font-family: 'Inter', sans-serif; }
 .brand-logo { width:var(--logoW); height:auto; }
 /* Tagline at 40% of logo width */
 .brand-tagline { width:calc(var(--logoW) * 0.40); height:auto; }
-.section-title { font-weight:700; letter-spacing:.03em; color:#fff; margin-bottom:.5rem; margin-top:1rem; }
 
-/* CRITICAL: wrap text everywhere (tabs, buttons, chips) */
-.btn, .main-nav-button, .sub-tab, .tabbtn {
-  display:block; width:100%;
-  background:#374151; color:#fff; font-weight:700;
+/* Wrapping and button/tabs */
+.btn, .tab, .subtab {
+  display:block; width:100%; background:#374151; color:#fff; font-weight:700;
   padding:.75rem 1rem; border-radius:.75rem; text-align:center; transition:.2s;
-  white-space: normal; word-wrap: break-word; overflow-wrap: anywhere; hyphens: auto; line-height:1.2;
+  white-space: normal; overflow-wrap:anywhere; word-wrap:break-word; hyphens:auto; line-height:1.2;
+  border:1px solid rgba(255,255,255,.05);
 }
-.btn:hover { background:#4b5563; }
+.btn:hover, .tab[aria-selected="true"], .subtab[aria-selected="true"] { background:#4b5563; }
 
+.section-title { font-weight:800; letter-spacing:.03em; color:#fff; margin-bottom:.5rem; margin-top:1rem; }
 .grid-links { gap:.5rem; }
-.leadership * { text-transform: uppercase; }
 a:focus { outline: 2px solid #dc2626; outline-offset:2px; }
 
-.contact-card { background: #0f172a; border:1px solid rgba(255,255,255,0.06); border-radius: 1rem; padding: 1rem; }
-.contact-name { font-weight: 800; letter-spacing: .04em; font-size: 1.25rem; }
-.contact-role { color: #fca5a5; letter-spacing: .02em; }
-.contact-link { text-decoration: underline; display:block; }
+/* Cards */
+.card { background:#0f172a; border:1px solid rgba(255,255,255,.06); border-radius:1rem; padding:1rem; }
+.card h3 { font-weight:800; letter-spacing:.03em; }
+
+/* Tabs layout */
+.tabbar, .subtabbar { display:flex; gap:.5rem; overflow-x:auto; padding:.25rem; }
+.panel { display:none; }
+.panel.active { display:block; }
 </style>
 </head>
 <body class="bg-black text-white">
@@ -59,76 +62,86 @@ a:focus { outline: 2px solid #dc2626; outline-offset:2px; }
   </div>
 </section>
 
-<section class="mb-8" aria-label="Other links">
-  <h2 class="section-title">OTHER LINKS</h2>
-  <div class="grid grid-cols-2 md:grid-cols-5 grid-links">
-    <a class="btn" target="_blank" href="https://mapp.kwsouthafrica.co.za/Account/Login?returnUrl=%2F">MAPP</a>
-    <a class="btn" target="_blank" href="https://console.command.kw.com/command">COMMAND</a>
-    <a class="btn" target="_blank" href="https://drive.google.com/drive/">GOOGLE DRIVE</a>
-    <a class="btn" target="_blank" href="https://toolkit.lightstone.co.za/#/">LIGHTSTONE</a>
-    <a class="btn" target="_blank" href="https://www.cmainfo.co.za/">CMA INFO</a>
-    <a class="btn" target="_blank" href="https://app.thevirtualagent.co.za/User/sign-in">THE VIRTUAL AGENT</a>
-    <a class="btn" target="_blank" href="https://www.property24.com/">PROPERTY 24</a>
-    <a class="btn" target="_blank" href="https://www.privateproperty.co.za/">PRIVATE PROPERTY</a>
-    <a class="btn" target="_blank" href="https://web.whatsapp.com/">WHATSAPP WEB</a>
-    <a class="btn" target="_blank" href="https://drive.google.com/drive/folders/17t9lC6d9cZHPltRiKw3CVtporeDzxTbT">AGENT TOOLKIT</a>
-    <a class="btn" target="_blank" href="https://drive.google.com/drive/folders/1P_9v2kTheV4mzPt0h2Jtm4oozt3QrVFG?usp=drive_link">MANDATES</a>
-    <a class="btn" target="_blank" href="https://drive.google.com/drive/folders/1SgDPogFFXti5vMFc7GiPRR_LjIHUySaP?usp=drive_link">OFFER TO PURCHASE</a>
-    <a class="btn" target="_blank" href="https://my.ooba.co.za/obi/?var1=KW4&var2=&var3=OBI&var4">GET AN OOBA BOND</a>
-    <a class="btn" href="tel:+27725759054">THE BOND GIRL: +27 72 575 9054</a>
-    <a class="btn" href="mailto:moricolette.erasmusnel@kwsa.co.za">MORICOLETTE.ERASMUSNEL@KWSA.CO.ZA</a>
-    <a class="btn" target="_blank" href="https://drive.google.com/file/d/1HSMwSP35aBx0s8gYKs-leAzIQEtbC1VJ/view?usp=sharing">ROADMAP TO RENTALS</a>
-    <a class="btn" target="_blank" href="https://www.weconnectu.co.za/redrabbit">RED RABBIT</a>
-    <a class="btn" target="_blank" href="https://drive.google.com/drive/folders/1GlY8meqjLJFqTKLSipRr0CFXjgZYrdSE">RENTAL DOCUMENTS</a>
-    <a class="btn" target="_blank" href="https://evictionsecure.co.za/">EVICTION SECURE</a>
-    <a class="btn" target="_blank" href="https://drive.google.com/file/d/1mE1lX7e0W-u7b2uSHvZlLMsEwLX8Jcjf/view?usp=drive_link">RENTAL POLICY & PROCEDURES</a>
-    <a class="btn" target="_blank" href="https://drive.google.com/file/d/1dlIv_sGXhoSwb7QKm_UiYQCAKF2s6mHQ/view?usp=drive_link">RENTAL FAQ</a>
-    <a class="btn" target="_blank" href="https://chatgpt.com/">CHAT GPT</a>
-    <a class="btn" target="_blank" href="https://gemini.google.com/app">GEMINI</a>
-    <a class="btn" target="_blank" href="https://authn.kw.com/saml20/idp/startsso?spEntityId=https://www.canva.com">CANVA (SSO)</a>
-    <a class="btn" target="_blank" href="https://web.facebook.com/groups/236242439163189?_rdc=1&_rdr#">MAPPS TO EXPLORE DESIGNS</a>
-    <a class="btn" target="_blank" href="https://chat.whatsapp.com/Fo9u1JwPQPX5jKFxkxireB">KWE BUSINESS</a>
-    <a class="btn" target="_blank" href="https://chat.whatsapp.com/7Vt6td3OTf6AnC9UAZ2NrW">KWE FAMILY</a>
-    <a class="btn" target="_blank" href="https://chat.whatsapp.com/BmC5OcpGr0fEsSNjBjs9V6">KWE MINDSET</a>
-    <a class="btn" target="_blank" href="https://chat.whatsapp.com/KhXyuE7SMBzKa4zmKjT8V2">KWE TRADING FLOOR</a>
-    <a class="btn" target="_blank" href="https://chat.whatsapp.com/FJjYfQR22CWCJoi14kZxFa">KWE RENTALS</a>
-    <a class="btn" target="_blank" href="https://chat.whatsapp.com/GgAtHnEYmXmAQEXzEl0DkC?mode=wwc">KWE COMMERCIAL</a>
-    <a class="btn" target="_blank" href="https://calendar.app.google/8351gr38GWZpT1vL7">BOOK 1-ON-1</a>
-    <a class="btn" target="_blank" href="https://www.youtube.com/playlist?list=PLK75KZDqV1zlNlNbAYLPDegh4Rje76NNL">COMMAND 66 DAY CHALLENGE</a>
-    <a class="btn" target="_blank" href="https://answers.kw.com/hc/en-us">FAQ COMMAND</a>
-    <a class="btn" target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSfXYVHkzEEDTycJx-lN8iFcW7rwo6rdEVPjSGIfzvsuvmzUlA/viewform">GENERAL LETTER OF EMPLOYMENT</a>
-    <a class="btn" target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSd0yabWfk6dM9JwDUxRofYdI9m9S66ZbhwlIKMIN3iXXfREdg/viewform">SARS & PPRA LETTER OF EMPLOYMENT</a>
-    <a class="btn" target="_blank" href="https://drive.google.com/file/d/1HRhp_4CD1bvpHppBJWx9OXdYeuHZ_N09/view?usp=sharing">KW EXPLORE WELCOME PACK</a>
-    <a class="btn" target="_blank" href="https://theppra.org.za/myffc">PPRA</a>
-    <a class="btn" target="_blank" href="https://drive.google.com/file/d/1ngSQQgKzl-3-BQ6VijgiZbyD8Fh8HByB/view?usp=sharing">CODE OF CONDUCT</a>
-    <a class="btn" target="_blank" href="https://drive.google.com/file/d/12oz_bU_Tqnqlx9LJa3OPz2aY5mCFF80C/view?usp=sharing">FIC</a>
-    <a class="btn" target="_blank" href="https://www.thevirtualagent.co.za/info/#c-tab3-5">DO NOT CALL: VIRTUAL AGENT</a>
-    <a class="btn" target="_blank" href="https://www.cmainfo.co.za/privacy.aspx">DO NOT CALL: CMA INFO</a>
-    <a class="btn" target="_blank" href="https://kellerink.com/">KELLER INK</a>
-    <a class="btn" target="_blank" href="https://kwecgi.netlify.app/">CGI CALCULATOR</a>
-    <a class="btn" target="_blank" href="https://drive.google.com/file/d/1Ot82JX3nPrb1we1d1AdO5t1_k-YgWLb0/view?usp=sharing">VALUE MAP</a>
-    <a class="btn" target="_blank" href="https://www.vandeventers.law/">VAN DEVENTERS</a>
-    <a class="btn" target="_blank" href="https://lmw.co.za/">LWM INC.</a>
-    <a class="btn" target="_blank" href="https://www.hammondpole.co.za/">HAMMOND POLE</a>
-    <a class="btn" target="_blank" href="https://www.ooba.co.za/product-determinator-v2/?paid_campaign=search&landing_page=homeloan1&adwords_campaign_id=1615939422&gclid=Cj0KCQjwrfymBhCTARIsADXTabn4IM5wvINZrk6RE8ePkpkWcMaHiH3fzglJthHjrXIPCmY_NrUw8yUaAuwFEALw_wcB">OOBA PRODUCT DETERMINATOR</a>
+<!-- OTP/MANDATES (from v3e) -->
+<section class="mb-8" aria-label="OTP / Mandates">
+  <h2 class="section-title">TABS</h2>
+  <div class="tabbar" role="tablist" aria-label="Sections">
+    <button class="tab" role="tab" aria-selected="true" aria-controls="panel-otp" id="tab-otp">OTP / MANDATES</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="panel-bond" id="tab-bond">BOND PRE-APPROVAL</button>
   </div>
-</section>
 
-<section class="mb-10 leadership" aria-label="Contact the leadership team">
-  <h2 class="section-title">CONTACT THE LEADERSHIP TEAM</h2>
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-    <div class="contact-card"><div class="contact-name">ESTELLE FERREIRA</div><div class="contact-role">PRINCIPAL PROPERTY PRACTITIONER</div><a class="contact-link" href="tel:+27824606864">+27 82 460 6864</a><a class="contact-link" href="mailto:Estelle.Ferreira@kwsa.co.za">ESTELLE.FERREIRA@KWSA.CO.ZA</a></div>
-    <div class="contact-card"><div class="contact-name">SHAWN ARMER</div><div class="contact-role">OPERATING PARTNER</div><a class="contact-link" href="tel:+27815335683">+27 81 533 5683</a><a class="contact-link" href="mailto:shawn.armer@kwsa.co.za">SHAWN.ARMER@KWSA.CO.ZA</a></div>
-    <div class="contact-card"><div class="contact-name">DAWIE DU TOIT</div><div class="contact-role">TEAM LEADER</div><a class="contact-link" href="tel:+27840624865">+27 84 062 4865</a><a class="contact-link" href="mailto:dawie.dutoit@kwsa.co.za">DAWIE.DUTOIT@KWSA.CO.ZA</a></div>
-    <div class="contact-card"><div class="contact-name">RUKUDZO JAGADA</div><div class="contact-role">MARKET CENTRE ADMINISTRATOR</div><a class="contact-link" href="tel:+27785848244">+27 78 584 8244</a><a class="contact-link" href="mailto:rukudzo.jagada@kwsa.co.za">RUKUDZO.JAGADA@KWSA.CO.ZA</a></div>
-    <div class="contact-card"><div class="contact-name">CASANDRA VAN DER MERWE</div><div class="contact-role">MCTT / DFI</div><a class="contact-link" href="tel:+27842121991">+27 84 212 1991</a><a class="contact-link" href="mailto:casandra.vdmerwe@kwsa.co.za">CASANDRA.VDMERWE@KWSA.CO.ZA</a></div>
-    <div class="contact-card"><div class="contact-name">FRANCOIS MULLER</div><div class="contact-role">RENTAL MANAGER</div><a class="contact-link" href="tel:+27824402482">082 440 2482</a><a class="contact-link" href="mailto:francois.muller@kwsa.co.za">FRANCOIS.MULLER@KWSA.CO.ZA</a></div>
-    <div class="contact-card"><div class="contact-name">MARYNA MULLER</div><div class="contact-role">RENTAL ADMINISTRATOR</div><a class="contact-link" href="tel:+27768922404">076 892 2404</a><a class="contact-link" href="mailto:maryna.muller@kwsa.co.za">MARYNA.MULLER@KWSA.CO.ZA</a></div>
-    <div class="contact-card"><div class="contact-name">MORNAY CLOETE</div><div class="contact-role">COMMERCIAL DEPARTMENT | CORPORATE REAL ESTATE CONSULTANT | PROPERTY INVESTMENT STRATEGIST</div><a class="contact-link" href="tel:+27828886602">+27 82 888 6602</a><a class="contact-link" href="mailto:mornay@emacity.co.za">MORNAY@EMACITY.CO.ZA</a></div>
-    <div class="contact-card"><div class="contact-name">MORICOLETTE ERASMUS-NEL</div><div class="contact-role">THE BOND GIRL</div><a class="contact-link" href="tel:+27725759054">072 575 9054</a><a class="contact-link" href="mailto:moricolette.erasmusnel@kwsa.co.za">MORICOLETTE.ERASMUSNEL@KWSA.CO.ZA</a></div>
+  <div id="panel-otp" class="panel active" role="tabpanel" aria-labelledby="tab-otp">
+    <div class="subtabbar" role="tablist" aria-label="OTP Subsections">
+      <button class="subtab" role="tab" aria-selected="true" aria-controls="subpanel-mandates" id="subtab-mandates">MANDATES</button>
+      <button class="subtab" role="tab" aria-selected="false" aria-controls="subpanel-otp" id="subtab-otp">OFFER TO PURCHASE</button>
+    </div>
+    <div id="subpanel-mandates" class="panel active" role="tabpanel" aria-labelledby="subtab-mandates">
+      <div class="mt-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+        <a class="btn" target="_blank" href="https://drive.google.com/drive/folders/1P_9v2kTheV4mzPt0h2Jtm4oozt3QrVFG?usp=drive_link">OPEN MANDATES FOLDER</a>
+      </div>
+    </div>
+    <div id="subpanel-otp" class="panel" role="tabpanel" aria-labelledby="subtab-otp">
+      <div class="mt-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+        <a class="btn" target="_blank" href="https://drive.google.com/drive/folders/1SgDPogFFXti5vMFc7GiPRR_LjIHUySaP?usp=drive_link">OPEN OFFER TO PURCHASE FOLDER</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- NEW: BOND PRE-APPROVAL TABS -->
+  <div id="panel-bond" class="panel" role="tabpanel" aria-labelledby="tab-bond">
+    <div class="subtabbar" role="tablist" aria-label="Bond Pre-Approval Subsections">
+      <button class="subtab" role="tab" aria-selected="true" aria-controls="subpanel-bond-ooba" id="subtab-bond-ooba">GET A OOBA BOND</button>
+      <button class="subtab" role="tab" aria-selected="false" aria-controls="subpanel-bond-girl" id="subtab-bond-girl">THE BOND GIRL</button>
+    </div>
+
+    <div id="subpanel-bond-ooba" class="panel active" role="tabpanel" aria-labelledby="subtab-bond-ooba">
+      <div class="mt-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+        <a class="btn" target="_blank" href="https://my.ooba.co.za/obi/?var1=KW4&var2=&var3=OBI&var4">OPEN OOBA PRE-APPROVAL</a>
+      </div>
+    </div>
+
+    <div id="subpanel-bond-girl" class="panel" role="tabpanel" aria-labelledby="subtab-bond-girl">
+      <div class="mt-3 grid grid-cols-1 md:grid-cols-2 gap-3">
+        <div class="card">
+          <h3>MORICOLETTE ERASMUS-NEL</h3>
+          <p class="mt-1 text-red-300">THE BOND GIRL</p>
+          <p class="mt-2"><a class="underline" href="tel:+27725759054">+27 72 575 9054</a></p>
+          <p class="mt-1"><a class="underline" href="mailto:moricolette.erasmusnel@kwsa.co.za">MORICOLETTE.ERASMUSNEL@KWSA.CO.ZA</a></p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
 <footer class="text-center mt-12 h-16"></footer>
 </div>
+
+<script>
+// Top tab switching
+document.querySelectorAll('.tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const tabs = btn.parentElement.querySelectorAll('.tab');
+    tabs.forEach(b => b.setAttribute('aria-selected', 'false'));
+    btn.setAttribute('aria-selected', 'true');
+
+    const panels = document.querySelectorAll('section [role="tabpanel"]');
+    panels.forEach(p => p.classList.remove('active'));
+    document.getElementById(btn.getAttribute('aria-controls')).classList.add('active');
+  });
+});
+
+// Subtab switching (works per parent panel)
+document.querySelectorAll('.subtabbar').forEach(bar => {
+  bar.addEventListener('click', (e) => {
+    const btn = e.target.closest('.subtab');
+    if (!btn) return;
+    bar.querySelectorAll('.subtab').forEach(b => b.setAttribute('aria-selected', 'false'));
+    btn.setAttribute('aria-selected', 'true');
+    const parentPanel = bar.parentElement;
+    parentPanel.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    const toShow = document.getElementById(btn.getAttribute('aria-controls'));
+    if (toShow) toShow.classList.add('active');
+  });
+});
+</script>
 </body></html>
