@@ -15,30 +15,32 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet"/>
 <style>
 :root { --logoW: clamp(220px, 60vw, 560px); }
-body { font-family: 'Inter', sans-serif; }
-.brand-wrap { display:grid; place-items:center; gap:0.5rem; }
+body { font-family:'Inter',sans-serif; }
+.brand-wrap { display:grid; place-items:center; gap:.5rem; }
 .brand-logo { width:var(--logoW); height:auto; }
-/* Tagline at 40% of logo width */
-.brand-tagline { width:calc(var(--logoW) * 0.40); height:auto; }
+.brand-tagline { width:calc(var(--logoW)*0.40); height:auto; }
 
-/* Top Tabs */
-.tabbar { display:flex; gap:.5rem; overflow-x:auto; padding:.5rem 0; border-bottom:1px solid rgba(255,255,255,.06); position:sticky; top:0; background:#000; z-index:10; }
-.tabbtn { background:#111827; color:#e5e7eb; border:1px solid rgba(255,255,255,.08); border-radius:.75rem; padding:.55rem .9rem; white-space:normal; overflow-wrap:anywhere; font-weight:700; }
-.tabbtn[aria-selected="true"] { background:#dc2626; color:#fff; border-color:#dc2626; }
-/* Subtabs */
-.subtabbar { display:flex; gap:.5rem; overflow-x:auto; padding:.5rem 0; }
-.subtab { background:#1f2937; color:#fff; border:1px solid rgba(255,255,255,.08); border-radius:.65rem; padding:.5rem .8rem; white-space:normal; overflow-wrap:anywhere; font-weight:700; }
+/* Main buttons grid (classic) */
+.main-grid { display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:.5rem; }
+@media (min-width:640px) { .main-grid { grid-template-columns: repeat(3, minmax(0,1fr)); } }
+@media (min-width:768px) { .main-grid { grid-template-columns: repeat(5, minmax(0,1fr)); } }
+
+.btn, .subtab {
+  display:block; width:100%; background:#1f2937; color:#fff; font-weight:700;
+  padding:.8rem 1rem; border-radius:.9rem; text-align:center; border:1px solid rgba(255,255,255,.06);
+  white-space:normal; overflow-wrap:anywhere; hyphens:auto; line-height:1.2;
+}
+.btn:hover { background:#374151; }
+/* Section card */
+.section-card { background:#0b1220; border:1px solid rgba(255,255,255,.06); border-radius:1rem; padding:1rem; margin-top:1rem; }
+
+/* Subtab bar appears after clicking a main section */
+.subtabbar { display:flex; gap:.5rem; flex-wrap:wrap; }
 .subtab[aria-selected="true"] { background:#4b5563; }
-/* Buttons */
-.btn { display:block; width:100%; background:#374151; color:#fff; font-weight:700; padding:.8rem 1rem; border-radius:.9rem; text-align:center;
-        white-space:normal; overflow-wrap:anywhere; hyphens:auto; line-height:1.2; border:1px solid rgba(255,255,255,.05); }
-.btn:hover { background:#4b5563; }
-/* Cards */
-.card { background:#0f172a; border:1px solid rgba(255,255,255,.06); border-radius:1rem; padding:1rem; }
-.card h3 { font-weight:800; letter-spacing:.03em; }
-/* Panels */
+
 .panel { display:none; }
 .panel.active { display:block; }
+
 /* Leadership */
 .leadership * { text-transform: uppercase; }
 .contact-name { font-size:1.125rem; font-weight:800; letter-spacing:.04em; }
@@ -56,135 +58,83 @@ body { font-family: 'Inter', sans-serif; }
     <p class="text-center mt-4 text-sm md:text-base text-gray-200">WELCOME TO KW EXPLORE! WORKING TOGETHER TO THE NUMBER 1 AGENCY IN SA</p>
   </header>
 
-  <nav class="tabbar" role="tablist" aria-label="Sections" id="top-tabs"></nav>
-  <main id="panels" class="mt-4"></main>
+  <!-- Classic primary section buttons -->
+  <div class="main-grid" id="section-grid"></div>
+
+  <!-- Section panel appears below the grid -->
+  <div id="section-panel" class="section-card"></div>
 
   <footer class="text-center mt-10 text-xs text-gray-400">KW Explore Fourways</footer>
 </div>
 
 <script>
-const DATA = {"MAIN": {"ACTIONS": [["CALENDAR", "https://calendar.google.com/calendar/"], ["MY MAIL", "https://mail.google.com/mail/"], ["REFER A NEW AGENT", "https://thatrealestateguysa.github.io/learnmore/"]]}, "OTHER LINKS": {"QUICK LINKS": [["MAPP", "https://mapp.kwsouthafrica.co.za/Account/Login?returnUrl=%2F"], ["COMMAND", "https://console.command.kw.com/command"], ["GOOGLE DRIVE", "https://drive.google.com/drive/"], ["LIGHTSTONE", "https://toolkit.lightstone.co.za/#/"], ["CMA INFO", "https://www.cmainfo.co.za/"], ["THE VIRTUAL AGENT", "https://app.thevirtualagent.co.za/User/sign-in"], ["PROPERTY 24", "https://www.property24.com/"], ["PRIVATE PROPERTY", "https://www.privateproperty.co.za/"], ["WHATSAPP WEB", "https://web.whatsapp.com/"], ["AGENT TOOLKIT", "https://drive.google.com/drive/folders/17t9lC6d9cZHPltRiKw3CVtporeDzxTbT"]]}, "OTP / MANDATES": {"MANDATES": [["OPEN MANDATES FOLDER", "https://drive.google.com/drive/folders/1P_9v2kTheV4mzPt0h2Jtm4oozt3QrVFG?usp=drive_link"]], "OFFER TO PURCHASE": [["OPEN OFFER TO PURCHASE FOLDER", "https://drive.google.com/drive/folders/1SgDPogFFXti5vMFc7GiPRR_LjIHUySaP?usp=drive_link"]]}, "BOND PRE-APPROVAL": {"GET A OOBA BOND": [["OPEN OOBA PRE-APPROVAL", "https://my.ooba.co.za/obi/?var1=KW4&var2=&var3=OBI&var4"]], "THE BOND GIRL": [["MORICOLETTE ERASMUS-NEL \u2014 CALL", "+27725759054", "tel"], ["MORICOLETTE.ERASMUSNEL@KWSA.CO.ZA", "mailto:moricolette.erasmusnel@kwsa.co.za"]]}, "RENTAL DESK": {"GUIDES & FORMS": [["ROADMAP TO RENTALS", "https://drive.google.com/file/d/1HsmWsP35aBx0s8gykS-LeAzIQETbCLVj/view?usp=sharing"], ["RENTAL DOCUMENTS", "https://drive.google.com/drive/folders/1GlY8meqjLJFqTKLSipRr0CFXjgZYrdSE"], ["RENTAL POLICY & PROCEDURES", "https://drive.google.com/file/d/1mE1lX7e0W-u7b2uSHvZlLMsEwLX8Jcjf/view?usp=drive_link"], ["RENTAL FAQ", "https://drive.google.com/file/d/1dlIv_sGXhoSwb7QKm_UiYQCAKF2s6mHQ/view?usp=drive_link"]], "TOOLS": [["RED RABBIT", "https://www.weconnectu.co.za/redrabbit"], ["EVICTION SECURE", "https://evictionsecure.co.za/"]]}, "AI APPS": {"APPS": [["CHAT GPT", "https://chatgpt.com/"], ["GEMINI", "https://gemini.google.com/app"]]}, "MARKETING": {"ASSETS": [["CANVA (SSO)", "https://authn.kw.com/saml20/idp/startsso?spEntityId=https://www.canva.com"], ["MAPPS TO EXPLORE DESIGNS", "https://web.facebook.com/groups/236242439163189?_rdc=1&_rdr#"]]}, "EXPLORE IN A BOX": {"EXPLORE WHATSAPP": [["KWE BUSINESS", "https://chat.whatsapp.com/Fo9u1JwPQPX5jKFxkxireB"], ["KWE FAMILY", "https://chat.whatsapp.com/7Vt6td3OTf6AnC9UAZ2NrW"], ["KWE MINDSET", "https://chat.whatsapp.com/BmC5OcpGr0fEsSNjBjs9V6"], ["KWE TRADING FLOOR", "https://chat.whatsapp.com/KhXyuE7SMBzKa4zmKjT8V2"], ["KWE RENTALS", "https://chat.whatsapp.com/FJjYfQR22CWCJoi14kZxFa"], ["KWE COMMERCIAL", "https://chat.whatsapp.com/GgAtHnEYmXmAQEXzEl0DkC?mode=wwc"]], "KW EXPLORE TECH SUPPORT": [["BOOK 1-ON-1", "https://calendar.app.google/8351gr38GWZpT1vL7"], ["COMMAND 66 DAY CHALLENGE", "https://www.youtube.com/playlist?list=PLK75KZDqV1zlNlNbAYLPDegh4Rje76NNL"], ["FAQ COMMAND", "https://answers.kw.com/hc/en-us"]], "LETTER OF EMPLOYMENT": [["GENERAL LETTER OF EMPLOYMENT", "https://docs.google.com/forms/d/e/1FAIpQLSfXYVHkzEEDTycJx-lN8iFcW7rwo6rdEVPjSGIfzvsuvmzUlA/viewform"], ["SARS & PPRA LETTER OF EMPLOYMENT", "https://docs.google.com/forms/d/e/1FAIpQLSd0yabWfk6dM9JwDUxRofYdI9m9S66ZbhwlIKMIN3iXXfREdg/viewform"]], "WELCOME PACK": [["KW EXPLORE WELCOME PACK", "https://drive.google.com/file/d/1HRhp_4CD1bvpHppBJWx9OXdYeuHZ_N09/view?usp=sharing"]]}, "COMPLIANCE": {"REGULATIONS": [["PPRA", "https://theppra.org.za/myffc"], ["CODE OF CONDUCT", "https://drive.google.com/file/d/1ngSQQgKzl-3-BQ6VijgiZbyD8Fh8HByB/view?usp=sharing"], ["FIC", "https://drive.google.com/file/d/12oz_bU_Tqnqlx9LJa3OPz2aY5mCFF80C/view?usp=sharing"]], "DO NOT CALL LISTS": [["VIRTUAL AGENT", "https://www.thevirtualagent.co.za/info/#c-tab3-5"], ["CMA INFO", "https://www.cmainfo.co.za/privacy.aspx"]]}, "CONTACT THE LEADERSHIP TEAM": {"LEADERSHIP": [["ESTELLE FERREIRA", "PRINCIPAL PROPERTY PRACTITIONER", "+27824606864", "Estelle.Ferreira@kwsa.co.za"], ["SHAWN ARMER", "OPERATING PARTNER", "+27815335683", "shawn.armer@kwsa.co.za"], ["DAWIE DU TOIT", "TEAM LEADER", "+27840624865", "dawie.dutoit@kwsa.co.za"], ["RUKUDZO JAGADA", "MARKET CENTRE ADMINISTRATOR", "+27785848244", "rukudzo.jagada@kwsa.co.za"], ["CASANDRA VAN DER MERWE", "MCTT / DFI", "+27842121991", "casandra.vdmerwe@kwsa.co.za"], ["FRANCOIS MULLER", "RENTAL MANAGER", "+27824402482", "francois.muller@kwsa.co.za"], ["MARYNA MULLER", "RENTAL ADMINISTRATOR", "+27768922404", "maryna.muller@kwsa.co.za"], ["MORNAY CLOETE", "COMMERCIAL DEPT | CORPORATE REAL ESTATE CONSULTANT | PROPERTY INVESTMENT STRATEGIST", "+27828886602", "mornay@emacity.co.za"], ["MORICOLETTE ERASMUS-NEL", "THE BOND GIRL", "+27725759054", "moricolette.erasmusnel@kwsa.co.za"]]}, "RESOURCES": {"LINKS": [["KELLER INK", "https://kellerink.com/"], ["CGI CALCULATOR", "https://kwecgi.netlify.app/"], ["VALUE MAP", "https://drive.google.com/file/d/1Ot82JX3nPrb1we1d1AdO5t1_k-YgWLb0/view?usp=sharing"]]}, "PARTNERS": {"FIRMS": [["VAN DEVENTERS", "https://www.vandeventers.law/"], ["LWM INC.", "https://lmw.co.za/"], ["HAMMOND POLE", "https://www.hammondpole.co.za/"], ["OOBA PRODUCT DETERMINATOR", "https://www.ooba.co.za/product-determinator-v2/?paid_campaign=search&landing_page=homeloan1&adwords_campaign_id=1615939422&gclid=Cj0KCQjwrfymBhCTARIsADXTabn4IM5wvINZrk6RE8ePkpkWcMaHiH3fzglJthHjrXIPCmY_NrUw8yUaAuwFEALw_wcB"]]}};
+const DATA = {"MAIN TABS": {"ACTIONS": [["CALENDAR", "https://calendar.google.com/calendar/"], ["MY MAIL", "https://mail.google.com/mail/"], ["REFER A NEW AGENT", "https://thatrealestateguysa.github.io/learnmore/"]]}, "OTHER LINKS": {"QUICK LINKS": [["MAPP", "https://mapp.kwsouthafrica.co.za/Account/Login?returnUrl=%2F"], ["COMMAND", "https://console.command.kw.com/command"], ["GOOGLE DRIVE", "https://drive.google.com/drive/"], ["LIGHTSTONE", "https://toolkit.lightstone.co.za/#/"], ["CMA INFO", "https://www.cmainfo.co.za/"], ["THE VIRTUAL AGENT", "https://app.thevirtualagent.co.za/User/sign-in"], ["PROPERTY 24", "https://www.property24.com/"], ["PRIVATE PROPERTY", "https://www.privateproperty.co.za/"], ["WHATSAPP WEB", "https://web.whatsapp.com/"], ["AGENT TOOLKIT", "https://drive.google.com/drive/folders/17t9lC6d9cZHPltRiKw3CVtporeDzxTbT"]]}, "OTP / MANDATES": {"MANDATES": [["OPEN MANDATES FOLDER", "https://drive.google.com/drive/folders/1P_9v2kTheV4mzPt0h2Jtm4oozt3QrVFG?usp=drive_link"]], "OFFER TO PURCHASE": [["OPEN OFFER TO PURCHASE FOLDER", "https://drive.google.com/drive/folders/1SgDPogFFXti5vMFc7GiPRR_LjIHUySaP?usp=drive_link"]]}, "BOND PRE-APPROVAL": {"GET A OOBA BOND": [["OPEN OOBA PRE-APPROVAL", "https://my.ooba.co.za/obi/?var1=KW4&var2=&var3=OBI&var4"]], "THE BOND GIRL": [["MORICOLETTE ERASMUS-NEL \u2014 CALL", "+27725759054", "tel"], ["MORICOLETTE.ERASMUSNEL@KWSA.CO.ZA", "mailto:moricolette.erasmusnel@kwsa.co.za"]]}, "RENTALS": {"GUIDES & FORMS": [["ROADMAP TO RENTALS", "https://drive.google.com/file/d/1HsmWsP35aBx0s8gykS-LeAzIQETbCLVj/view?usp=sharing"], ["RENTAL DOCUMENTS", "https://drive.google.com/drive/folders/1GlY8meqjLJFqTKLSipRr0CFXjgZYrdSE"], ["RENTAL POLICY & PROCEDURES", "https://drive.google.com/file/d/1mE1lX7e0W-u7b2uSHvZlLMsEwLX8Jcjf/view?usp=drive_link"], ["RENTAL FAQ", "https://drive.google.com/file/d/1dlIv_sGXhoSwb7QKm_UiYQCAKF2s6mHQ/view?usp=drive_link"]], "TOOLS": [["RED RABBIT", "https://www.weconnectu.co.za/redrabbit"], ["EVICTION SECURE", "https://evictionsecure.co.za/"]]}, "AI APPS": {"APPS": [["CHAT GPT", "https://chatgpt.com/"], ["GEMINI", "https://gemini.google.com/app"]]}, "MARKETING": {"ASSETS": [["CANVA (SSO)", "https://authn.kw.com/saml20/idp/startsso?spEntityId=https://www.canva.com"], ["MAPPS TO EXPLORE DESIGNS", "https://web.facebook.com/groups/236242439163189?_rdc=1&_rdr#"]]}, "EXPLORE IN A BOX": {"EXPLORE WHATSAPP": [["KWE BUSINESS", "https://chat.whatsapp.com/Fo9u1JwPQPX5jKFxkxireB"], ["KWE FAMILY", "https://chat.whatsapp.com/7Vt6td3OTf6AnC9UAZ2NrW"], ["KWE MINDSET", "https://chat.whatsapp.com/BmC5OcpGr0fEsSNjBjs9V6"], ["KWE TRADING FLOOR", "https://chat.whatsapp.com/KhXyuE7SMBzKa4zmKjT8V2"], ["KWE RENTALS", "https://chat.whatsapp.com/FJjYfQR22CWCJoi14kZxFa"], ["KWE COMMERCIAL", "https://chat.whatsapp.com/GgAtHnEYmXmAQEXzEl0DkC?mode=wwc"]], "KW EXPLORE TECH SUPPORT": [["BOOK 1-ON-1", "https://calendar.app.google/8351gr38GWZpT1vL7"], ["COMMAND 66 DAY CHALLENGE", "https://www.youtube.com/playlist?list=PLK75KZDqV1zlNlNbAYLPDegh4Rje76NNL"], ["FAQ COMMAND", "https://answers.kw.com/hc/en-us"]], "LETTER OF EMPLOYMENT": [["GENERAL LETTER OF EMPLOYMENT", "https://docs.google.com/forms/d/e/1FAIpQLSfXYVHkzEEDTycJx-lN8iFcW7rwo6rdEVPjSGIfzvsuvmzUlA/viewform"], ["SARS & PPRA LETTER OF EMPLOYMENT", "https://docs.google.com/forms/d/e/1FAIpQLSd0yabWfk6dM9JwDUxRofYdI9m9S66ZbhwlIKMIN3iXXfREdg/viewform"]], "WELCOME PACK": [["KW EXPLORE WELCOME PACK", "https://drive.google.com/file/d/1HRhp_4CD1bvpHppBJWx9OXdYeuHZ_N09/view?usp=sharing"]]}, "COMPLIANCE": {"REGULATIONS": [["PPRA", "https://theppra.org.za/myffc"], ["CODE OF CONDUCT", "https://drive.google.com/file/d/1ngSQQgKzl-3-BQ6VijgiZbyD8Fh8HByB/view?usp=sharing"], ["FIC", "https://drive.google.com/file/d/12oz_bU_Tqnqlx9LJa3OPz2aY5mCFF80C/view?usp=sharing"]], "DO NOT CALL LISTS": [["VIRTUAL AGENT", "https://www.thevirtualagent.co.za/info/#c-tab3-5"], ["CMA INFO", "https://www.cmainfo.co.za/privacy.aspx"]]}, "CONTACT THE LEADERSHIP TEAM": {"LEADERSHIP": [["ESTELLE FERREIRA", "PRINCIPAL PROPERTY PRACTITIONER", "+27824606864", "Estelle.Ferreira@kwsa.co.za"], ["SHAWN ARMER", "OPERATING PARTNER", "+27815335683", "shawn.armer@kwsa.co.za"], ["DAWIE DU TOIT", "TEAM LEADER", "+27840624865", "dawie.dutoit@kwsa.co.za"], ["RUKUDZO JAGADA", "MARKET CENTRE ADMINISTRATOR", "+27785848244", "rukudzo.jagada@kwsa.co.za"], ["CASANDRA VAN DER MERWE", "MCTT / DFI", "+27842121991", "casandra.vdmerwe@kwsa.co.za"], ["FRANCOIS MULLER", "RENTAL MANAGER", "+27824402482", "francois.muller@kwsa.co.za"], ["MARYNA MULLER", "RENTAL ADMINISTRATOR", "+27768922404", "maryna.muller@kwsa.co.za"], ["MORNAY CLOETE", "COMMERCIAL DEPARTMENT | CORPORATE REAL ESTATE CONSULTANT | PROPERTY INVESTMENT STRATEGIST", "+27828886602", "mornay@emacity.co.za"], ["MORICOLETTE ERASMUS-NEL", "THE BOND GIRL", "+27725759054", "moricolette.erasmusnel@kwsa.co.za"]]}, "RESOURCES": {"LINKS": [["KELLER INK", "https://kellerink.com/"], ["CGI CALCULATOR", "https://kwecgi.netlify.app/"], ["VALUE MAP", "https://drive.google.com/file/d/1Ot82JX3nPrb1we1d1AdO5t1_k-YgWLb0/view?usp=sharing"]]}, "PARTNERS": {"FIRMS": [["VAN DEVENTERS", "https://www.vandeventers.law/"], ["LWM INC.", "https://lmw.co.za/"], ["HAMMOND POLE", "https://www.hammondpole.co.za/"], ["OOBA PRODUCT DETERMINATOR", "https://www.ooba.co.za/product-determinator-v2/?paid_campaign=search&landing_page=homeloan1&adwords_campaign_id=1615939422&gclid=Cj0KCQjwrfymBhCTARIsADXTabn4IM5wvINZrk6RE8ePkpkWcMaHiH3fzglJthHjrXIPCmY_NrUw8yUaAuwFEALw_wcB"]]}};
 
-// Build top tabs
-const topTabs = document.getElementById('top-tabs');
-const panels = document.getElementById('panels');
+// Build main grid
+const grid = document.getElementById('section-grid');
+const panel = document.getElementById('section-panel');
 
-Object.keys(DATA).forEach((sectionKey, idx) => {
-  const tabId = 'tab-' + idx;
-  const panelId = 'panel-' + idx;
-
-  const btn = document.createElement('button');
-  btn.className = 'tabbtn';
-  btn.id = tabId;
-  btn.role = 'tab';
-  btn.setAttribute('aria-controls', panelId);
-  btn.setAttribute('aria-selected', 'false');
-  btn.textContent = sectionKey;
-  topTabs.appendChild(btn);
-
-  const panel = document.createElement('section');
-  panel.className = 'panel';
-  panel.id = panelId;
-  panel.setAttribute('role','tabpanel');
-  panel.setAttribute('aria-labelledby', tabId);
-  panels.appendChild(panel);
-
-  // Panel content: build subtabs when this panel is first opened
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.tabbtn').forEach(b => b.setAttribute('aria-selected','false'));
-    btn.setAttribute('aria-selected','true');
-
-    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-    panel.classList.add('active');
-
-    if (!panel.dataset.built) {
-      buildSubtabs(panel, DATA[sectionKey]);
-      panel.dataset.built = '1';
-    }
-  });
+Object.keys(DATA).forEach((key, idx) => {
+  const b = document.createElement('button');
+  b.className = 'btn';
+  b.textContent = key;
+  b.addEventListener('click', () => openSection(key));
+  grid.appendChild(b);
 });
 
-// Build subtabs and their content
-function buildSubtabs(container, sectionObj) {
-  const subBar = document.createElement('div');
-  subBar.className = 'subtabbar';
-  subBar.setAttribute('role','tablist');
-  container.appendChild(subBar);
+// Opens a section: show subtabs, nothing selected until a subtab is clicked
+function openSection(key) {
+  const section = DATA[key];
+  panel.innerHTML = `<h2 class="text-lg font-bold mb-2">${key}</h2>
+                     <div class="subtabbar" id="subbar"></div>
+                     <div id="subcontent"></div>`;
+  const subbar = panel.querySelector('#subbar');
+  const subcontent = panel.querySelector('#subcontent');
 
-  const contentWrap = document.createElement('div');
-  container.appendChild(contentWrap);
-
-  const subkeys = Object.keys(sectionObj);
-
-  subkeys.forEach((subKey, jdx) => {
-    const subId = container.id + '-subtab-' + jdx;
-    const subPanelId = container.id + '-subpanel-' + jdx;
-
-    const sbtn = document.createElement('button');
-    sbtn.className = 'subtab';
-    sbtn.id = subId;
-    sbtn.role = 'tab';
-    sbtn.setAttribute('aria-controls', subPanelId);
-    sbtn.setAttribute('aria-selected','false');
-    sbtn.textContent = subKey;
-    subBar.appendChild(sbtn);
-
-    const spanel = document.createElement('div');
-    spanel.className = 'panel';
-    spanel.id = subPanelId;
-    spanel.setAttribute('role','tabpanel');
-    spanel.setAttribute('aria-labelledby', subId);
-    contentWrap.appendChild(spanel);
-
-    // Content builder
-    const items = sectionObj[subKey];
-
-    if (subKey === 'LEADERSHIP') {
-      const grid = document.createElement('div');
-      grid.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 leadership';
-      items.forEach(row => {
-        const [name, role, phone, email] = row;
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.innerHTML = `<div class="contact-name">${name}</div>
-                          <div class="contact-role">${role}</div>
-                          <a class="contact-link" href="tel:${phone}">${phone}</a>
-                          <a class="contact-link" href="mailto:${email}">${email.toUpperCase()}</a>`;
-        grid.appendChild(card);
-      });
-      spanel.appendChild(grid);
-    } else if (Array.isArray(items)) {
-      // Default: button grid
-      const grid = document.createElement('div');
-      grid.className = 'mt-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3';
-      items.forEach(link => {
-        // Special-case tel links if provided as [label, value, 'tel']
-        let label = link[0];
-        let href = link[1];
-        if (link[2] === 'tel') {
-          href = 'tel:' + link[1].replace(/\s+/g,'');
-        }
-        const a = document.createElement('a');
-        a.className = 'btn';
-        a.href = href;
-        a.target = href.startsWith('http') ? '_blank' : '_self';
-        a.textContent = label;
-        grid.appendChild(a);
-      });
-      spanel.appendChild(grid);
-    }
+  Object.keys(section).forEach((subKey, jdx) => {
+    const s = document.createElement('button');
+    s.className = 'subtab';
+    s.textContent = subKey;
+    s.setAttribute('aria-selected','false');
+    s.addEventListener('click', () => {
+      subbar.querySelectorAll('.subtab').forEach(el => el.setAttribute('aria-selected','false'));
+      s.setAttribute('aria-selected','true');
+      renderSub(subKey, section[subKey], subcontent);
+    });
+    subbar.appendChild(s);
   });
+}
 
-  // click-to-activate subtabs; do not auto-open until user clicks
-  subBar.addEventListener('click', (e) => {
-    const btn = e.target.closest('.subtab');
-    if (!btn) return;
-    subBar.querySelectorAll('.subtab').forEach(b => b.setAttribute('aria-selected','false'));
-    btn.setAttribute('aria-selected','true');
-    const showId = btn.getAttribute('aria-controls');
-    contentWrap.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-    document.getElementById(showId).classList.add('active');
-  });
+function renderSub(subKey, items, container) {
+  container.innerHTML = '';
+  if (subKey === 'LEADERSHIP') {
+    const grid = document.createElement('div');
+    grid.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 leadership';
+    items.forEach(([name, role, phone, email]) => {
+      const card = document.createElement('div');
+      card.className = 'section-card';
+      card.innerHTML = `<div class="contact-name">${name}</div>
+                        <div class="contact-role">${role}</div>
+                        <a class="contact-link" href="tel:${phone}">${phone}</a>
+                        <a class="contact-link" href="mailto:${email}">${email.toUpperCase()}</a>`;
+      grid.appendChild(card);
+    });
+    container.appendChild(grid);
+  } else {
+    const grid = document.createElement('div');
+    grid.className = 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3';
+    items.forEach(link => {
+      let label = link[0]; let href = link[1];
+      if (link[2] === 'tel') href = 'tel:' + link[1].replace(/\s+/g,'');
+      const a = document.createElement('a');
+      a.className = 'btn';
+      a.href = href;
+      a.target = href.startsWith('http') ? '_blank' : '_self';
+      a.textContent = label;
+      grid.appendChild(a);
+    });
+    container.appendChild(grid);
+  }
 }
 </script>
 </body></html>
