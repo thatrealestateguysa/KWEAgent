@@ -51,7 +51,8 @@ h1 { font-weight:800; letter-spacing:.02em; }
 .section-title { font-weight:800; margin:.75rem 0 .5rem; }
 
 /* Panels appear directly under the trigger; spanning full width of the grid */
-.panel-slot { grid-column: 1 / -1; }
+.panel-slot { display:none; }
+.panel-slot.open { display:block; grid-column:1 / -1; }
 .panel { display:none; }
 .panel.open{ display:block; }
 .panel .subtabbar { display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.5rem; }
@@ -318,6 +319,7 @@ h1 { font-weight:800; letter-spacing:.02em; }
 
 <script>
 function closeAll(){
+  document.querySelectorAll('.panel-slot').forEach(s=>s.classList.remove('open'));
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('open'));
   document.querySelectorAll('[data-panel]').forEach(btn=>{ btn.setAttribute('aria-expanded','false'); btn.classList.remove('active'); });
   ['bondGirlCard','dncRow','waRow','techRow','loeRow'].forEach(id=>{ const el=document.getElementById(id); if(el) el.classList.add('hidden'); });
@@ -325,6 +327,10 @@ function closeAll(){
   document.querySelectorAll('#leadershipPanel .leader-card').forEach(c=>c.classList.add('hidden'));
 }
 function closeOthers(exceptId){
+  document.querySelectorAll('.panel-slot').forEach(s=>{
+    const panel=s.querySelector('.panel');
+    if(panel && panel.id!==exceptId) s.classList.remove('open');
+  });
   document.querySelectorAll('.panel').forEach(p=>{ if(p.id!==exceptId) p.classList.remove('open'); });
   document.querySelectorAll('[data-panel]').forEach(btn=>{
     if(btn.dataset.panel!==exceptId){ btn.setAttribute('aria-expanded','false'); btn.classList.remove('active'); }
@@ -377,5 +383,55 @@ document.querySelectorAll('#leadershipPanel .subtabbar .subtab').forEach(btn=>{
   });
 });
 </script>
+
+<script>
+// --- overrides to ensure panel-slot rows only appear when open ---
+(function(){
+  function closeAll(){
+    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('open'));
+    document.querySelectorAll('.panel-slot').forEach(s=>s.classList.remove('open'));
+    document.querySelectorAll('[data-panel]').forEach(btn=>{ btn.setAttribute('aria-expanded','false'); btn.classList.remove('active'); });
+    ['bondGirlCard','dncRow','waRow','techRow','loeRow'].forEach(id=>{ const el=document.getElementById(id); if(el) el.classList.add('hidden'); });
+    document.querySelectorAll('.subtab.open-sub').forEach(el=>el.classList.remove('open-sub'));
+    document.querySelectorAll('#leadershipPanel .leader-card').forEach(c=>c.classList.add('hidden'));
+  }
+  function closeOthers(exceptId){
+    document.querySelectorAll('.panel').forEach(p=>{ if(p.id!==exceptId) p.classList.remove('open'); });
+    document.querySelectorAll('.panel-slot').forEach(s=>{ const p=s.querySelector('.panel'); if(!p || p.id!==exceptId) s.classList.remove('open'); });
+    document.querySelectorAll('[data-panel]').forEach(btn=>{ if(btn.dataset.panel!==exceptId){ btn.setAttribute('aria-expanded','false'); btn.classList.remove('active'); }});
+    ['bondGirlCard','dncRow','waRow','techRow','loeRow'].forEach(id=>{ const el=document.getElementById(id); if(el) el.classList.add('hidden'); });
+    if(exceptId!=='leadershipPanel'){ document.querySelectorAll('#leadershipPanel .leader-card').forEach(c=>c.classList.add('hidden')); }
+    document.querySelectorAll('.subtab.open-sub').forEach(el=>el.classList.remove('open-sub'));
+  }
+  function setupToggle(btnId,panelId){
+    const btn=document.getElementById(btnId);
+    const panel=document.getElementById(panelId);
+    const slot = btn && btn.nextElementSibling;
+    if(!btn || !panel || !slot) return;
+    btn.addEventListener('click', (e)=>{
+      e.stopPropagation();
+      const open=panel.classList.contains('open');
+      if(open){
+        panel.classList.remove('open');
+        slot.classList.remove('open');
+        btn.setAttribute('aria-expanded','false');
+        btn.classList.remove('active');
+      } else {
+        closeOthers(panelId);
+        slot.classList.add('open');
+        panel.classList.add('open');
+        btn.setAttribute('aria-expanded','true');
+        btn.classList.add('active');
+      }
+    });
+  }
+  // Rewire
+  ['otp','bond','rent','productivity','marketing','compliance','resources','exploreBox','partners','lead'].forEach(key=>setupToggle(key+'Btn', key+'Panel'));
+  document.querySelectorAll('.panel').forEach(p=>p.addEventListener('click', e=>e.stopPropagation()));
+  document.addEventListener('click', (e)=>{ const root=document.getElementById('quickLinksRoot'); if(root && !root.contains(e.target)) closeAll(); });
+  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeAll(); });
+})();
+</script>
+
 </body>
 </html>
