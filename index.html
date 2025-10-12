@@ -13,10 +13,9 @@
 :root {
   --logoW: clamp(220px, 60vw, 560px);
   --kwred:#dc2626;
-  /* Stronger greys */
-  --dark:#0b1220;     /* near-slate-950 */
-  --light:#3f4956;    /* punchier light grey-blue */
-  --hover:#2a3340;    /* hover for light */
+  --dark:#0b1220;
+  --light:#3f4956;
+  --hover:#2a3340;
 }
 body { font-family: 'Inter', sans-serif; }
 .brand { display:grid; place-items:center; gap:.5rem; }
@@ -42,15 +41,12 @@ h1 { font-weight:800; letter-spacing:.02em; }
 .quick-5 { display:grid; grid-template-columns:repeat(2,1fr); gap:.6rem; }
 @media (min-width:768px){ .quick-5{ grid-template-columns:repeat(5,1fr);} }
 
-/* Stronger alternating greys */
 .quick-5 > .btn:nth-child(odd)  { background: var(--light); }
 .quick-5 > .btn:nth-child(even) { background: var(--dark); }
 .quick-5 > .btn:nth-child(odd):hover { background: var(--hover); }
-.quick-5 > .btn:nth-child(even):hover { filter:brightness(1.15); }
 
 .section-title { font-weight:800; margin:.75rem 0 .5rem; }
 
-/* Panels now sit in 'panel-slot' immediately after the trigger; span full grid width */
 .panel-slot { grid-column: 1 / -1; }
 .panel { display:none; }
 .panel.open{ display:block; }
@@ -65,7 +61,6 @@ h1 { font-weight:800; letter-spacing:.02em; }
 
 .hidden{display:none;}
 
-/* Leadership styles */
 .leadership * { text-transform: uppercase; }
 .leader-card { background:#0b1220; border:1px solid rgba(255,255,255,.14); border-radius:1rem; padding:1rem; }
 .leader-name { font-weight:900; font-size:1.35rem; letter-spacing:.02em; }
@@ -86,7 +81,7 @@ h1 { font-weight:800; letter-spacing:.02em; }
       <div class="main-three">
         <a class="btn" style="background:var(--light)" target="_blank" href="https://calendar.google.com/calendar/">CALENDAR</a>
         <a class="btn" style="background:var(--dark)" target="_blank" href="https://mail.google.com/mail/">MY MAIL</a>
-        <a class="btn" style="background:var(--light)" target="_blank" href="https://thatrealestateguysa.github.io/learnmore/">REFER A NEW AGENT</a>
+        <a class="btn" style="background:var(--kwred); border-color:var(--kwred)" target="_blank" href="https://thatrealestateguysa.github.io/learnmore/">REFER A NEW AGENT</a>
       </div>
     </section>
 
@@ -105,7 +100,6 @@ h1 { font-weight:800; letter-spacing:.02em; }
         <a class="btn" target="_blank" href="https://web.whatsapp.com/">WHATSAPP WEB</a>
         <a class="btn" target="_blank" href="https://drive.google.com/drive/folders/17t9lC6d9cZHPltRiKw3CVtporeDzxTbT">AGENT TOOLKIT</a>
 
-        <!-- Accordion buttons + inline slots so panel opens directly beneath -->
         <button id="otpBtn" class="btn" type="button" aria-expanded="false" data-panel="otpPanel">OTP / MANDATES</button>
         <div class="panel-slot"><div id="otpPanel" class="panel">
           <div class="subtabbar">
@@ -142,9 +136,14 @@ h1 { font-weight:800; letter-spacing:.02em; }
           </div>
         </div></div>
 
-        <button id="aiBtn" class="btn" type="button" aria-expanded="false" data-panel="aiPanel">AI APPS</button>
-        <div class="panel-slot"><div id="aiPanel" class="panel">
+        <!-- RENAMED: PRODUCTIVITY APPS -->
+        <button id="productivityBtn" class="btn" type="button" aria-expanded="false" data-panel="productivityPanel">PRODUCTIVITY APPS</button>
+        <div class="panel-slot"><div id="productivityPanel" class="panel">
           <div class="subtabbar">
+            <a class="subtab" target="_blank" href="https://docs.google.com/">DOCS</a>
+            <a class="subtab" target="_blank" href="https://docs.google.com/spreadsheets/">SHEETS</a>
+            <a class="subtab" target="_blank" href="https://docs.google.com/presentation/">SLIDES</a>
+            <a class="subtab" target="_blank" href="https://contacts.google.com/">CONTACTS</a>
             <a class="subtab" target="_blank" href="https://chatgpt.com/">CHAT GPT</a>
             <a class="subtab" target="_blank" href="https://gemini.google.com/app">GEMINI</a>
           </div>
@@ -181,7 +180,6 @@ h1 { font-weight:800; letter-spacing:.02em; }
           </div>
         </div></div>
 
-        <!-- Keep order from Stage 18: Explore in a Box then Partners -->
         <button id="exploreBoxBtn" class="btn" type="button" aria-expanded="false" data-panel="exploreBoxPanel">EXPLORE IN A BOX</button>
         <div class="panel-slot"><div id="exploreBoxPanel" class="panel">
           <div class="subtabbar">
@@ -313,7 +311,6 @@ h1 { font-weight:800; letter-spacing:.02em; }
   </div>
 
 <script>
-// Close-all helpers (adapted for inline panel-slots)
 function closeAll(){
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('open'));
   document.querySelectorAll('[data-panel]').forEach(btn=>{ btn.setAttribute('aria-expanded','false'); btn.classList.remove('active'); });
@@ -340,14 +337,13 @@ function setupToggle(btnId,panelId){
     else{ closeOthers(panelId); panel.classList.add('open'); btn.setAttribute('aria-expanded','true'); btn.classList.add('active'); }
   });
 }
-['otp','bond','rent','ai','marketing','compliance','resources','exploreBox','partners','lead'].forEach(key=>setupToggle(key+'Btn', key+'Panel'));
+['otp','bond','rent','productivity','marketing','compliance','resources','exploreBox','partners','lead'].forEach(key=>setupToggle(key+'Btn', key+'Panel'));
 
 // Click-away + Escape
 document.querySelectorAll('.panel').forEach(p=>p.addEventListener('click', e=>e.stopPropagation()));
 document.addEventListener('click', (e)=>{ const root=document.getElementById('quickLinksRoot'); if(!root.contains(e.target)) closeAll(); });
 document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeAll(); });
 
-// Sub toggles + red border when open
 function toggleRow(tabId, rowId){
   const tab=document.getElementById(tabId);
   const row=document.getElementById(rowId);
