@@ -36,10 +36,6 @@ h1 { font-weight:800; letter-spacing:.02em; }
 .subtabbar { display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.5rem; }
 .subtab { background:#111827; color:#fff; font-weight:700; padding:.7rem 1rem; border-radius:.8rem; border:1px solid rgba(255,255,255,.08); }
 .subtab:hover, .subtab[aria-selected="true"] { background:#374151; }
-.subrow { display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.5rem; }
-.linkpill { background:#0b1220; border:1px solid rgba(255,255,255,.08); padding:.6rem 1rem; border-radius:.75rem; font-weight:700; }
-.linkpill:hover { background:#1f2937; }
-.hidden { display:none; }
 </style>
 </head>
 <body class="bg-black text-white">
@@ -72,24 +68,23 @@ h1 { font-weight:800; letter-spacing:.02em; }
         <a class="btn" target="_blank" href="https://www.privateproperty.co.za/">PRIVATE PROPERTY</a>
         <a class="btn" target="_blank" href="https://web.whatsapp.com/">WHATSAPP WEB</a>
         <a class="btn" target="_blank" href="https://drive.google.com/drive/folders/17t9lC6d9cZHPltRiKw3CVtporeDzxTbT">AGENT TOOLKIT</a>
+
         <button id="otpBtn" class="btn" type="button" aria-expanded="false" aria-controls="otpPanel">OTP / MANDATES</button>
         <button id="bondBtn" class="btn" type="button" aria-expanded="false" aria-controls="bondPanel">BOND PRE-APPROVAL</button>
         <button id="rentBtn" class="btn" type="button" aria-expanded="false" aria-controls="rentPanel">RENTAL DESK</button>
         <button id="aiBtn" class="btn" type="button" aria-expanded="false" aria-controls="aiPanel">AI APPS</button>
         <button id="marketingBtn" class="btn" type="button" aria-expanded="false" aria-controls="marketingPanel">MARKETING</button>
         <button id="complianceBtn" class="btn" type="button" aria-expanded="false" aria-controls="compliancePanel">COMPLIANCE</button>
+        <button id="resourcesBtn" class="btn" type="button" aria-expanded="false" aria-controls="resourcesPanel">RESOURCES</button>
       </div>
 
-      <!-- OTP -->
-      <div id="otpPanel" class="panel" role="region">
-        <div class="subtabbar">
-          <a class="subtab" target="_blank" href="https://drive.google.com/drive/folders/1P_9v2kTheV4mzPt0h2Jtm4oozt3QrVFG?usp=drive_link">MANDATES</a>
-          <a class="subtab" target="_blank" href="https://drive.google.com/drive/folders/1SgDPogFFXti5vMFc7GiPRR_LjIHUySaP?usp=drive_link">OFFER TO PURCHASE</a>
-        </div>
-      </div>
+      <!-- Panels (existing ones omitted for brevity in comment; included below) -->
+      <div id="otpPanel" class="panel"><div class="subtabbar">
+        <a class="subtab" target="_blank" href="https://drive.google.com/drive/folders/1P_9v2kTheV4mzPt0h2Jtm4oozt3QrVFG?usp=drive_link">MANDATES</a>
+        <a class="subtab" target="_blank" href="https://drive.google.com/drive/folders/1SgDPogFFXti5vMFc7GiPRR_LjIHUySaP?usp=drive_link">OFFER TO PURCHASE</a>
+      </div></div>
 
-      <!-- Bond -->
-      <div id="bondPanel" class="panel" role="region">
+      <div id="bondPanel" class="panel">
         <div class="subtabbar">
           <a class="subtab" target="_blank" href="https://my.ooba.co.za/obi/?var1=KW4&var2=&var3=OBI&var4">GET A OOBA BOND</a>
           <a class="subtab" href="#" id="bondGirlTab">THE BOND GIRL</a>
@@ -104,58 +99,66 @@ h1 { font-weight:800; letter-spacing:.02em; }
         </div>
       </div>
 
-      <!-- Rentals -->
-      <div id="rentPanel" class="panel" role="region">
-        <div class="subtabbar">
-          <a class="subtab" target="_blank" href="https://drive.google.com/file/d/1HsmWsP35aBx0s8gykS-LeAzIQETbCLVj/view?usp=sharing">ROADMAP TO RENTALS</a>
-          <a class="subtab" target="_blank" href="https://www.weconnectu.co.za/redrabbit">RED RABBIT</a>
-          <a class="subtab" target="_blank" href="https://drive.google.com/drive/folders/1GlY8meqjLJFqTKLSipRr0CFXjgZYrdSE">RENTAL DOCUMENTS</a>
-          <a class="subtab" target="_blank" href="https://evictionsecure.co.za/">EVICTION SECURE</a>
-          <a class="subtab" target="_blank" href="https://drive.google.com/file/d/1mE1k7g0W-u7b2u8H2LlN_6wL3qVkfj4/view?usp=drive_link">RENTAL POLICY & PROCEDURES</a>
-          <a class="subtab" target="_blank" href="https://drive.google.com/file/d/1dlIv_sGXhoSwb7QKm_UiYQCAKF2s6mHQ/view?usp=drive_link">RENTAL FAQ</a>
-        </div>
-      </div>
+      <div id="rentPanel" class="panel"><div class="subtabbar">
+        <a class="subtab" target="_blank" href="https://drive.google.com/file/d/1HsmWsP35aBx0s8gykS-LeAzIQETbCLVj/view?usp=sharing">ROADMAP TO RENTALS</a>
+        <a class="subtab" target="_blank" href="https://www.weconnectu.co.za/redrabbit">RED RABBIT</a>
+        <a class="subtab" target="_blank" href="https://drive.google.com/drive/folders/1GlY8meqjLJFqTKLSipRr0CFXjgZYrdSE">RENTAL DOCUMENTS</a>
+        <a class="subtab" target="_blank" href="https://evictionsecure.co.za/">EVICTION SECURE</a>
+        <a class="subtab" target="_blank" href="https://drive.google.com/file/d/1mE1k7g0W-u7b2u8H2LlN_6wL3qVkfj4/view?usp=drive_link">RENTAL POLICY & PROCEDURES</a>
+        <a class="subtab" target="_blank" href="https://drive.google.com/file/d/1dlIv_sGXhoSwb7QKm_UiYQCAKF2s6mHQ/view?usp=drive_link">RENTAL FAQ</a>
+      </div></div>
 
-      <!-- AI Apps -->
-      <div id="aiPanel" class="panel" role="region">
-        <div class="subtabbar">
-          <a class="subtab" target="_blank" href="https://chatgpt.com/">CHAT GPT</a>
-          <a class="subtab" target="_blank" href="https://gemini.google.com/app">GEMINI</a>
-        </div>
-      </div>
+      <div id="aiPanel" class="panel"><div class="subtabbar">
+        <a class="subtab" target="_blank" href="https://chatgpt.com/">CHAT GPT</a>
+        <a class="subtab" target="_blank" href="https://gemini.google.com/app">GEMINI</a>
+      </div></div>
 
-      <!-- Marketing -->
-      <div id="marketingPanel" class="panel" role="region">
-        <div class="subtabbar">
-          <a class="subtab" target="_blank" href="https://authn.kw.com/saml20/idp/startsso?spEntityId=https://www.canva.com">CANVA (SSO)</a>
-          <a class="subtab" target="_blank" href="https://web.facebook.com/groups/236242439163189?_rdc=1&_rdr#">MAPPS TO EXPLORE DESIGNS</a>
-        </div>
-      </div>
+      <div id="marketingPanel" class="panel"><div class="subtabbar">
+        <a class="subtab" target="_blank" href="https://authn.kw.com/saml20/idp/startsso?spEntityId=https://www.canva.com">CANVA (SSO)</a>
+        <a class="subtab" target="_blank" href="https://web.facebook.com/groups/236242439163189?_rdc=1&_rdr#">MAPPS TO EXPLORE DESIGNS</a>
+      </div></div>
 
-      <!-- Compliance with DNC nested -->
-      <div id="compliancePanel" class="panel" role="region">
+      <div id="compliancePanel" class="panel">
         <div class="subtabbar">
           <a class="subtab" target="_blank" href="https://theppra.org.za/myffc">PPRA</a>
           <a class="subtab" target="_blank" href="https://drive.google.com/file/d/1ngSQQgKzl-3-BQ6VijgiZbyD8Fh8HByB/view?usp=sharing">CODE OF CONDUCT</a>
           <a class="subtab" target="_blank" href="https://drive.google.com/file/d/12oz_bU_Tqnqlx9LJa3OPz2aY5mCFF80C/view?usp=sharing">FIC</a>
           <a class="subtab" href="#" id="dncTab">DO NOT CALL LISTS</a>
         </div>
-        <div id="dncRow" class="hidden subrow">
-          <a class="linkpill" target="_blank" href="https://www.thevirtualagent.co.za/info/#c-tab3-5">VIRTUAL AGENT</a>
-          <a class="linkpill" target="_blank" href="https://www.cmainfo.co.za/privacy.aspx">CMA INFO</a>
+        <div id="dncRow" class="hidden" style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.5rem;">
+          <a class="subtab" target="_blank" href="https://www.thevirtualagent.co.za/info/#c-tab3-5">VIRTUAL AGENT</a>
+          <a class="subtab" target="_blank" href="https://www.cmainfo.co.za/privacy.aspx">CMA INFO</a>
         </div>
       </div>
+
+      <!-- RESOURCES (NEW) -->
+      <div id="resourcesPanel" class="panel">
+        <div class="subtabbar">
+          <a class="subtab" target="_blank" href="https://kellerink.com/">KELLER INK</a>
+          <a class="subtab" target="_blank" href="https://www.google.com/search?q=https://kwecgi.netlify.app/">CGI CALCULATOR</a>
+          <a class="subtab" target="_blank" href="https://drive.google.com/file/d/1Ot82JX3nPrb1we1d1AdO5t1_k-YgWLb0/view?usp=sharing">VALUE MAP</a>
+        </div>
+      </div>
+
     </section>
   </div>
 
 <script>
 function closeOthers(exceptId){
-  const ids=['otpPanel','bondPanel','rentPanel','aiPanel','marketingPanel','compliancePanel'];
+  const ids=['otpPanel','bondPanel','rentPanel','aiPanel','marketingPanel','compliancePanel','resourcesPanel'];
   ids.forEach(id=>{
     if(id!==exceptId){
       const p=document.getElementById(id);
-      const b=document.getElementById(id==='otpPanel'?'otpBtn':id==='bondPanel'?'bondBtn':id==='rentPanel'?'rentBtn':id==='aiPanel'?'aiBtn':id==='marketingPanel'?'marketingBtn':'complianceBtn');
-      p.classList.remove('open'); b.setAttribute('aria-expanded','false');
+      const b=document.getElementById(
+        id==='otpPanel'?'otpBtn':
+        id==='bondPanel'?'bondBtn':
+        id==='rentPanel'?'rentBtn':
+        id==='aiPanel'?'aiBtn':
+        id==='marketingPanel'?'marketingBtn':
+        id==='compliancePanel'?'complianceBtn':'resourcesBtn'
+      );
+      p.classList.remove('open');
+      b.setAttribute('aria-expanded','false');
     }
   });
 }
@@ -174,13 +177,12 @@ setupToggle('rentBtn','rentPanel');
 setupToggle('aiBtn','aiPanel');
 setupToggle('marketingBtn','marketingPanel');
 setupToggle('complianceBtn','compliancePanel');
+setupToggle('resourcesBtn','resourcesPanel');
 
-// Bond Girl subcard
+// Bond Girl & DNC toggles
 const bondGirlTab=document.getElementById('bondGirlTab');
 const bondGirlCard=document.getElementById('bondGirlCard');
 if(bondGirlTab){ bondGirlTab.addEventListener('click',e=>{ e.preventDefault(); bondGirlCard.classList.toggle('hidden'); }); }
-
-// DNC nested links toggle
 const dncTab=document.getElementById('dncTab');
 const dncRow=document.getElementById('dncRow');
 if(dncTab){ dncTab.addEventListener('click', e=>{ e.preventDefault(); dncRow.classList.toggle('hidden'); }); }
