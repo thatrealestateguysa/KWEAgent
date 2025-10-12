@@ -14,13 +14,11 @@
 body { font-family: 'Inter', sans-serif; }
 .brand { display:grid; place-items:center; gap:.5rem; }
 .brand img.logo { width:var(--logoW); height:auto; }
-/* Tagline sized to 40% of logo width */
 .brand img.tagline { width:calc(var(--logoW) * .40); height:auto; }
 
 h1 { font-weight:800; letter-spacing:.02em; }
 .subtle { color:#d1d5db; }
 
-/* Buttons */
 .btn {
   display:block; width:100%; background:#1f2937; color:#fff; font-weight:700;
   padding:.85rem 1rem; border-radius:.9rem; text-align:center; border:1px solid rgba(255,255,255,.06);
@@ -28,17 +26,19 @@ h1 { font-weight:800; letter-spacing:.02em; }
 }
 .btn:hover { background:#374151; }
 
-/* Layouts */
 .main-three { display:grid; grid-template-columns:1fr; gap:.5rem; }
 @media (min-width:640px) { .main-three { grid-template-columns:repeat(3, 1fr); } }
 
 .quick-5 { display:grid; grid-template-columns:repeat(2, 1fr); gap:.5rem; }
 @media (min-width:768px) { .quick-5 { grid-template-columns:repeat(5, 1fr); } }
 
-.placeholder-grid { display:grid; grid-template-columns:repeat(2, 1fr); gap:.5rem; }
-@media (min-width:768px) { .placeholder-grid { grid-template-columns:repeat(5, 1fr); } }
-
 .section-title { font-weight:800; margin:.75rem 0 .5rem; }
+
+/* OTP panel styles */
+.subtabbar { display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.5rem; }
+.subtab { background:#111827; color:#fff; font-weight:700; padding:.7rem 1rem; border-radius:.8rem; border:1px solid rgba(255,255,255,.08); }
+.subtab:hover, .subtab[aria-selected="true"] { background:#374151; }
+.hidden { display:none; }
 </style>
 </head>
 <body class="bg-black text-white">
@@ -59,8 +59,8 @@ h1 { font-weight:800; letter-spacing:.02em; }
       </div>
     </section>
 
-    <!-- Quick links 1-10 -->
-    <section aria-label="Quick Links" class="mb-6">
+    <!-- Quick links includes OTP/Mandates trigger -->
+    <section aria-label="Quick Links" class="mb-3">
       <h2 class="section-title">QUICK LINKS</h2>
       <div class="quick-5">
         <a class="btn" target="_blank" href="https://mapp.kwsouthafrica.co.za/Account/Login?returnUrl=%2F">MAPP</a>
@@ -73,14 +73,22 @@ h1 { font-weight:800; letter-spacing:.02em; }
         <a class="btn" target="_blank" href="https://www.privateproperty.co.za/">PRIVATE PROPERTY</a>
         <a class="btn" target="_blank" href="https://web.whatsapp.com/">WHATSAPP WEB</a>
         <a class="btn" target="_blank" href="https://drive.google.com/drive/folders/17t9lC6d9cZHPltRiKw3CVtporeDzxTbT">AGENT TOOLKIT</a>
+        <!-- NEW: OTP / MANDATES trigger -->
+        <button id="otpBtn" class="btn" type="button" aria-expanded="false" aria-controls="otpPanel">OTP / MANDATES</button>
+      </div>
+      <!-- Subtabs panel appears here -->
+      <div id="otpPanel" class="hidden" role="region" aria-label="OTP / Mandates Options">
+        <div class="subtabbar">
+          <a class="subtab" target="_blank" href="https://drive.google.com/drive/folders/1P_9v2kTheV4mzPt0h2Jtm4oozt3QrVFG?usp=drive_link">MANDATES</a>
+          <a class="subtab" target="_blank" href="https://drive.google.com/drive/folders/1SgDPogFFXti5vMFc7GiPRR_LjIHUySaP?usp=drive_link">OFFER TO PURCHASE</a>
+        </div>
       </div>
     </section>
 
-    <!-- Placeholder sections (11–20) to wire later) -->
+    <!-- Placeholder sections (to be built next) -->
     <section class="mb-10">
-      <h2 class="section-title">SECTIONS (COMING NEXT)</h2>
-      <div class="placeholder-grid">
-        <button class="btn" type="button">OTP / MANDATES</button>
+      <h2 class="section-title">NEXT SECTIONS</h2>
+      <div class="quick-5">
         <button class="btn" type="button">BOND PRE-APPROVAL</button>
         <button class="btn" type="button">RENTAL DESK</button>
         <button class="btn" type="button">AI APPS</button>
@@ -93,5 +101,20 @@ h1 { font-weight:800; letter-spacing:.02em; }
       </div>
     </section>
   </div>
+
+<script>
+// Toggle OTP panel
+const otpBtn = document.getElementById('otpBtn');
+const otpPanel = document.getElementById('otpPanel');
+otpBtn.addEventListener('click', () => {
+  const expanded = otpBtn.getAttribute('aria-expanded') === 'true';
+  otpBtn.setAttribute('aria-expanded', String(!expanded));
+  otpPanel.classList.toggle('hidden');
+  // Keep focus visible for accessibility
+  if (!expanded) {
+    otpPanel.querySelector('a').focus();
+  }
+});
+</script>
 </body>
 </html>
