@@ -10,7 +10,7 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
 <style>
-:root { --logoW: clamp(220px, 60vw, 560px); }
+:root { --logoW: clamp(220px, 60vw, 560px); --kwred:#dc2626; }
 body { font-family: 'Inter', sans-serif; }
 .brand { display:grid; place-items:center; gap:.5rem; }
 .brand img.logo { width:var(--logoW); height:auto; }
@@ -21,8 +21,9 @@ h1 { font-weight:800; letter-spacing:.02em; }
 
 .btn { display:block; width:100%; background:#1f2937; color:#fff; font-weight:700;
   padding:.85rem 1rem; border-radius:.9rem; text-align:center; border:1px solid rgba(255,255,255,.06);
-  white-space:normal; overflow-wrap:anywhere; hyphens:auto; line-height:1.2; }
+  white-space:normal; overflow-wrap:anywhere; hyphens:auto; line-height:1.2; transition:background .15s, border-color .15s; }
 .btn:hover { background:#374151; }
+.btn.active { background:var(--kwred); border-color:var(--kwred); }
 
 .main-three { display:grid; grid-template-columns:1fr; gap:.5rem; }
 @media (min-width:640px){ .main-three{ grid-template-columns:repeat(3,1fr);} }
@@ -34,8 +35,10 @@ h1 { font-weight:800; letter-spacing:.02em; }
 
 .panel { display:none; } .panel.open{ display:block; }
 .subtabbar { display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.5rem; }
-.subtab { background:#111827; color:#fff; font-weight:700; padding:.7rem 1rem; border-radius:.8rem; border:1px solid rgba(255,255,255,.08); }
+.subtab { background:#111827; color:#fff; font-weight:700; padding:.7rem 1rem; border-radius:.8rem; border:2px solid rgba(255,255,255,.08); transition:border-color .15s, box-shadow .15s; }
 .subtab:hover, .subtab[aria-selected="true"] { background:#374151; }
+.subtab.open-sub { border-color: var(--kwred); box-shadow: 0 0 0 2px color-mix(in srgb, var(--kwred) 45%, transparent) inset; }
+
 .subrow { display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.5rem; }
 .linkpill { background:#0b1220; border:1px solid rgba(255,255,255,.08); padding:.6rem 1rem; border-radius:.75rem; font-weight:700; }
 .linkpill:hover { background:#1f2937; }
@@ -92,7 +95,7 @@ h1 { font-weight:800; letter-spacing:.02em; }
         <button id="leadBtn" class="btn" type="button" aria-expanded="false" data-panel="leadershipPanel">CONTACT THE LEADERSHIP TEAM</button>
       </div>
 
-      <!-- Existing panels, identical to Stage 15 (trimmed comments) -->
+      <!-- (Panels identical to Stage 16 content, trimmed for brevity in comments) -->
       <div id="otpPanel" class="panel"><div class="subtabbar">
         <a class="subtab" target="_blank" href="https://drive.google.com/drive/folders/1P_9v2kTheV4mzPt0h2Jtm4oozt3QrVFG?usp=drive_link">MANDATES</a>
         <a class="subtab" target="_blank" href="https://drive.google.com/drive/folders/1SgDPogFFXti5vMFc7GiPRR_LjIHUySaP?usp=drive_link">OFFER TO PURCHASE</a>
@@ -188,7 +191,6 @@ h1 { font-weight:800; letter-spacing:.02em; }
         </div>
       </div>
 
-      <!-- LEADERSHIP (NEW) -->
       <div id="leadershipPanel" class="panel leadership">
         <div class="subtabbar">
           <a class="subtab" href="#" data-target="estelle">ESTELLE FERREIRA</a>
@@ -281,21 +283,26 @@ h1 { font-weight:800; letter-spacing:.02em; }
   </div>
 
 <script>
-// Close-all helpers (from Stage 15)
+// Close-all helpers
 function closeAll(){
   const panelIds=['otpPanel','bondPanel','rentPanel','aiPanel','marketingPanel','compliancePanel','resourcesPanel','partnersPanel','exploreBoxPanel','leadershipPanel'];
   panelIds.forEach(id=>document.getElementById(id).classList.remove('open'));
-  document.querySelectorAll('[data-panel]').forEach(btn=>btn.setAttribute('aria-expanded','false'));
+  document.querySelectorAll('[data-panel]').forEach(btn=>{ btn.setAttribute('aria-expanded','false'); btn.classList.remove('active'); });
+  // hide sub dropdowns + remove red borders
   ['bondGirlCard','dncRow','waRow','techRow','loeRow'].forEach(id=>{ const el=document.getElementById(id); if(el) el.classList.add('hidden'); });
-  // hide all leadership cards
+  document.querySelectorAll('.subtab.open-sub').forEach(el=>el.classList.remove('open-sub'));
   document.querySelectorAll('#leadershipPanel .leader-card').forEach(c=>c.classList.add('hidden'));
 }
 function closeOthers(exceptId){
   const ids=['otpPanel','bondPanel','rentPanel','aiPanel','marketingPanel','compliancePanel','resourcesPanel','partnersPanel','exploreBoxPanel','leadershipPanel'];
   ids.forEach(id=>{ if(id!==exceptId){ document.getElementById(id).classList.remove('open'); } });
-  document.querySelectorAll('[data-panel]').forEach(btn=>{ if(btn.dataset.panel!==exceptId) btn.setAttribute('aria-expanded','false'); });
+  document.querySelectorAll('[data-panel]').forEach(btn=>{
+    if(btn.dataset.panel!==exceptId){ btn.setAttribute('aria-expanded','false'); btn.classList.remove('active'); }
+  });
+  // collapse sub rows and remove red borders
   ['bondGirlCard','dncRow','waRow','techRow','loeRow'].forEach(id=>{ const el=document.getElementById(id); if(el) el.classList.add('hidden'); });
   if(exceptId!=='leadershipPanel'){ document.querySelectorAll('#leadershipPanel .leader-card').forEach(c=>c.classList.add('hidden')); }
+  document.querySelectorAll('.subtab.open-sub').forEach(el=>el.classList.remove('open-sub'));
 }
 function setupToggle(btnId,panelId){
   const btn=document.getElementById(btnId);
@@ -303,8 +310,8 @@ function setupToggle(btnId,panelId){
   btn.addEventListener('click', (e)=>{
     e.stopPropagation();
     const open=panel.classList.contains('open');
-    if(open){ panel.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }
-    else{ closeOthers(panelId); panel.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+    if(open){ panel.classList.remove('open'); btn.setAttribute('aria-expanded','false'); btn.classList.remove('active'); }
+    else{ closeOthers(panelId); panel.classList.add('open'); btn.setAttribute('aria-expanded','true'); btn.classList.add('active'); }
   });
 }
 setupToggle('otpBtn','otpPanel');
@@ -323,30 +330,30 @@ document.querySelectorAll('.panel').forEach(p=>p.addEventListener('click', e=>e.
 document.addEventListener('click', (e)=>{ const root=document.getElementById('quickLinksRoot'); if(!root.contains(e.target)) closeAll(); });
 document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeAll(); });
 
-// Existing sub toggles
-const bondGirlTab=document.getElementById('bondGirlTab');
-const bondGirlCard=document.getElementById('bondGirlCard');
-if(bondGirlTab){ bondGirlTab.addEventListener('click',e=>{ e.preventDefault(); e.stopPropagation(); bondGirlCard.classList.toggle('hidden'); }); }
-const dncTab=document.getElementById('dncTab');
-const dncRow=document.getElementById('dncRow');
-if(dncTab){ dncTab.addEventListener('click', e=>{ e.preventDefault(); e.stopPropagation(); dncRow.classList.toggle('hidden'); }); }
-['waTab','techTab','loeTab'].forEach((id)=>{
-  const tab=document.getElementById(id);
-  if(!tab) return;
+// Sub toggles + red border when open
+function toggleRow(tabId, rowId){
+  const tab=document.getElementById(tabId);
+  const row=document.getElementById(rowId);
+  if(!tab || !row) return;
   tab.addEventListener('click', (e)=>{
     e.preventDefault(); e.stopPropagation();
-    const targetId = id==='waTab'?'waRow':id==='techTab'?'techRow':'loeRow';
-    document.getElementById(targetId).classList.toggle('hidden');
+    const isHidden=row.classList.toggle('hidden');
+    if(isHidden){ tab.classList.remove('open-sub'); }
+    else{ tab.classList.add('open-sub'); }
   });
-});
+}
+toggleRow('bondGirlTab','bondGirlCard');
+toggleRow('dncTab','dncRow');
+toggleRow('waTab','waRow');
+toggleRow('techTab','techRow');
+toggleRow('loeTab','loeRow');
 
-// Leadership subtab toggles - show only one card at a time
+// Leadership subtab toggles (no red border needed here)
 document.querySelectorAll('#leadershipPanel .subtabbar .subtab').forEach(btn=>{
   btn.addEventListener('click', (e)=>{
     e.preventDefault(); e.stopPropagation();
-    const target = btn.getAttribute('data-target');
     document.querySelectorAll('#leadershipPanel .leader-card').forEach(c=>c.classList.add('hidden'));
-    const card = document.getElementById(target);
+    const card = document.getElementById(btn.getAttribute('data-target'));
     if(card){ card.classList.remove('hidden'); }
   });
 });
