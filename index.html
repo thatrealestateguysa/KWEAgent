@@ -34,15 +34,12 @@ h1 { font-weight:800; letter-spacing:.02em; }
 
 .section-title { font-weight:800; margin:.75rem 0 .5rem; }
 
-/* Panels + subtabs (identical styling for both OTP & BOND) */
+/* Panels + subtabs (shared) */
 .panel { display:none; }
 .panel.open { display:block; }
 .subtabbar { display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.5rem; }
 .subtab { background:#111827; color:#fff; font-weight:700; padding:.7rem 1rem; border-radius:.8rem; border:1px solid rgba(255,255,255,.08); }
 .subtab:hover, .subtab[aria-selected="true"] { background:#374151; }
-
-.card { background:#0b1220; border:1px solid rgba(255,255,255,.08); border-radius:1rem; padding:1rem; }
-a.underline { text-decoration: underline; }
 </style>
 </head>
 <body class="bg-black text-white">
@@ -63,7 +60,7 @@ a.underline { text-decoration: underline; }
       </div>
     </section>
 
-    <!-- Quick links with two expandable buttons (OTP + BOND) -->
+    <!-- Quick links with three expandable buttons -->
     <section aria-label="Quick Links" class="mb-6">
       <h2 class="section-title">QUICK LINKS</h2>
       <div class="quick-5">
@@ -81,6 +78,7 @@ a.underline { text-decoration: underline; }
         <!-- Expanders -->
         <button id="otpBtn" class="btn" type="button" aria-expanded="false" aria-controls="otpPanel">OTP / MANDATES</button>
         <button id="bondBtn" class="btn" type="button" aria-expanded="false" aria-controls="bondPanel">BOND PRE-APPROVAL</button>
+        <button id="rentBtn" class="btn" type="button" aria-expanded="false" aria-controls="rentPanel">RENTAL DESK</button>
       </div>
 
       <!-- OTP panel -->
@@ -91,51 +89,72 @@ a.underline { text-decoration: underline; }
         </div>
       </div>
 
-      <!-- BOND panel (same behavior & styling) -->
+      <!-- Bond panel -->
       <div id="bondPanel" class="panel" role="region" aria-label="Bond Pre-Approval Options">
         <div class="subtabbar">
           <a class="subtab" target="_blank" href="https://my.ooba.co.za/obi/?var1=KW4&var2=&var3=OBI&var4">GET A OOBA BOND</a>
-          <button id="bondGirlTab" class="subtab" type="button" aria-controls="bondGirlCard" aria-selected="false">THE BOND GIRL</button>
+          <a class="subtab" href="#" id="bondGirlTab">THE BOND GIRL</a>
         </div>
         <div id="bondGirlCard" class="hidden mt-3">
-          <div class="card">
+          <div class="p-4 rounded-lg border border-white/10 bg-black/20">
             <div class="font-extrabold tracking-wide">MORICOLETTE ERASMUS-NEL</div>
             <div class="text-red-300">THE BOND GIRL</div>
             <p class="mt-2"><a class="underline" href="tel:+27725759054">+27 72 575 9054</a></p>
-            <p class="mt-1"><a class="underline" href="mailto:moricolette.erasmusnel@kwsa.co.za">MORICOLETTE.ERASMUS-NEL@KWSA.CO.ZA</a></p>
+            <p class="mt-1"><a class="underline" href="mailto:moricolette.erasmusnel@kwsa.co.za">MORICOLETTE.ERASMUSNEL@KWSA.CO.ZA</a></p>
           </div>
+        </div>
+      </div>
+
+      <!-- Rental Desk panel (NEW) -->
+      <div id="rentPanel" class="panel" role="region" aria-label="Rental Desk Options">
+        <div class="subtabbar">
+          <a class="subtab" target="_blank" href="https://drive.google.com/file/d/1HsmWsP35aBx0s8gykS-LeAzIQETbCLVj/view?usp=sharing">ROADMAP TO RENTALS</a>
+          <a class="subtab" target="_blank" href="https://www.weconnectu.co.za/redrabbit">RED RABBIT</a>
+          <a class="subtab" target="_blank" href="https://drive.google.com/drive/folders/1GlY8meqjLJFqTKLSipRr0CFXjgZYrdSE">RENTAL DOCUMENTS</a>
+          <a class="subtab" target="_blank" href="https://evictionsecure.co.za/">EVICTION SECURE</a>
+          <a class="subtab" target="_blank" href="https://drive.google.com/file/d/1mE1k7g0W-u7b2u8H2LlN_6wL3qVkfj4/view?usp=drive_link">RENTAL POLICY & PROCEDURES</a>
+          <a class="subtab" target="_blank" href="https://drive.google.com/file/d/1dlIv_sGXhoSwb7QKm_UiYQCAKF2s6mHQ/view?usp=drive_link">RENTAL FAQ</a>
         </div>
       </div>
     </section>
   </div>
 
 <script>
-// Generic toggle for panels under Quick Links
+function closeOthers(exceptId) {
+  ['otpPanel','bondPanel','rentPanel'].forEach(id => {
+    if (id !== exceptId) {
+      const p = document.getElementById(id);
+      const b = document.getElementById(id==='otpPanel'?'otpBtn':id==='bondPanel'?'bondBtn':'rentBtn');
+      p.classList.remove('open');
+      b.setAttribute('aria-expanded','false');
+    }
+  });
+}
 function setupToggle(btnId, panelId) {
   const btn = document.getElementById(btnId);
   const panel = document.getElementById(panelId);
   btn.addEventListener('click', () => {
     const open = panel.classList.contains('open');
-    btn.setAttribute('aria-expanded', String(!open));
-    panel.classList.toggle('open');
-    // Optional: close the other panel when one opens
-    const otherId = panelId === 'otpPanel' ? 'bondPanel' : 'otpPanel';
-    const otherPanel = document.getElementById(otherId);
-    const otherBtn = document.getElementById(otherId === 'otpPanel' ? 'otpBtn' : 'bondBtn');
-    otherPanel.classList.remove('open');
-    otherBtn.setAttribute('aria-expanded', 'false');
+    if (open) {
+      panel.classList.remove('open');
+      btn.setAttribute('aria-expanded','false');
+    } else {
+      closeOthers(panelId);
+      panel.classList.add('open');
+      btn.setAttribute('aria-expanded','true');
+    }
   });
 }
-setupToggle('otpBtn', 'otpPanel');
-setupToggle('bondBtn', 'bondPanel');
+setupToggle('otpBtn','otpPanel');
+setupToggle('bondBtn','bondPanel');
+setupToggle('rentBtn','rentPanel');
 
-// Subtab to reveal 'The Bond Girl' card
+// Bond Girl toggler
 const bondGirlTab = document.getElementById('bondGirlTab');
 const bondGirlCard = document.getElementById('bondGirlCard');
-bondGirlTab.addEventListener('click', () => {
-  const shown = !bondGirlCard.classList.contains('hidden');
+bondGirlTab.addEventListener('click', (e) => {
+  e.preventDefault();
   bondGirlCard.classList.toggle('hidden');
-  bondGirlTab.setAttribute('aria-selected', String(!shown));
 });
 </script>
 </body>
