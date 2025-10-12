@@ -319,7 +319,6 @@ h1 { font-weight:800; letter-spacing:.02em; }
 
 <script>
 function closeAll(){
-  document.querySelectorAll('.panel-slot').forEach(s=>s.classList.remove('open'));
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('open'));
   document.querySelectorAll('[data-panel]').forEach(btn=>{ btn.setAttribute('aria-expanded','false'); btn.classList.remove('active'); });
   ['bondGirlCard','dncRow','waRow','techRow','loeRow'].forEach(id=>{ const el=document.getElementById(id); if(el) el.classList.add('hidden'); });
@@ -327,10 +326,6 @@ function closeAll(){
   document.querySelectorAll('#leadershipPanel .leader-card').forEach(c=>c.classList.add('hidden'));
 }
 function closeOthers(exceptId){
-  document.querySelectorAll('.panel-slot').forEach(s=>{
-    const panel=s.querySelector('.panel');
-    if(panel && panel.id!==exceptId) s.classList.remove('open');
-  });
   document.querySelectorAll('.panel').forEach(p=>{ if(p.id!==exceptId) p.classList.remove('open'); });
   document.querySelectorAll('[data-panel]').forEach(btn=>{
     if(btn.dataset.panel!==exceptId){ btn.setAttribute('aria-expanded','false'); btn.classList.remove('active'); }
@@ -385,8 +380,9 @@ document.querySelectorAll('#leadershipPanel .subtabbar .subtab').forEach(btn=>{
 </script>
 
 <script>
-// --- overrides to ensure panel-slot rows only appear when open ---
-(function(){
+document.addEventListener('DOMContentLoaded', function(){
+  const KWRED = getComputedStyle(document.documentElement).getPropertyValue('--kwred') || '#dc2626';
+
   function closeAll(){
     document.querySelectorAll('.panel').forEach(p=>p.classList.remove('open'));
     document.querySelectorAll('.panel-slot').forEach(s=>s.classList.remove('open'));
@@ -395,42 +391,78 @@ document.querySelectorAll('#leadershipPanel .subtabbar .subtab').forEach(btn=>{
     document.querySelectorAll('.subtab.open-sub').forEach(el=>el.classList.remove('open-sub'));
     document.querySelectorAll('#leadershipPanel .leader-card').forEach(c=>c.classList.add('hidden'));
   }
-  function closeOthers(exceptId){
-    document.querySelectorAll('.panel').forEach(p=>{ if(p.id!==exceptId) p.classList.remove('open'); });
-    document.querySelectorAll('.panel-slot').forEach(s=>{ const p=s.querySelector('.panel'); if(!p || p.id!==exceptId) s.classList.remove('open'); });
-    document.querySelectorAll('[data-panel]').forEach(btn=>{ if(btn.dataset.panel!==exceptId){ btn.setAttribute('aria-expanded','false'); btn.classList.remove('active'); }});
-    ['bondGirlCard','dncRow','waRow','techRow','loeRow'].forEach(id=>{ const el=document.getElementById(id); if(el) el.classList.add('hidden'); });
-    if(exceptId!=='leadershipPanel'){ document.querySelectorAll('#leadershipPanel .leader-card').forEach(c=>c.classList.add('hidden')); }
+  function closeOthers(exceptPanelId){
+    document.querySelectorAll('[data-panel]').forEach(btn=>{
+      if(btn.dataset.panel!==exceptPanelId){ btn.setAttribute('aria-expanded','false'); btn.classList.remove('active'); }
+    });
+    document.querySelectorAll('.panel-slot').forEach(slot=>{
+      const p = slot.querySelector('.panel');
+      if(!p || p.id!==exceptPanelId){ slot.classList.remove('open'); }
+    });
+    document.querySelectorAll('.panel').forEach(p=>{ if(p.id!==exceptPanelId) p.classList.remove('open'); });
+    if(exceptPanelId!=='leadershipPanel'){ document.querySelectorAll('#leadershipPanel .leader-card').forEach(c=>c.classList.add('hidden')); }
     document.querySelectorAll('.subtab.open-sub').forEach(el=>el.classList.remove('open-sub'));
+    ['bondGirlCard','dncRow','waRow','techRow','loeRow'].forEach(id=>{ const el=document.getElementById(id); if(el) el.classList.add('hidden'); });
   }
-  function setupToggle(btnId,panelId){
-    const btn=document.getElementById(btnId);
-    const panel=document.getElementById(panelId);
-    const slot = btn && btn.nextElementSibling;
-    if(!btn || !panel || !slot) return;
-    btn.addEventListener('click', (e)=>{
+
+  // Attach click handlers to each trigger
+  document.querySelectorAll('[data-panel]').forEach(btn=>{
+    const slot = btn.nextElementSibling;
+    const panel = slot ? slot.querySelector('.panel') : null;
+    if(!slot || !panel) return;
+    btn.addEventListener('click', function(e){
+      e.preventDefault();
       e.stopPropagation();
-      const open=panel.classList.contains('open');
+      const open = panel.classList.contains('open');
       if(open){
         panel.classList.remove('open');
         slot.classList.remove('open');
         btn.setAttribute('aria-expanded','false');
         btn.classList.remove('active');
       } else {
-        closeOthers(panelId);
+        closeOthers(panel.id);
         slot.classList.add('open');
         panel.classList.add('open');
         btn.setAttribute('aria-expanded','true');
         btn.classList.add('active');
       }
     });
+  });
+
+  // Sub-row toggles
+  function toggleRow(tabId, rowId){
+    const tab=document.getElementById(tabId);
+    const row=document.getElementById(rowId);
+    if(!tab || !row) return;
+    tab.addEventListener('click', (e)=>{
+      e.preventDefault(); e.stopPropagation();
+      const hidden=row.classList.toggle('hidden');
+      if(hidden){ tab.classList.remove('open-sub'); }
+      else{ tab.classList.add('open-sub'); }
+    });
   }
-  // Rewire
-  ['otp','bond','rent','productivity','marketing','compliance','resources','exploreBox','partners','lead'].forEach(key=>setupToggle(key+'Btn', key+'Panel'));
+  toggleRow('bondGirlTab','bondGirlCard');
+  toggleRow('dncTab','dncRow');
+  toggleRow('waTab','waRow');
+  toggleRow('techTab','techRow');
+  toggleRow('loeTab','loeRow');
+
+  // Leadership cards
+  document.querySelectorAll('#leadershipPanel .subtabbar .subtab').forEach(btn=>{
+    btn.addEventListener('click', (e)=>{
+      if(!btn.dataset.target) return;
+      e.preventDefault(); e.stopPropagation();
+      document.querySelectorAll('#leadershipPanel .leader-card').forEach(c=>c.classList.add('hidden'));
+      const card = document.getElementById(btn.dataset.target);
+      if(card){ card.classList.remove('hidden'); }
+    });
+  });
+
+  // click-away / esc
   document.querySelectorAll('.panel').forEach(p=>p.addEventListener('click', e=>e.stopPropagation()));
   document.addEventListener('click', (e)=>{ const root=document.getElementById('quickLinksRoot'); if(root && !root.contains(e.target)) closeAll(); });
   document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeAll(); });
-})();
+});
 </script>
 
 </body>
