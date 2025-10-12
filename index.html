@@ -60,7 +60,7 @@ h1 { font-weight:800; letter-spacing:.02em; }
       </div>
     </section>
 
-    <!-- Quick links with four expandable buttons -->
+    <!-- Quick links with five expandable buttons -->
     <section aria-label="Quick Links" class="mb-6">
       <h2 class="section-title">QUICK LINKS</h2>
       <div class="quick-5">
@@ -80,6 +80,7 @@ h1 { font-weight:800; letter-spacing:.02em; }
         <button id="bondBtn" class="btn" type="button" aria-expanded="false" aria-controls="bondPanel">BOND PRE-APPROVAL</button>
         <button id="rentBtn" class="btn" type="button" aria-expanded="false" aria-controls="rentPanel">RENTAL DESK</button>
         <button id="aiBtn" class="btn" type="button" aria-expanded="false" aria-controls="aiPanel">AI APPS</button>
+        <button id="marketingBtn" class="btn" type="button" aria-expanded="false" aria-controls="marketingPanel">MARKETING</button>
       </div>
 
       <!-- OTP panel -->
@@ -118,11 +119,19 @@ h1 { font-weight:800; letter-spacing:.02em; }
         </div>
       </div>
 
-      <!-- AI APPS panel (NEW) -->
+      <!-- AI APPS panel -->
       <div id="aiPanel" class="panel" role="region" aria-label="AI Apps">
         <div class="subtabbar">
           <a class="subtab" target="_blank" href="https://chatgpt.com/">CHAT GPT</a>
           <a class="subtab" target="_blank" href="https://gemini.google.com/app">GEMINI</a>
+        </div>
+      </div>
+
+      <!-- MARKETING panel (NEW) -->
+      <div id="marketingPanel" class="panel" role="region" aria-label="Marketing">
+        <div class="subtabbar">
+          <a class="subtab" target="_blank" href="https://authn.kw.com/saml20/idp/startsso?spEntityId=https://www.canva.com">CANVA (SSO)</a>
+          <a class="subtab" target="_blank" href="https://web.facebook.com/groups/236242439163189?_rdc=1&_rdr#">MAPPS TO EXPLORE DESIGNS</a>
         </div>
       </div>
     </section>
@@ -130,10 +139,15 @@ h1 { font-weight:800; letter-spacing:.02em; }
 
 <script>
 function closeOthers(exceptId) {
-  ['otpPanel','bondPanel','rentPanel','aiPanel'].forEach(id => {
+  ['otpPanel','bondPanel','rentPanel','aiPanel','marketingPanel'].forEach(id => {
     if (id !== exceptId) {
       const p = document.getElementById(id);
-      const b = document.getElementById(id==='otpPanel'?'otpBtn':id==='bondPanel'?'bondBtn':id==='rentPanel'?'rentBtn':'aiBtn');
+      const b = document.getElementById(
+        id==='otpPanel'?'otpBtn':
+        id==='bondPanel'?'bondBtn':
+        id==='rentPanel'?'rentBtn':
+        id==='aiPanel'?'aiBtn':'marketingBtn'
+      );
       p.classList.remove('open');
       b.setAttribute('aria-expanded','false');
     }
@@ -158,6 +172,7 @@ setupToggle('otpBtn','otpPanel');
 setupToggle('bondBtn','bondPanel');
 setupToggle('rentBtn','rentPanel');
 setupToggle('aiBtn','aiPanel');
+setupToggle('marketingBtn','marketingPanel');
 
 // Bond Girl toggler
 const bondGirlTab = document.getElementById('bondGirlTab');
