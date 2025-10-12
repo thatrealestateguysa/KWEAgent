@@ -13,9 +13,10 @@
 :root {
   --logoW: clamp(220px, 60vw, 560px);
   --kwred:#dc2626;
-  --dark:#0b1220;
-  --light:#3f4956;
-  --hover:#2a3340;
+  /* Softer zebra greys (closer together) */
+  --dark:#232c37;     /* softer dark */
+  --light:#2c3744;    /* softer light */
+  --hover:#313d4b;
 }
 body { font-family: 'Inter', sans-serif; }
 .brand { display:grid; place-items:center; gap:.5rem; }
@@ -27,42 +28,45 @@ h1 { font-weight:800; letter-spacing:.02em; }
 
 .btn {
   display:block; width:100%; color:#fff; font-weight:700;
-  padding:.9rem 1rem; border-radius:.9rem; text-align:center;
-  border:1px solid rgba(255,255,255,.10);
+  padding:.95rem 1rem; border-radius:1.2rem; text-align:center;
+  border:1px solid rgba(255,255,255,.08);
   white-space:normal; overflow-wrap:anywhere; hyphens:auto; line-height:1.2;
   transition:filter .15s, background .15s, border-color .15s;
+  box-shadow: 0 1px 0 rgba(0,0,0,.25) inset;
 }
-.btn:hover { filter:brightness(1.08); }
+.btn:hover { background:var(--hover); }
 .btn.active { background:var(--kwred) !important; border-color:var(--kwred) !important; }
 
-.main-three { display:grid; grid-template-columns:1fr; gap:.6rem; }
+.main-three { display:grid; grid-template-columns:1fr; gap:.8rem; }
 @media (min-width:640px){ .main-three{ grid-template-columns:repeat(3,1fr);} }
 
-.quick-5 { display:grid; grid-template-columns:repeat(2,1fr); gap:.6rem; }
+.quick-5 { display:grid; grid-template-columns:repeat(2,1fr); gap:.85rem; }
 @media (min-width:768px){ .quick-5{ grid-template-columns:repeat(5,1fr);} }
 
+/* Subtle alternating greys */
 .quick-5 > .btn:nth-child(odd)  { background: var(--light); }
 .quick-5 > .btn:nth-child(even) { background: var(--dark); }
-.quick-5 > .btn:nth-child(odd):hover { background: var(--hover); }
 
 .section-title { font-weight:800; margin:.75rem 0 .5rem; }
 
+/* Panels appear directly under the trigger; spanning full width of the grid */
 .panel-slot { grid-column: 1 / -1; }
 .panel { display:none; }
 .panel.open{ display:block; }
 .panel .subtabbar { display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.5rem; }
-.subtab { background:#131a26; color:#fff; font-weight:700; padding:.7rem 1rem; border-radius:.8rem; border:2px solid rgba(255,255,255,.10); transition:border-color .15s, box-shadow .15s, background .15s; }
-.subtab:hover, .subtab[aria-selected="true"] { background:#1f2937; }
-.subtab.open-sub { border-color: var(--kwred); box-shadow: 0 0 0 2px color-mix(in srgb, var(--kwred) 45%, transparent) inset; }
+.subtab { background:#1b2330; color:#fff; font-weight:800; padding:.7rem 1rem; border-radius:.95rem; border:2px solid rgba(255,255,255,.08); transition:border-color .15s, box-shadow .15s, background .15s; }
+.subtab:hover, .subtab[aria-selected="true"] { background:#222c3a; }
+.subtab.open-sub { border-color: var(--kwred); box-shadow: 0 0 0 2px color-mix(in srgb, var(--kwred) 40%, transparent) inset; }
 
 .subrow { display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.6rem; }
-.linkpill { background:#0b1220; border:1px solid rgba(255,255,255,.12); padding:.6rem 1rem; border-radius:.75rem; font-weight:700; }
-.linkpill:hover { background:#192130; }
+.linkpill { background:#131a1f; border:1px solid rgba(255,255,255,.1); padding:.6rem 1rem; border-radius:.8rem; font-weight:800; }
+.linkpill:hover { background:#182233; }
 
 .hidden{display:none;}
 
+/* Leadership */
 .leadership * { text-transform: uppercase; }
-.leader-card { background:#0b1220; border:1px solid rgba(255,255,255,.14); border-radius:1rem; padding:1rem; }
+.leader-card { background:#131a1f; border:1px solid rgba(255,255,255,.12); border-radius:1rem; padding:1rem; }
 .leader-name { font-weight:900; font-size:1.35rem; letter-spacing:.02em; }
 .leader-role { color:#fca5a5; font-weight:800; margin-top:.25rem; }
 .leader-links a { text-decoration: underline; }
@@ -77,6 +81,7 @@ h1 { font-weight:800; letter-spacing:.02em; }
       <p class="subtle mt-1">WELCOME TO KW EXPLORE! WORKING TOGETHER TO THE NUMBER 1 AGENCY IN SA</p>
     </header>
 
+    <!-- Main 3 buttons (layout preserved) -->
     <section class="mb-6" aria-label="Main tabs">
       <div class="main-three">
         <a class="btn" style="background:var(--light)" target="_blank" href="https://calendar.google.com/calendar/">CALENDAR</a>
@@ -85,6 +90,7 @@ h1 { font-weight:800; letter-spacing:.02em; }
       </div>
     </section>
 
+    <!-- Quick links grid (layout preserved) -->
     <section aria-label="Quick Links" class="mb-6" id="quickLinksRoot">
       <h2 class="section-title">QUICK LINKS</h2>
       <div class="quick-5">
@@ -136,7 +142,6 @@ h1 { font-weight:800; letter-spacing:.02em; }
           </div>
         </div></div>
 
-        <!-- RENAMED: PRODUCTIVITY APPS -->
         <button id="productivityBtn" class="btn" type="button" aria-expanded="false" data-panel="productivityPanel">PRODUCTIVITY APPS</button>
         <div class="panel-slot"><div id="productivityPanel" class="panel">
           <div class="subtabbar">
@@ -339,7 +344,7 @@ function setupToggle(btnId,panelId){
 }
 ['otp','bond','rent','productivity','marketing','compliance','resources','exploreBox','partners','lead'].forEach(key=>setupToggle(key+'Btn', key+'Panel'));
 
-// Click-away + Escape
+// Click-away + Escape closes everything
 document.querySelectorAll('.panel').forEach(p=>p.addEventListener('click', e=>e.stopPropagation()));
 document.addEventListener('click', (e)=>{ const root=document.getElementById('quickLinksRoot'); if(!root.contains(e.target)) closeAll(); });
 document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeAll(); });
@@ -361,7 +366,7 @@ toggleRow('waTab','waRow');
 toggleRow('techTab','techRow');
 toggleRow('loeTab','loeRow');
 
-// Leadership subtab toggles
+// Leadership subtabs
 document.querySelectorAll('#leadershipPanel .subtabbar .subtab').forEach(btn=>{
   btn.addEventListener('click', (e)=>{
     e.preventDefault(); e.stopPropagation();
