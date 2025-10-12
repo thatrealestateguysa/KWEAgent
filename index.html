@@ -19,24 +19,20 @@ body { font-family: 'Inter', sans-serif; }
 h1 { font-weight:800; letter-spacing:.02em; }
 .subtle { color:#d1d5db; }
 
-.btn {
-  display:block; width:100%; background:#1f2937; color:#fff; font-weight:700;
+.btn { display:block; width:100%; background:#1f2937; color:#fff; font-weight:700;
   padding:.85rem 1rem; border-radius:.9rem; text-align:center; border:1px solid rgba(255,255,255,.06);
-  white-space:normal; overflow-wrap:anywhere; hyphens:auto; line-height:1.2;
-}
+  white-space:normal; overflow-wrap:anywhere; hyphens:auto; line-height:1.2; }
 .btn:hover { background:#374151; }
 
 .main-three { display:grid; grid-template-columns:1fr; gap:.5rem; }
-@media (min-width:640px) { .main-three { grid-template-columns:repeat(3, 1fr); } }
+@media (min-width:640px){ .main-three{ grid-template-columns:repeat(3,1fr);} }
 
-.quick-5 { display:grid; grid-template-columns:repeat(2, 1fr); gap:.5rem; }
-@media (min-width:768px) { .quick-5 { grid-template-columns:repeat(5, 1fr); } }
+.quick-5 { display:grid; grid-template-columns:repeat(2,1fr); gap:.5rem; }
+@media (min-width:768px){ .quick-5{ grid-template-columns:repeat(5,1fr);} }
 
 .section-title { font-weight:800; margin:.75rem 0 .5rem; }
 
-/* Panels + subtabs */
-.panel { display:none; }
-.panel.open { display:block; }
+.panel { display:none; } .panel.open{ display:block; }
 .subtabbar { display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.5rem; }
 .subtab { background:#111827; color:#fff; font-weight:700; padding:.7rem 1rem; border-radius:.8rem; border:1px solid rgba(255,255,255,.08); }
 .subtab:hover, .subtab[aria-selected="true"] { background:#374151; }
@@ -51,8 +47,7 @@ h1 { font-weight:800; letter-spacing:.02em; }
       <p class="subtle mt-1">WELCOME TO KW EXPLORE! WORKING TOGETHER TO THE NUMBER 1 AGENCY IN SA</p>
     </header>
 
-    <!-- Main three -->
-    <section aria-label="Main tabs" class="mb-6">
+    <section class="mb-6" aria-label="Main tabs">
       <div class="main-three">
         <a class="btn" target="_blank" href="https://calendar.google.com/calendar/">CALENDAR</a>
         <a class="btn" target="_blank" href="https://mail.google.com/mail/">MY MAIL</a>
@@ -60,7 +55,6 @@ h1 { font-weight:800; letter-spacing:.02em; }
       </div>
     </section>
 
-    <!-- Quick links with five expandable buttons -->
     <section aria-label="Quick Links" class="mb-6">
       <h2 class="section-title">QUICK LINKS</h2>
       <div class="quick-5">
@@ -74,25 +68,24 @@ h1 { font-weight:800; letter-spacing:.02em; }
         <a class="btn" target="_blank" href="https://www.privateproperty.co.za/">PRIVATE PROPERTY</a>
         <a class="btn" target="_blank" href="https://web.whatsapp.com/">WHATSAPP WEB</a>
         <a class="btn" target="_blank" href="https://drive.google.com/drive/folders/17t9lC6d9cZHPltRiKw3CVtporeDzxTbT">AGENT TOOLKIT</a>
-
-        <!-- Expanders -->
         <button id="otpBtn" class="btn" type="button" aria-expanded="false" aria-controls="otpPanel">OTP / MANDATES</button>
         <button id="bondBtn" class="btn" type="button" aria-expanded="false" aria-controls="bondPanel">BOND PRE-APPROVAL</button>
         <button id="rentBtn" class="btn" type="button" aria-expanded="false" aria-controls="rentPanel">RENTAL DESK</button>
         <button id="aiBtn" class="btn" type="button" aria-expanded="false" aria-controls="aiPanel">AI APPS</button>
         <button id="marketingBtn" class="btn" type="button" aria-expanded="false" aria-controls="marketingPanel">MARKETING</button>
+        <button id="complianceBtn" class="btn" type="button" aria-expanded="false" aria-controls="compliancePanel">COMPLIANCE</button>
       </div>
 
-      <!-- OTP panel -->
-      <div id="otpPanel" class="panel" role="region" aria-label="OTP / Mandates Options">
+      <!-- OTP -->
+      <div id="otpPanel" class="panel" role="region">
         <div class="subtabbar">
           <a class="subtab" target="_blank" href="https://drive.google.com/drive/folders/1P_9v2kTheV4mzPt0h2Jtm4oozt3QrVFG?usp=drive_link">MANDATES</a>
           <a class="subtab" target="_blank" href="https://drive.google.com/drive/folders/1SgDPogFFXti5vMFc7GiPRR_LjIHUySaP?usp=drive_link">OFFER TO PURCHASE</a>
         </div>
       </div>
 
-      <!-- Bond panel -->
-      <div id="bondPanel" class="panel" role="region" aria-label="Bond Pre-Approval Options">
+      <!-- Bond -->
+      <div id="bondPanel" class="panel" role="region">
         <div class="subtabbar">
           <a class="subtab" target="_blank" href="https://my.ooba.co.za/obi/?var1=KW4&var2=&var3=OBI&var4">GET A OOBA BOND</a>
           <a class="subtab" href="#" id="bondGirlTab">THE BOND GIRL</a>
@@ -107,8 +100,8 @@ h1 { font-weight:800; letter-spacing:.02em; }
         </div>
       </div>
 
-      <!-- Rental Desk panel -->
-      <div id="rentPanel" class="panel" role="region" aria-label="Rental Desk Options">
+      <!-- Rentals -->
+      <div id="rentPanel" class="panel" role="region">
         <div class="subtabbar">
           <a class="subtab" target="_blank" href="https://drive.google.com/file/d/1HsmWsP35aBx0s8gykS-LeAzIQETbCLVj/view?usp=sharing">ROADMAP TO RENTALS</a>
           <a class="subtab" target="_blank" href="https://www.weconnectu.co.za/redrabbit">RED RABBIT</a>
@@ -119,53 +112,51 @@ h1 { font-weight:800; letter-spacing:.02em; }
         </div>
       </div>
 
-      <!-- AI APPS panel -->
-      <div id="aiPanel" class="panel" role="region" aria-label="AI Apps">
+      <!-- AI Apps -->
+      <div id="aiPanel" class="panel" role="region">
         <div class="subtabbar">
           <a class="subtab" target="_blank" href="https://chatgpt.com/">CHAT GPT</a>
           <a class="subtab" target="_blank" href="https://gemini.google.com/app">GEMINI</a>
         </div>
       </div>
 
-      <!-- MARKETING panel (NEW) -->
-      <div id="marketingPanel" class="panel" role="region" aria-label="Marketing">
+      <!-- Marketing -->
+      <div id="marketingPanel" class="panel" role="region">
         <div class="subtabbar">
           <a class="subtab" target="_blank" href="https://authn.kw.com/saml20/idp/startsso?spEntityId=https://www.canva.com">CANVA (SSO)</a>
           <a class="subtab" target="_blank" href="https://web.facebook.com/groups/236242439163189?_rdc=1&_rdr#">MAPPS TO EXPLORE DESIGNS</a>
+        </div>
+      </div>
+
+      <!-- Compliance (NEW) -->
+      <div id="compliancePanel" class="panel" role="region">
+        <div class="subtabbar">
+          <a class="subtab" target="_blank" href="https://theppra.org.za/myffc">PPRA</a>
+          <a class="subtab" target="_blank" href="https://drive.google.com/file/d/1ngSQQgKzl-3-BQ6VijgiZbyD8Fh8HByB/view?usp=sharing">CODE OF CONDUCT</a>
+          <a class="subtab" target="_blank" href="https://drive.google.com/file/d/12oz_bU_Tqnqlx9LJa3OPz2aY5mCFF80C/view?usp=sharing">FIC</a>
         </div>
       </div>
     </section>
   </div>
 
 <script>
-function closeOthers(exceptId) {
-  ['otpPanel','bondPanel','rentPanel','aiPanel','marketingPanel'].forEach(id => {
-    if (id !== exceptId) {
-      const p = document.getElementById(id);
-      const b = document.getElementById(
-        id==='otpPanel'?'otpBtn':
-        id==='bondPanel'?'bondBtn':
-        id==='rentPanel'?'rentBtn':
-        id==='aiPanel'?'aiBtn':'marketingBtn'
-      );
-      p.classList.remove('open');
-      b.setAttribute('aria-expanded','false');
+function closeOthers(exceptId){
+  const ids=['otpPanel','bondPanel','rentPanel','aiPanel','marketingPanel','compliancePanel'];
+  ids.forEach(id=>{
+    if(id!==exceptId){
+      const p=document.getElementById(id);
+      const b=document.getElementById(id==='otpPanel'?'otpBtn':id==='bondPanel'?'bondBtn':id==='rentPanel'?'rentBtn':id==='aiPanel'?'aiBtn':id==='marketingPanel'?'marketingBtn':'complianceBtn');
+      p.classList.remove('open'); b.setAttribute('aria-expanded','false');
     }
   });
 }
-function setupToggle(btnId, panelId) {
-  const btn = document.getElementById(btnId);
-  const panel = document.getElementById(panelId);
-  btn.addEventListener('click', () => {
-    const open = panel.classList.contains('open');
-    if (open) {
-      panel.classList.remove('open');
-      btn.setAttribute('aria-expanded','false');
-    } else {
-      closeOthers(panelId);
-      panel.classList.add('open');
-      btn.setAttribute('aria-expanded','true');
-    }
+function setupToggle(btnId,panelId){
+  const btn=document.getElementById(btnId);
+  const panel=document.getElementById(panelId);
+  btn.addEventListener('click',()=>{
+    const open=panel.classList.contains('open');
+    if(open){ panel.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }
+    else{ closeOthers(panelId); panel.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
   });
 }
 setupToggle('otpBtn','otpPanel');
@@ -173,16 +164,12 @@ setupToggle('bondBtn','bondPanel');
 setupToggle('rentBtn','rentPanel');
 setupToggle('aiBtn','aiPanel');
 setupToggle('marketingBtn','marketingPanel');
+setupToggle('complianceBtn','compliancePanel');
 
-// Bond Girl toggler
-const bondGirlTab = document.getElementById('bondGirlTab');
-const bondGirlCard = document.getElementById('bondGirlCard');
-if (bondGirlTab) {
-  bondGirlTab.addEventListener('click', (e) => {
-    e.preventDefault();
-    bondGirlCard.classList.toggle('hidden');
-  });
-}
+// Bond Girl subcard
+const bondGirlTab=document.getElementById('bondGirlTab');
+const bondGirlCard=document.getElementById('bondGirlCard');
+if(bondGirlTab){ bondGirlTab.addEventListener('click',e=>{ e.preventDefault(); bondGirlCard.classList.toggle('hidden'); }); }
 </script>
 </body>
 </html>
