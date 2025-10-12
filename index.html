@@ -40,6 +40,13 @@ h1 { font-weight:800; letter-spacing:.02em; }
 .linkpill { background:#0b1220; border:1px solid rgba(255,255,255,.08); padding:.6rem 1rem; border-radius:.75rem; font-weight:700; }
 .linkpill:hover { background:#1f2937; }
 .hidden{display:none;}
+
+/* Leadership styles */
+.leadership * { text-transform: uppercase; }
+.leader-card { background:#0b1220; border:1px solid rgba(255,255,255,.1); border-radius:1rem; padding:1rem; }
+.leader-name { font-weight:900; font-size:1.35rem; letter-spacing:.02em; }
+.leader-role { color:#fca5a5; font-weight:800; margin-top:.25rem; }
+.leader-links a { text-decoration: underline; }
 </style>
 </head>
 <body class="bg-black text-white">
@@ -73,18 +80,19 @@ h1 { font-weight:800; letter-spacing:.02em; }
         <a class="btn" target="_blank" href="https://web.whatsapp.com/">WHATSAPP WEB</a>
         <a class="btn" target="_blank" href="https://drive.google.com/drive/folders/17t9lC6d9cZHPltRiKw3CVtporeDzxTbT">AGENT TOOLKIT</a>
 
-        <button id="otpBtn"    class="btn" type="button" aria-expanded="false" aria-controls="otpPanel"    data-panel="otpPanel">OTP / MANDATES</button>
-        <button id="bondBtn"   class="btn" type="button" aria-expanded="false" aria-controls="bondPanel"   data-panel="bondPanel">BOND PRE-APPROVAL</button>
-        <button id="rentBtn"   class="btn" type="button" aria-expanded="false" aria-controls="rentPanel"   data-panel="rentPanel">RENTAL DESK</button>
-        <button id="aiBtn"     class="btn" type="button" aria-expanded="false" aria-controls="aiPanel"     data-panel="aiPanel">AI APPS</button>
-        <button id="marketingBtn" class="btn" type="button" aria-expanded="false" aria-controls="marketingPanel" data-panel="marketingPanel">MARKETING</button>
-        <button id="complianceBtn" class="btn" type="button" aria-expanded="false" aria-controls="compliancePanel" data-panel="compliancePanel">COMPLIANCE</button>
-        <button id="resourcesBtn" class="btn" type="button" aria-expanded="false" aria-controls="resourcesPanel" data-panel="resourcesPanel">RESOURCES</button>
-        <button id="partnersBtn"  class="btn" type="button" aria-expanded="false" aria-controls="partnersPanel"  data-panel="partnersPanel">PARTNERS</button>
-        <button id="exploreBoxBtn" class="btn" type="button" aria-expanded="false" aria-controls="exploreBoxPanel" data-panel="exploreBoxPanel">EXPLORE IN A BOX</button>
+        <button id="otpBtn" class="btn" type="button" aria-expanded="false" data-panel="otpPanel">OTP / MANDATES</button>
+        <button id="bondBtn" class="btn" type="button" aria-expanded="false" data-panel="bondPanel">BOND PRE-APPROVAL</button>
+        <button id="rentBtn" class="btn" type="button" aria-expanded="false" data-panel="rentPanel">RENTAL DESK</button>
+        <button id="aiBtn" class="btn" type="button" aria-expanded="false" data-panel="aiPanel">AI APPS</button>
+        <button id="marketingBtn" class="btn" type="button" aria-expanded="false" data-panel="marketingPanel">MARKETING</button>
+        <button id="complianceBtn" class="btn" type="button" aria-expanded="false" data-panel="compliancePanel">COMPLIANCE</button>
+        <button id="resourcesBtn" class="btn" type="button" aria-expanded="false" data-panel="resourcesPanel">RESOURCES</button>
+        <button id="partnersBtn" class="btn" type="button" aria-expanded="false" data-panel="partnersPanel">PARTNERS</button>
+        <button id="exploreBoxBtn" class="btn" type="button" aria-expanded="false" data-panel="exploreBoxPanel">EXPLORE IN A BOX</button>
+        <button id="leadBtn" class="btn" type="button" aria-expanded="false" data-panel="leadershipPanel">CONTACT THE LEADERSHIP TEAM</button>
       </div>
 
-      <!-- Panels (same content as Stage 14) -->
+      <!-- Existing panels, identical to Stage 15 (trimmed comments) -->
       <div id="otpPanel" class="panel"><div class="subtabbar">
         <a class="subtab" target="_blank" href="https://drive.google.com/drive/folders/1P_9v2kTheV4mzPt0h2Jtm4oozt3QrVFG?usp=drive_link">MANDATES</a>
         <a class="subtab" target="_blank" href="https://drive.google.com/drive/folders/1SgDPogFFXti5vMFc7GiPRR_LjIHUySaP?usp=drive_link">OFFER TO PURCHASE</a>
@@ -180,48 +188,115 @@ h1 { font-weight:800; letter-spacing:.02em; }
         </div>
       </div>
 
+      <!-- LEADERSHIP (NEW) -->
+      <div id="leadershipPanel" class="panel leadership">
+        <div class="subtabbar">
+          <a class="subtab" href="#" data-target="estelle">ESTELLE FERREIRA</a>
+          <a class="subtab" href="#" data-target="shawn">SHAWN ARMER</a>
+          <a class="subtab" href="#" data-target="dawie">DAWIE DU TOIT</a>
+          <a class="subtab" href="#" data-target="rukudzo">RUKUDZO JAGADA</a>
+          <a class="subtab" href="#" data-target="casandra">CASANDRA VAN DER MERWE</a>
+          <a class="subtab" href="#" data-target="francois">FRANCOIS MULLER</a>
+          <a class="subtab" href="#" data-target="maryna">MARYNA MULLER</a>
+          <a class="subtab" href="#" data-target="mornay">MORNAY CLOETE</a>
+          <a class="subtab" href="#" data-target="bondgirl">MORICOLETTE ERASMUS-NEL</a>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
+          <div id="estelle" class="leader-card hidden">
+            <div class="leader-name">ESTELLE FERREIRA</div>
+            <div class="leader-role">PRINCIPAL PROPERTY PRACTITIONER</div>
+            <div class="leader-links mt-2">
+              <a href="tel:+27824606864">+27 82 460 6864</a> ·
+              <a href="mailto:estelle.ferreira@kwsa.co.za">ESTELLE.FERREIRA@KWSA.CO.ZA</a>
+            </div>
+          </div>
+          <div id="shawn" class="leader-card hidden">
+            <div class="leader-name">SHAWN ARMER</div>
+            <div class="leader-role">OPERATING PARTNER</div>
+            <div class="leader-links mt-2">
+              <a href="tel:+27815335683">+27 81 533 5683</a> ·
+              <a href="mailto:shawn.armer@kwsa.co.za">SHAWN.ARMER@KWSA.CO.ZA</a>
+            </div>
+          </div>
+          <div id="dawie" class="leader-card hidden">
+            <div class="leader-name">DAWIE DU TOIT</div>
+            <div class="leader-role">TEAM LEADER</div>
+            <div class="leader-links mt-2">
+              <a href="tel:+27840624865">+27 84 062 4865</a> ·
+              <a href="mailto:dawie.dutoit@kwsa.co.za">DAWIE.DUTOIT@KWSA.CO.ZA</a>
+            </div>
+          </div>
+          <div id="rukudzo" class="leader-card hidden">
+            <div class="leader-name">RUKUDZO JAGADA</div>
+            <div class="leader-role">MARKET CENTRE ADMINISTRATOR</div>
+            <div class="leader-links mt-2">
+              <a href="tel:+27785848244">+27 78 584 8244</a> ·
+              <a href="mailto:rukudzo.jagada@kwsa.co.za">RUKUDZO.JAGADA@KWSA.CO.ZA</a>
+            </div>
+          </div>
+          <div id="casandra" class="leader-card hidden">
+            <div class="leader-name">CASANDRA VAN DER MERWE</div>
+            <div class="leader-role">MCTT / DFI</div>
+            <div class="leader-links mt-2">
+              <a href="tel:+27842121991">+27 84 212 1991</a> ·
+              <a href="mailto:casandra.vdmerwe@kwsa.co.za">CASANDRA.VDMERWE@KWSA.CO.ZA</a>
+            </div>
+          </div>
+          <div id="francois" class="leader-card hidden">
+            <div class="leader-name">FRANCOIS MULLER</div>
+            <div class="leader-role">RENTAL MANAGER</div>
+            <div class="leader-links mt-2">
+              <a href="tel:+27824402482">082 440 2482</a> ·
+              <a href="mailto:francois.muller@kwsa.co.za">FRANCOIS.MULLER@KWSA.CO.ZA</a>
+            </div>
+          </div>
+          <div id="maryna" class="leader-card hidden">
+            <div class="leader-name">MARYNA MULLER</div>
+            <div class="leader-role">RENTAL ADMINISTRATOR</div>
+            <div class="leader-links mt-2">
+              <a href="tel:+27768922404">076 892 2404</a> ·
+              <a href="mailto:maryna.muller@kwsa.co.za">MARYNA.MULLER@KWSA.CO.ZA</a>
+            </div>
+          </div>
+          <div id="mornay" class="leader-card hidden">
+            <div class="leader-name">MORNAY CLOETE</div>
+            <div class="leader-role">COMMERCIAL DEPARTMENT | CORPORATE REAL ESTATE CONSULTANT | PROPERTY INVESTMENT STRATEGIST</div>
+            <div class="leader-links mt-2">
+              <a href="tel:+27828886602">+27 82 888 6602</a> ·
+              <a href="mailto:mornay@emacity.co.za">MORNAY@EMACITY.CO.ZA</a>
+            </div>
+          </div>
+          <div id="bondgirl" class="leader-card hidden">
+            <div class="leader-name">MORICOLETTE ERASMUS-NEL</div>
+            <div class="leader-role">THE BOND GIRL</div>
+            <div class="leader-links mt-2">
+              <a href="tel:+27725759054">072 575 9054</a> ·
+              <a href="mailto:moricolette.erasmusnel@kwsa.co.za">MORICOLETTE.ERASMUSNEL@KWSA.CO.ZA</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </section>
   </div>
 
 <script>
-// Utility: close all panels + any open nested rows
+// Close-all helpers (from Stage 15)
 function closeAll(){
-  const panelIds=['otpPanel','bondPanel','rentPanel','aiPanel','marketingPanel','compliancePanel','resourcesPanel','partnersPanel','exploreBoxPanel'];
-  panelIds.forEach(id=>{
-    document.getElementById(id).classList.remove('open');
-  });
-  const btnMap={
-    otpPanel:'otpBtn', bondPanel:'bondBtn', rentPanel:'rentBtn', aiPanel:'aiBtn',
-    marketingPanel:'marketingBtn', compliancePanel:'complianceBtn',
-    resourcesPanel:'resourcesBtn', partnersPanel:'partnersBtn', exploreBoxPanel:'exploreBoxBtn'
-  };
-  Object.keys(btnMap).forEach(pid=>{
-    const btn=document.getElementById(btnMap[pid]);
-    if(btn) btn.setAttribute('aria-expanded','false');
-  });
-  // Hide sub-dropdowns
-  ['bondGirlCard','dncRow','waRow','techRow','loeRow'].forEach(id=>{
-    const el=document.getElementById(id);
-    if(el) el.classList.add('hidden');
-  });
+  const panelIds=['otpPanel','bondPanel','rentPanel','aiPanel','marketingPanel','compliancePanel','resourcesPanel','partnersPanel','exploreBoxPanel','leadershipPanel'];
+  panelIds.forEach(id=>document.getElementById(id).classList.remove('open'));
+  document.querySelectorAll('[data-panel]').forEach(btn=>btn.setAttribute('aria-expanded','false'));
+  ['bondGirlCard','dncRow','waRow','techRow','loeRow'].forEach(id=>{ const el=document.getElementById(id); if(el) el.classList.add('hidden'); });
+  // hide all leadership cards
+  document.querySelectorAll('#leadershipPanel .leader-card').forEach(c=>c.classList.add('hidden'));
 }
-
 function closeOthers(exceptId){
-  const ids=['otpPanel','bondPanel','rentPanel','aiPanel','marketingPanel','compliancePanel','resourcesPanel','partnersPanel','exploreBoxPanel'];
-  ids.forEach(id=>{
-    if(id!==exceptId){
-      document.getElementById(id).classList.remove('open');
-      const b=document.querySelector(`[data-panel="${id}"]`);
-      if(b) b.setAttribute('aria-expanded','false');
-    }
-  });
-  // Also collapse nested rows when switching sections
-  ['bondGirlCard','dncRow','waRow','techRow','loeRow'].forEach(id=>{
-    const el=document.getElementById(id);
-    if(el) el.classList.add('hidden');
-  });
+  const ids=['otpPanel','bondPanel','rentPanel','aiPanel','marketingPanel','compliancePanel','resourcesPanel','partnersPanel','exploreBoxPanel','leadershipPanel'];
+  ids.forEach(id=>{ if(id!==exceptId){ document.getElementById(id).classList.remove('open'); } });
+  document.querySelectorAll('[data-panel]').forEach(btn=>{ if(btn.dataset.panel!==exceptId) btn.setAttribute('aria-expanded','false'); });
+  ['bondGirlCard','dncRow','waRow','techRow','loeRow'].forEach(id=>{ const el=document.getElementById(id); if(el) el.classList.add('hidden'); });
+  if(exceptId!=='leadershipPanel'){ document.querySelectorAll('#leadershipPanel .leader-card').forEach(c=>c.classList.add('hidden')); }
 }
-
 function setupToggle(btnId,panelId){
   const btn=document.getElementById(btnId);
   const panel=document.getElementById(panelId);
@@ -232,7 +307,6 @@ function setupToggle(btnId,panelId){
     else{ closeOthers(panelId); panel.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
   });
 }
-
 setupToggle('otpBtn','otpPanel');
 setupToggle('bondBtn','bondPanel');
 setupToggle('rentBtn','rentPanel');
@@ -242,41 +316,38 @@ setupToggle('complianceBtn','compliancePanel');
 setupToggle('resourcesBtn','resourcesPanel');
 setupToggle('partnersBtn','partnersPanel');
 setupToggle('exploreBoxBtn','exploreBoxPanel');
+setupToggle('leadBtn','leadershipPanel');
 
-// Stop clicks inside panels from bubbling to the document
-document.querySelectorAll('.panel').forEach(p=>{
-  p.addEventListener('click', e=> e.stopPropagation());
-});
+// Click-away + Escape
+document.querySelectorAll('.panel').forEach(p=>p.addEventListener('click', e=>e.stopPropagation()));
+document.addEventListener('click', (e)=>{ const root=document.getElementById('quickLinksRoot'); if(!root.contains(e.target)) closeAll(); });
+document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeAll(); });
 
-// Click-away: clicking anywhere outside the quick links area closes all panels
-document.addEventListener('click', (e)=>{
-  const root=document.getElementById('quickLinksRoot');
-  if(!root.contains(e.target)){
-    closeAll();
-  }
-});
-// Also close on Escape
-document.addEventListener('keydown', (e)=>{
-  if(e.key==='Escape'){ closeAll(); }
-});
-
-// Sub toggles
+// Existing sub toggles
 const bondGirlTab=document.getElementById('bondGirlTab');
 const bondGirlCard=document.getElementById('bondGirlCard');
 if(bondGirlTab){ bondGirlTab.addEventListener('click',e=>{ e.preventDefault(); e.stopPropagation(); bondGirlCard.classList.toggle('hidden'); }); }
 const dncTab=document.getElementById('dncTab');
 const dncRow=document.getElementById('dncRow');
 if(dncTab){ dncTab.addEventListener('click', e=>{ e.preventDefault(); e.stopPropagation(); dncRow.classList.toggle('hidden'); }); }
-
-// Explore in a Box subtabs
 ['waTab','techTab','loeTab'].forEach((id)=>{
   const tab=document.getElementById(id);
   if(!tab) return;
   tab.addEventListener('click', (e)=>{
     e.preventDefault(); e.stopPropagation();
     const targetId = id==='waTab'?'waRow':id==='techTab'?'techRow':'loeRow';
-    const el=document.getElementById(targetId);
-    el.classList.toggle('hidden');
+    document.getElementById(targetId).classList.toggle('hidden');
+  });
+});
+
+// Leadership subtab toggles - show only one card at a time
+document.querySelectorAll('#leadershipPanel .subtabbar .subtab').forEach(btn=>{
+  btn.addEventListener('click', (e)=>{
+    e.preventDefault(); e.stopPropagation();
+    const target = btn.getAttribute('data-target');
+    document.querySelectorAll('#leadershipPanel .leader-card').forEach(c=>c.classList.add('hidden'));
+    const card = document.getElementById(target);
+    if(card){ card.classList.remove('hidden'); }
   });
 });
 </script>
