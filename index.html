@@ -59,7 +59,7 @@ h1 { font-weight:800; letter-spacing:.02em; }
       </div>
     </section>
 
-    <section aria-label="Quick Links" class="mb-6">
+    <section aria-label="Quick Links" class="mb-6" id="quickLinksRoot">
       <h2 class="section-title">QUICK LINKS</h2>
       <div class="quick-5">
         <a class="btn" target="_blank" href="https://mapp.kwsouthafrica.co.za/Account/Login?returnUrl=%2F">MAPP</a>
@@ -73,18 +73,18 @@ h1 { font-weight:800; letter-spacing:.02em; }
         <a class="btn" target="_blank" href="https://web.whatsapp.com/">WHATSAPP WEB</a>
         <a class="btn" target="_blank" href="https://drive.google.com/drive/folders/17t9lC6d9cZHPltRiKw3CVtporeDzxTbT">AGENT TOOLKIT</a>
 
-        <button id="otpBtn" class="btn" type="button" aria-expanded="false" aria-controls="otpPanel">OTP / MANDATES</button>
-        <button id="bondBtn" class="btn" type="button" aria-expanded="false" aria-controls="bondPanel">BOND PRE-APPROVAL</button>
-        <button id="rentBtn" class="btn" type="button" aria-expanded="false" aria-controls="rentPanel">RENTAL DESK</button>
-        <button id="aiBtn" class="btn" type="button" aria-expanded="false" aria-controls="aiPanel">AI APPS</button>
-        <button id="marketingBtn" class="btn" type="button" aria-expanded="false" aria-controls="marketingPanel">MARKETING</button>
-        <button id="complianceBtn" class="btn" type="button" aria-expanded="false" aria-controls="compliancePanel">COMPLIANCE</button>
-        <button id="resourcesBtn" class="btn" type="button" aria-expanded="false" aria-controls="resourcesPanel">RESOURCES</button>
-        <button id="partnersBtn" class="btn" type="button" aria-expanded="false" aria-controls="partnersPanel">PARTNERS</button>
-        <button id="exploreBoxBtn" class="btn" type="button" aria-expanded="false" aria-controls="exploreBoxPanel">EXPLORE IN A BOX</button>
+        <button id="otpBtn"    class="btn" type="button" aria-expanded="false" aria-controls="otpPanel"    data-panel="otpPanel">OTP / MANDATES</button>
+        <button id="bondBtn"   class="btn" type="button" aria-expanded="false" aria-controls="bondPanel"   data-panel="bondPanel">BOND PRE-APPROVAL</button>
+        <button id="rentBtn"   class="btn" type="button" aria-expanded="false" aria-controls="rentPanel"   data-panel="rentPanel">RENTAL DESK</button>
+        <button id="aiBtn"     class="btn" type="button" aria-expanded="false" aria-controls="aiPanel"     data-panel="aiPanel">AI APPS</button>
+        <button id="marketingBtn" class="btn" type="button" aria-expanded="false" aria-controls="marketingPanel" data-panel="marketingPanel">MARKETING</button>
+        <button id="complianceBtn" class="btn" type="button" aria-expanded="false" aria-controls="compliancePanel" data-panel="compliancePanel">COMPLIANCE</button>
+        <button id="resourcesBtn" class="btn" type="button" aria-expanded="false" aria-controls="resourcesPanel" data-panel="resourcesPanel">RESOURCES</button>
+        <button id="partnersBtn"  class="btn" type="button" aria-expanded="false" aria-controls="partnersPanel"  data-panel="partnersPanel">PARTNERS</button>
+        <button id="exploreBoxBtn" class="btn" type="button" aria-expanded="false" aria-controls="exploreBoxPanel" data-panel="exploreBoxPanel">EXPLORE IN A BOX</button>
       </div>
 
-      <!-- Existing panels are identical to Stage 13 (omitted comments for brevity) -->
+      <!-- Panels (same content as Stage 14) -->
       <div id="otpPanel" class="panel"><div class="subtabbar">
         <a class="subtab" target="_blank" href="https://drive.google.com/drive/folders/1P_9v2kTheV4mzPt0h2Jtm4oozt3QrVFG?usp=drive_link">MANDATES</a>
         <a class="subtab" target="_blank" href="https://drive.google.com/drive/folders/1SgDPogFFXti5vMFc7GiPRR_LjIHUySaP?usp=drive_link">OFFER TO PURCHASE</a>
@@ -154,7 +154,6 @@ h1 { font-weight:800; letter-spacing:.02em; }
         </div>
       </div>
 
-      <!-- EXPLORE IN A BOX (NEW) -->
       <div id="exploreBoxPanel" class="panel">
         <div class="subtabbar">
           <a class="subtab" href="#" id="waTab">EXPLORE WHATSAPP</a>
@@ -185,35 +184,55 @@ h1 { font-weight:800; letter-spacing:.02em; }
   </div>
 
 <script>
+// Utility: close all panels + any open nested rows
+function closeAll(){
+  const panelIds=['otpPanel','bondPanel','rentPanel','aiPanel','marketingPanel','compliancePanel','resourcesPanel','partnersPanel','exploreBoxPanel'];
+  panelIds.forEach(id=>{
+    document.getElementById(id).classList.remove('open');
+  });
+  const btnMap={
+    otpPanel:'otpBtn', bondPanel:'bondBtn', rentPanel:'rentBtn', aiPanel:'aiBtn',
+    marketingPanel:'marketingBtn', compliancePanel:'complianceBtn',
+    resourcesPanel:'resourcesBtn', partnersPanel:'partnersBtn', exploreBoxPanel:'exploreBoxBtn'
+  };
+  Object.keys(btnMap).forEach(pid=>{
+    const btn=document.getElementById(btnMap[pid]);
+    if(btn) btn.setAttribute('aria-expanded','false');
+  });
+  // Hide sub-dropdowns
+  ['bondGirlCard','dncRow','waRow','techRow','loeRow'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.classList.add('hidden');
+  });
+}
+
 function closeOthers(exceptId){
   const ids=['otpPanel','bondPanel','rentPanel','aiPanel','marketingPanel','compliancePanel','resourcesPanel','partnersPanel','exploreBoxPanel'];
   ids.forEach(id=>{
     if(id!==exceptId){
-      const p=document.getElementById(id);
-      const b=document.getElementById(
-        id==='otpPanel'?'otpBtn':
-        id==='bondPanel'?'bondBtn':
-        id==='rentPanel'?'rentBtn':
-        id==='aiPanel'?'aiBtn':
-        id==='marketingPanel'?'marketingBtn':
-        id==='compliancePanel'?'complianceBtn':
-        id==='resourcesPanel'?'resourcesBtn':
-        id==='partnersPanel'?'partnersBtn':'exploreBoxBtn'
-      );
-      p.classList.remove('open');
-      b.setAttribute('aria-expanded','false');
+      document.getElementById(id).classList.remove('open');
+      const b=document.querySelector(`[data-panel="${id}"]`);
+      if(b) b.setAttribute('aria-expanded','false');
     }
   });
+  // Also collapse nested rows when switching sections
+  ['bondGirlCard','dncRow','waRow','techRow','loeRow'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.classList.add('hidden');
+  });
 }
+
 function setupToggle(btnId,panelId){
   const btn=document.getElementById(btnId);
   const panel=document.getElementById(panelId);
-  btn.addEventListener('click',()=>{
+  btn.addEventListener('click', (e)=>{
+    e.stopPropagation();
     const open=panel.classList.contains('open');
     if(open){ panel.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }
     else{ closeOthers(panelId); panel.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
   });
 }
+
 setupToggle('otpBtn','otpPanel');
 setupToggle('bondBtn','bondPanel');
 setupToggle('rentBtn','rentPanel');
@@ -224,24 +243,42 @@ setupToggle('resourcesBtn','resourcesPanel');
 setupToggle('partnersBtn','partnersPanel');
 setupToggle('exploreBoxBtn','exploreBoxPanel');
 
+// Stop clicks inside panels from bubbling to the document
+document.querySelectorAll('.panel').forEach(p=>{
+  p.addEventListener('click', e=> e.stopPropagation());
+});
+
+// Click-away: clicking anywhere outside the quick links area closes all panels
+document.addEventListener('click', (e)=>{
+  const root=document.getElementById('quickLinksRoot');
+  if(!root.contains(e.target)){
+    closeAll();
+  }
+});
+// Also close on Escape
+document.addEventListener('keydown', (e)=>{
+  if(e.key==='Escape'){ closeAll(); }
+});
+
 // Sub toggles
 const bondGirlTab=document.getElementById('bondGirlTab');
 const bondGirlCard=document.getElementById('bondGirlCard');
-if(bondGirlTab){ bondGirlTab.addEventListener('click',e=>{ e.preventDefault(); bondGirlCard.classList.toggle('hidden'); }); }
+if(bondGirlTab){ bondGirlTab.addEventListener('click',e=>{ e.preventDefault(); e.stopPropagation(); bondGirlCard.classList.toggle('hidden'); }); }
 const dncTab=document.getElementById('dncTab');
 const dncRow=document.getElementById('dncRow');
-if(dncTab){ dncTab.addEventListener('click', e=>{ e.preventDefault(); dncRow.classList.toggle('hidden'); }); }
+if(dncTab){ dncTab.addEventListener('click', e=>{ e.preventDefault(); e.stopPropagation(); dncRow.classList.toggle('hidden'); }); }
 
 // Explore in a Box subtabs
-const waTab=document.getElementById('waTab');
-const techTab=document.getElementById('techTab');
-const loeTab=document.getElementById('loeTab');
-const waRow=document.getElementById('waRow');
-const techRow=document.getElementById('techRow');
-const loeRow=document.getElementById('loeRow');
-if(waTab){ waTab.addEventListener('click', e=>{ e.preventDefault(); waRow.classList.toggle('hidden'); }); }
-if(techTab){ techTab.addEventListener('click', e=>{ e.preventDefault(); techRow.classList.toggle('hidden'); }); }
-if(loeTab){ loeTab.addEventListener('click', e=>{ e.preventDefault(); loeRow.classList.toggle('hidden'); }); }
+['waTab','techTab','loeTab'].forEach((id)=>{
+  const tab=document.getElementById(id);
+  if(!tab) return;
+  tab.addEventListener('click', (e)=>{
+    e.preventDefault(); e.stopPropagation();
+    const targetId = id==='waTab'?'waRow':id==='techTab'?'techRow':'loeRow';
+    const el=document.getElementById(targetId);
+    el.classList.toggle('hidden');
+  });
+});
 </script>
 </body>
 </html>
