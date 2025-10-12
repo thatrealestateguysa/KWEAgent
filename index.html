@@ -36,6 +36,10 @@ h1 { font-weight:800; letter-spacing:.02em; }
 .subtabbar { display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.5rem; }
 .subtab { background:#111827; color:#fff; font-weight:700; padding:.7rem 1rem; border-radius:.8rem; border:1px solid rgba(255,255,255,.08); }
 .subtab:hover, .subtab[aria-selected="true"] { background:#374151; }
+.subrow { display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.5rem; }
+.linkpill { background:#0b1220; border:1px solid rgba(255,255,255,.08); padding:.6rem 1rem; border-radius:.75rem; font-weight:700; }
+.linkpill:hover { background:#1f2937; }
+.hidden{display:none;}
 </style>
 </head>
 <body class="bg-black text-white">
@@ -77,9 +81,10 @@ h1 { font-weight:800; letter-spacing:.02em; }
         <button id="complianceBtn" class="btn" type="button" aria-expanded="false" aria-controls="compliancePanel">COMPLIANCE</button>
         <button id="resourcesBtn" class="btn" type="button" aria-expanded="false" aria-controls="resourcesPanel">RESOURCES</button>
         <button id="partnersBtn" class="btn" type="button" aria-expanded="false" aria-controls="partnersPanel">PARTNERS</button>
+        <button id="exploreBoxBtn" class="btn" type="button" aria-expanded="false" aria-controls="exploreBoxPanel">EXPLORE IN A BOX</button>
       </div>
 
-      <!-- Panels -->
+      <!-- Existing panels are identical to Stage 13 (omitted comments for brevity) -->
       <div id="otpPanel" class="panel"><div class="subtabbar">
         <a class="subtab" target="_blank" href="https://drive.google.com/drive/folders/1P_9v2kTheV4mzPt0h2Jtm4oozt3QrVFG?usp=drive_link">MANDATES</a>
         <a class="subtab" target="_blank" href="https://drive.google.com/drive/folders/1SgDPogFFXti5vMFc7GiPRR_LjIHUySaP?usp=drive_link">OFFER TO PURCHASE</a>
@@ -126,9 +131,9 @@ h1 { font-weight:800; letter-spacing:.02em; }
           <a class="subtab" target="_blank" href="https://drive.google.com/file/d/12oz_bU_Tqnqlx9LJa3OPz2aY5mCFF80C/view?usp=sharing">FIC</a>
           <a class="subtab" href="#" id="dncTab">DO NOT CALL LISTS</a>
         </div>
-        <div id="dncRow" class="hidden" style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.5rem;">
-          <a class="subtab" target="_blank" href="https://www.thevirtualagent.co.za/info/#c-tab3-5">VIRTUAL AGENT</a>
-          <a class="subtab" target="_blank" href="https://www.cmainfo.co.za/privacy.aspx">CMA INFO</a>
+        <div id="dncRow" class="hidden subrow">
+          <a class="linkpill" target="_blank" href="https://www.thevirtualagent.co.za/info/#c-tab3-5">VIRTUAL AGENT</a>
+          <a class="linkpill" target="_blank" href="https://www.cmainfo.co.za/privacy.aspx">CMA INFO</a>
         </div>
       </div>
 
@@ -149,12 +154,39 @@ h1 { font-weight:800; letter-spacing:.02em; }
         </div>
       </div>
 
+      <!-- EXPLORE IN A BOX (NEW) -->
+      <div id="exploreBoxPanel" class="panel">
+        <div class="subtabbar">
+          <a class="subtab" href="#" id="waTab">EXPLORE WHATSAPP</a>
+          <a class="subtab" href="#" id="techTab">KW EXPLORE TECH SUPPORT</a>
+          <a class="subtab" href="#" id="loeTab">LETTER OF EMPLOYMENT</a>
+          <a class="subtab" target="_blank" href="https://drive.google.com/file/d/1HRhp_4CD1bvpHppBJWx9OXdYeuHZ_N09/view?usp=sharing">KW EXPLORE WELCOME PACK</a>
+        </div>
+        <div id="waRow" class="hidden subrow">
+          <a class="linkpill" target="_blank" href="https://chat.whatsapp.com/Fo9u1JwPQPX5jKFxkxireB">KWE BUSINESS</a>
+          <a class="linkpill" target="_blank" href="https://chat.whatsapp.com/7Vt6td3OTf6AnC9UAZ2NrW">KWE FAMILY</a>
+          <a class="linkpill" target="_blank" href="https://chat.whatsapp.com/BmC5OcpGr0fEsSNjBjs9V6">KWE MINDSET</a>
+          <a class="linkpill" target="_blank" href="https://chat.whatsapp.com/KhXyuE7SMBzKa4zmKjT8V2">KWE TRADING FLOOR</a>
+          <a class="linkpill" target="_blank" href="https://chat.whatsapp.com/FJjYfQR22CWCJoi14kZxFa">KWE RENTALS</a>
+          <a class="linkpill" target="_blank" href="https://chat.whatsapp.com/GgAtHnEYmXmAQEXzEl0DkC?mode=wwc">KWE COMMERCIAL</a>
+        </div>
+        <div id="techRow" class="hidden subrow">
+          <a class="linkpill" target="_blank" href="https://calendar.app.google/8351gr38GWZpT1vL7">BOOK 1-ON-1</a>
+          <a class="linkpill" target="_blank" href="https://www.youtube.com/playlist?list=PLK75KZDqV1zlNlNbAYLPDegh4Rje76NNL">COMMAND 66 DAY CHALLENGE</a>
+          <a class="linkpill" target="_blank" href="https://answers.kw.com/hc/en-us">FAQ COMMAND</a>
+        </div>
+        <div id="loeRow" class="hidden subrow">
+          <a class="linkpill" target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSfXYVHkzEEDTycJx-lN8iFcW7rwo6rdEVPjSGIfzvsuvmzUlA/viewform">GENERAL LETTER OF EMPLOYMENT</a>
+          <a class="linkpill" target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSd0yabWfk6dM9JwDUxRofYdI9m9S66ZbhwlIKMIN3iXXfREdg/viewform">SARS & PPRA LETTER OF EMPLOYMENT</a>
+        </div>
+      </div>
+
     </section>
   </div>
 
 <script>
 function closeOthers(exceptId){
-  const ids=['otpPanel','bondPanel','rentPanel','aiPanel','marketingPanel','compliancePanel','resourcesPanel','partnersPanel'];
+  const ids=['otpPanel','bondPanel','rentPanel','aiPanel','marketingPanel','compliancePanel','resourcesPanel','partnersPanel','exploreBoxPanel'];
   ids.forEach(id=>{
     if(id!==exceptId){
       const p=document.getElementById(id);
@@ -165,7 +197,8 @@ function closeOthers(exceptId){
         id==='aiPanel'?'aiBtn':
         id==='marketingPanel'?'marketingBtn':
         id==='compliancePanel'?'complianceBtn':
-        id==='resourcesPanel'?'resourcesBtn':'partnersBtn'
+        id==='resourcesPanel'?'resourcesBtn':
+        id==='partnersPanel'?'partnersBtn':'exploreBoxBtn'
       );
       p.classList.remove('open');
       b.setAttribute('aria-expanded','false');
@@ -189,6 +222,7 @@ setupToggle('marketingBtn','marketingPanel');
 setupToggle('complianceBtn','compliancePanel');
 setupToggle('resourcesBtn','resourcesPanel');
 setupToggle('partnersBtn','partnersPanel');
+setupToggle('exploreBoxBtn','exploreBoxPanel');
 
 // Sub toggles
 const bondGirlTab=document.getElementById('bondGirlTab');
@@ -197,6 +231,17 @@ if(bondGirlTab){ bondGirlTab.addEventListener('click',e=>{ e.preventDefault(); b
 const dncTab=document.getElementById('dncTab');
 const dncRow=document.getElementById('dncRow');
 if(dncTab){ dncTab.addEventListener('click', e=>{ e.preventDefault(); dncRow.classList.toggle('hidden'); }); }
+
+// Explore in a Box subtabs
+const waTab=document.getElementById('waTab');
+const techTab=document.getElementById('techTab');
+const loeTab=document.getElementById('loeTab');
+const waRow=document.getElementById('waRow');
+const techRow=document.getElementById('techRow');
+const loeRow=document.getElementById('loeRow');
+if(waTab){ waTab.addEventListener('click', e=>{ e.preventDefault(); waRow.classList.toggle('hidden'); }); }
+if(techTab){ techTab.addEventListener('click', e=>{ e.preventDefault(); techRow.classList.toggle('hidden'); }); }
+if(loeTab){ loeTab.addEventListener('click', e=>{ e.preventDefault(); loeRow.classList.toggle('hidden'); }); }
 </script>
 </body>
 </html>
