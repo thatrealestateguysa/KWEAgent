@@ -17,8 +17,8 @@
 *{box-sizing:border-box}
 body{font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
 .brand{display:grid;place-items:center;gap:.5rem}
-.brand img.logo{width:var(--logoW);height:auto}
-.brand img.tagline{width:calc(var(--logoW)*.40);height:auto}
+.brand img.logo{width:calc(var(--logoW)*.5);height:auto;display:block;margin-inline:auto;}
+.brand img.tagline{width:calc(var(--logoW)*.40);height:auto;display:block;margin-inline:auto;}
 .btn{display:block;width:100%;color:#fff;font-weight:800;letter-spacing:.02em;padding:.95rem 1.05rem;border-radius:1.1rem;text-align:center;line-height:1.2;border:1px solid rgba(255,255,255,.08);box-shadow:0 1px 0 rgba(0,0,0,.25) inset;white-space:normal;overflow-wrap:anywhere;hyphens:auto;transition:background .12s,border-color .12s,filter .12s,transform .02s}
 .btn:hover{background:var(--hover);border-color:var(--hover);filter:brightness(1.02);position:relative;z-index:5}
 .btn:active{transform:translateY(1px)}
@@ -32,7 +32,7 @@ body{font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
 @media(min-width:1024px){.group-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
 .group-grid>.btn:nth-child(odd){background:var(--g1)}
 .group-grid>.btn:nth-child(even){background:var(--g2)}
-.section-title{font-weight:900;margin:.8rem 0 .5rem}
+.section-title{font-weight:900;margin:.8rem 0 .5rem;color:var(--kwred);text-align:center}
 .panel-slot{display:none}.panel-slot.open{display:block;grid-column:1 / -1}.panel{display:none}.panel.open{display:block}
 .subtabbar{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.6rem}
 .subtab{background:#1b2330;color:#fff;font-weight:900;padding:.7rem 1rem;border-radius:.9rem;border:2px solid rgba(255,255,255,.08)}
@@ -47,6 +47,11 @@ body{font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
 .leader-role{color:#fca5a5;font-weight:800;margin-top:.25rem}
 .leader-links a{text-decoration:underline}
 </style>
+<style>
+/* Added by assistant: tagline styling */
+.tagline-accent {/* red */ /* scale up responsively */
+  font-weight: 700;color:#d10000;text-transform:uppercase;font-size:clamp(1.1375rem, 1.95vw + 0.65rem, 1.95rem);font-weight:700;}
+</style>
 </head>
 <body class="bg-black text-white">
   <div class="max-w-6xl mx-auto p-4 md:p-6">
@@ -54,7 +59,7 @@ body{font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
       <img src="assets/logo.png" class="logo" alt="KW Explore Logo">
       <img src="assets/tagline.png" class="tagline" alt="Where Entrepreneurs Thrive">
       <p class="uppercase tracking-wide text-gray-300 text-sm md:text-base mt-2">
-        Explore the World of Property with us!
+        <span class="tagline-accent">Explore the World of Property with us!</span>
       </p>
     </header>
 
@@ -70,8 +75,8 @@ body{font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
     <section aria-label="KWE Agent Dashboard" id="quickLinksRoot">
 
       <!-- EXPLORE YOUR BUSINESS -->
-      <section class="group-block" aria-label="Explore your business">
-        <h2 class="section-title">EXPLORE YOUR BUSINESS</h2>
+      <section class="group-block" aria-label="Explore business">
+        <h2 class="section-title">EXPLORE BUSINESS</h2>
         <div class="group-grid">
           <a class="btn" href="https://mapp.kwsouthafrica.co.za/Account/Login?returnUrl=%2F" target="_blank">MAPP</a>
           <a class="btn" href="https://console.command.kw.com/command" target="_blank">COMMAND</a>
@@ -142,7 +147,7 @@ body{font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
 
       <!-- EXPLORE GROWTH -->
       <section class="group-block" aria-label="Explore growth">
-        <h2 class="section-title">EXPLORE THE GROWTH</h2>
+        <h2 class="section-title">EXPLORE GROWTH</h2>
         <div class="group-grid">
           <!-- Productivity Apps -->
           <button class="btn" type="button" data-panel="productivityPanel">PRODUCTIVITY APPS</button>
@@ -222,8 +227,8 @@ body{font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
       </section>
 
       <!-- CONTACT THE TEAM -->
-      <section class="group-block" aria-label="Contact the team">
-        <h2 class="section-title">CONTACT THE TEAM</h2>
+      <section class="group-block" aria-label="Explore team">
+        <h2 class="section-title">EXPLORE TEAM</h2>
         <div class="group-grid">
           <!-- Partners -->
           <button class="btn" type="button" data-panel="partnersPanel">PARTNERS</button>
