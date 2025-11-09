@@ -72,11 +72,22 @@ body{font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
   .subtab, .linkpill { display: inline-block; min-width: 0; }
 }
 </style>
+<style>
+/* Assistant: place logo left and tagline right */
+.brand-row{display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap;margin:1rem 0;}
+img.logo, img.tagline{margin:0 !important;display:block}
+@media (max-width:640px){.brand-row{gap:.75rem}}
+</style>
 </head>
 <body class="bg-black text-white">
   <div class="max-w-6xl mx-auto p-4 md:p-6">
     <header class="brand text-center mb-4">
-      <img src="assets/assets/logo.png" class="logo" alt="KW Explore Logo">
+      
+<div class="brand-row">
+  <img src="assets/assets/logo.png" class="logo" alt="KW Explore Logo">
+  
+</div>
+
       <img src="assets/assets/tagline.png" class="tagline" alt="Where Entrepreneurs Thrive">
       <p class="uppercase tracking-wide text-gray-300 text-sm md:text-base mt-2">
         <span class="tagline-accent">Explore the World of Property with us!</span>
