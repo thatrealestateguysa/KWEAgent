@@ -47,14 +47,17 @@ body{font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
 .leader-role{color:#fca5a5;font-weight:800;margin-top:.25rem}
 .leader-links a{text-decoration:underline}
 </style>
+
 <style>
-/* Assistant: logo left + tagline right; scale safely */
-:root{--brandH:clamp(46px,10vw,110px);--tagH:clamp(32px,7vw,80px)}
-.brand-row{display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap;margin:1rem 0}
-.brand-row img{display:block;margin:0}
-img.logo{height:var(--brandH);width:auto}
-img.tagline{height:var(--tagH);width:auto}
+/* Assistant: enforce red + centered group headings */
+h2.section-title{
+  color: var(--kwred) !important;
+  text-align: center !important;
+  font-weight: 900;
+  margin: .8rem 0 .5rem;
+}
 </style>
+
 </head>
 <body class="bg-black text-white">
   <div class="max-w-6xl mx-auto p-4 md:p-6">
@@ -88,12 +91,10 @@ img.tagline{height:var(--tagH);width:auto}
           <a class="btn" href="https://www.cmainfo.co.za/" target="_blank">CMA INFO</a>
 
           <!-- Bond -->
-          <button class="btn" type="button" data-panel="bondPanel">EXPLORE BONDS</button>
+          <button class="btn" type="button" data-panel="bondPanel">BOND PRE-APPROVAL</button>
           <div class="panel-slot"><div id="bondPanel" class="panel">
             <div class="subtabbar">
               <a class="subtab" target="_blank" href="https://my.ooba.co.za/obi/?var1=KW4&var2=&var3=OBI&var4">GET A OOBA BOND</a>
-              <a class="linkpill" target="_blank" href="https://kwebond.netlify.app/">BOND CALCULATOR</a>
-              <a class="linkpill" target="_blank" href="https://kwsa.atlassian.net/servicedesk/customer/portals">EXPLORE BOND TRACKER</a>
               <a class="subtab" href="#" id="bondGirlTab">THE BOND GIRL</a>
             </div>
             <div id="bondGirlCard" class="hidden mt-3">
