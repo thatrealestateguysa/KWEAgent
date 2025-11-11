@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>KWE AGENT DASHBOARD</title>
 <meta name="theme-color" content="#dc2626">
-<link rel="icon" type="image/png" sizes="16x16" href="assets/assets/favicon-16.png">
-<link rel="apple-touch-icon" sizes="152x152" href="assets/assets/apple-touch-icon-152.png">
-<link rel="apple-touch-icon" sizes="167x167" href="assets/assets/apple-touch-icon-167.png">
-<link rel="apple-touch-icon" sizes="180x180" href="assets/assets/apple-touch-icon-180.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+<link rel="apple-touch-icon" sizes="152x152" href="assets/apple-touch-icon-152.png">
+<link rel="apple-touch-icon" sizes="167x167" href="assets/apple-touch-icon-167.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon-180.png">
 <link rel="manifest" href="manifest.json">
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -47,12 +47,20 @@ body{font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
 .leader-role{color:#fca5a5;font-weight:800;margin-top:.25rem}
 .leader-links a{text-decoration:underline}
 </style>
+<style>
+/* Assistant: logo left + tagline right; scale safely */
+:root{--brandH:clamp(46px,10vw,110px);--tagH:clamp(32px,7vw,80px)}
+.brand-row{display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap;margin:1rem 0}
+.brand-row img{display:block;margin:0}
+img.logo{height:var(--brandH);width:auto}
+img.tagline{height:var(--tagH);width:auto}
+</style>
 </head>
 <body class="bg-black text-white">
   <div class="max-w-6xl mx-auto p-4 md:p-6">
     <header class="brand text-center mb-4">
-      <img src="assets/assets/logo.png" class="logo" alt="KW Explore Logo">
-      <img src="assets/assets/tagline.png" class="tagline" alt="Where Entrepreneurs Thrive">
+      <img src="assets/logo.png" class="logo" alt="KW Explore Logo">
+      <img src="assets/tagline.png" class="tagline" alt="Where Entrepreneurs Thrive">
       <p class="uppercase tracking-wide text-gray-300 text-sm md:text-base mt-2">
         Explore the World of Property with us!
       </p>
