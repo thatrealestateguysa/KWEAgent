@@ -58,6 +58,19 @@ h2.section-title{
 }
 </style>
 
+
+<style>
+  /* Side-by-side logo + tagline image; keep the text tagline below */
+  header.brand{
+    /* keep existing grid, just define 2 columns for the two images */
+    grid-template-columns: auto auto;
+    column-gap: .75rem;
+  }
+  header.brand p{
+    grid-column: 1 / -1;
+    margin-top: .5rem;
+  }
+</style>
 </head>
 <body class="bg-black text-white">
   <div class="max-w-6xl mx-auto p-4 md:p-6">
