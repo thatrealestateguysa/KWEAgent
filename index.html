@@ -32,7 +32,7 @@ body{font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
 @media(min-width:1024px){.group-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
 .group-grid>.btn:nth-child(odd){background:var(--g1)}
 .group-grid>.btn:nth-child(even){background:var(--g2)}
-.section-title{font-weight:900;margin:.8rem 0 .5rem}
+.section-title{font-weight:900;margin:.8rem 0 .5rem;color:var(--kwred);text-align:center}
 .panel-slot{display:none}.panel-slot.open{display:block;grid-column:1 / -1}.panel{display:none}.panel.open{display:block}
 .subtabbar{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.6rem}
 .subtab{background:#1b2330;color:#fff;font-weight:900;padding:.7rem 1rem;border-radius:.9rem;border:2px solid rgba(255,255,255,.08)}
@@ -47,29 +47,13 @@ body{font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
 .leader-role{color:#fca5a5;font-weight:800;margin-top:.25rem}
 .leader-links a{text-decoration:underline}
 </style>
-
 <style>
-/* Assistant: enforce red + centered group headings */
-h2.section-title{
-  color: var(--kwred) !important;
-  text-align: center !important;
-  font-weight: 900;
-  margin: .8rem 0 .5rem;
+/* Added by assistant: tagline styling */
+.tagline-accent {
+  color: #d10000;          /* red */
+  font-size: clamp(0.875rem, 1.5vw + 0.5rem, 1.5rem); /* scale up responsively */
+  font-weight: 700;
 }
-</style>
-
-
-<style>
-  /* Side-by-side logo + tagline image; keep the text tagline below */
-  header.brand{
-    /* keep existing grid, just define 2 columns for the two images */
-    grid-template-columns: auto auto;
-    column-gap: .75rem;
-  }
-  header.brand p{
-    grid-column: 1 / -1;
-    margin-top: .5rem;
-  }
 </style>
 </head>
 <body class="bg-black text-white">
@@ -78,7 +62,7 @@ h2.section-title{
       <img src="assets/logo.png" class="logo" alt="KW Explore Logo">
       <img src="assets/tagline.png" class="tagline" alt="Where Entrepreneurs Thrive">
       <p class="uppercase tracking-wide text-gray-300 text-sm md:text-base mt-2">
-        Explore the World of Property with us!
+        <span class="tagline-accent">Explore the World of Property with us!</span>
       </p>
     </header>
 
@@ -91,25 +75,22 @@ h2.section-title{
       </div>
     </section>
 
-    <section aria-label="KWE Agent HUB" id="quickLinksRoot">
+    <section aria-label="KWE Agent Dashboard" id="quickLinksRoot">
 
       <!-- EXPLORE YOUR BUSINESS -->
-      <section class="group-block" aria-label="Explore your business">
-        <h2 class="section-title">EXPLORE YOUR BUSINESS</h2>
+      <section class="group-block" aria-label="Explore business">
+        <h2 class="section-title">EXPLORE BUSINESS</h2>
         <div class="group-grid">
           <a class="btn" href="https://mapp.kwsouthafrica.co.za/Account/Login?returnUrl=%2F" target="_blank">MAPP</a>
           <a class="btn" href="https://console.command.kw.com/command" target="_blank">COMMAND</a>
-          <a class="btn" href="https://toolkit.lightstone.co.za/#/" target="_blank">LIGHTSTONE</a>
-          <a class="btn" href="https://app.thevirtualagent.co.za/User/sign-in" target="_blank">THE VIRTUAL AGENT</a>
+          <a class="btn" href="https://portal.loom.co.za/app/home" target="_blank">LOOM</a>
           <a class="btn" href="https://www.cmainfo.co.za/" target="_blank">CMA INFO</a>
 
           <!-- Bond -->
-          <button class="btn" type="button" data-panel="bondPanel">EXPLORE BONDS</button>
+          <button class="btn" type="button" data-panel="bondPanel">BOND PRE-APPROVAL</button>
           <div class="panel-slot"><div id="bondPanel" class="panel">
             <div class="subtabbar">
               <a class="subtab" target="_blank" href="https://my.ooba.co.za/obi/?var1=KW4&var2=&var3=OBI&var4">GET A OOBA BOND</a>
-              <a class="subtab" target="_blank" href="https://kwebond.netlify.app/">BOND CALCULATOR</a>
-              <a class="subtab" target="_blank" href="https://kwsa.atlassian.net/servicedesk/customer/portals">EXPLORE BOND TRACKER</a>
               <a class="subtab" href="#" id="bondGirlTab">THE BOND GIRL</a>
             </div>
             <div id="bondGirlCard" class="hidden mt-3">
@@ -166,9 +147,18 @@ h2.section-title{
         </div>
       </section>
 
+
+      <!-- EXPLORIAN SUPPORT -->
+      <section class="group-block" aria-label="Explorian support">
+        <h2 class="section-title">EXPLORIAN SUPPORT</h2>
+        <div class="group-grid">
+          <a class="btn" href="https://kwebetonred.netlify.app/" target="_blank">BET ON RED BOOKINGS</a>
+        </div>
+      </section>
+
       <!-- EXPLORE GROWTH -->
       <section class="group-block" aria-label="Explore growth">
-        <h2 class="section-title">EXPLORE THE GROWTH</h2>
+        <h2 class="section-title">EXPLORE GROWTH</h2>
         <div class="group-grid">
           <!-- Productivity Apps -->
           <button class="btn" type="button" data-panel="productivityPanel">PRODUCTIVITY APPS</button>
@@ -202,7 +192,6 @@ h2.section-title{
               <a class="subtab" href="#" id="dncTab">DO NOT CALL LISTS</a>
             </div>
             <div id="dncRow" class="hidden subrow">
-              <a class="linkpill" target="_blank" href="https://www.thevirtualagent.co.za/info/#c-tab3-5">VIRTUAL AGENT</a>
               <a class="linkpill" target="_blank" href="https://www.cmainfo.co.za/privacy.aspx">CMA INFO</a>
             </div>
           </div></div>
@@ -244,15 +233,12 @@ h2.section-title{
               <a class="linkpill" target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSd0yabWfk6dM9JwDUxRofYdI9m9S66ZbhwlIKMIN3iXXfREdg/viewform">SARS & PPRA LETTER OF EMPLOYMENT</a>
             </div>
           </div></div>
-          <a class="btn active" target="_blank" href="https://kwemo.netlify.app/">MARKET INSIGHTS</a>
-          <a class="btn active" target="_blank" href="https://kwetraining.netlify.app/">UPCOMING TRAINING</a>
-          <a class="btn active" target="_blank" href="https://kwcomms.netlify.app/">KW COMMS</a>
         </div>
       </section>
 
       <!-- CONTACT THE TEAM -->
-      <section class="group-block" aria-label="Contact the team">
-        <h2 class="section-title">CONTACT THE TEAM</h2>
+      <section class="group-block" aria-label="Explore team">
+        <h2 class="section-title">EXPLORE TEAM</h2>
         <div class="group-grid">
           <!-- Partners -->
           <button class="btn" type="button" data-panel="partnersPanel">PARTNERS</button>
